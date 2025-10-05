@@ -1,12 +1,11 @@
 ---
 layout: post
-title: "Real Analysis Lecture 0 — What is an Integral?"
+title: "Real Analysis Lecture 0: Introduction and Motivation for Measure"
 date: 2025-10-05
 categories: [Real_analysis]
 use_math: True
 ---
 
-# 📘 Lecture 0: Introduction and Motivation for Measure
 
 ## (00a) What is an Integral?
 
