@@ -8,7 +8,7 @@ use_math: True
 
 # 📘 Lecture 0: Introduction and Motivation for Measure
 
-## [00a] What is an Integral?
+## (00a) What is an Integral?
 
 ### 1. Quadrature <!-- % 구적법 -->
 The process of approximating area under a curve by partitioning an interval and summing up rectangular areas. (foundation of the Riemann integral)
@@ -17,13 +17,16 @@ The process of approximating area under a curve by partitioning an interval and 
 \lim_{n \to \infty} \sum_{k=1}^n f(\frac{k}{n}) \cdot \frac{1}{n}
 \]
 
+
 ---
 
 ### 2. Riemann Integral <!-- % 리만 적분 -->
+
 \[
 \lim_{n \to \infty} \sum_{k=1}^n f(s_k) (x_k - x_{k-1}) \rightarrow A
 \]
-where \( x_{k-1} \le s_k \le x_k \).
+
+where  $x_{k-1} \le s_k \le x_k$ .
 
 A function is Riemann integrable if and only if the set of all its discontinuities has measure zero 
 
@@ -31,18 +34,19 @@ A function is Riemann integrable if and only if the set of all its discontinuiti
 
 
 #### Goal
-For a set \( E \subset \mathbb{R} \), we aim to define a function  
+For a set $ E \subset \mathbb{R} $, we aim to define a function  
 \[
-\mu : 2^{\mathbb{R}} \to [0, \infty]
+\mu : 2^{\mathbb{R}} \to [0, \infty)
 \]
-that assigns a meaningful **measure** (length, area, volume) to \(E\).
+
+that assigns a meaningful **measure** (length, area, volume) to $E$.
 
 #### Length of Intervals
-- For an open interval \((a,b)\),
+- For an open interval $(a,b)$,
   \[
   l((a,b)) = b - a
   \]
-- For disjoint intervals \((a,b)\) and \((c,d)\),
+- For disjoint intervals $(a,b)$ and $(c,d)$,
   \[
   l((a,b) \cup (c,d)) = (b - a) + (d - c)
   \]
@@ -52,15 +56,15 @@ that assigns a meaningful **measure** (length, area, volume) to \(E\).
   \]
 
 #### Open Set Representation
-Let \( U \subset \mathbb{R} \) be open.  
-For each \( x \in U \):
+Let $ U \subset \mathbb{R} $ be open.  
+For each $ x \in U $:
 
 \[
 a_x = \inf \{ a \mid (a,x) \subset U \}, \quad
 b_x = \sup \{ b \mid (x,b) \subset U \}
 \]
 
-Then each \(x\) belongs to the interval \((a_x,b_x)\), and
+Then each $x$ belongs to the interval $(a_x,b_x)$, and
 \[
 U = \bigcup_{x \in U} (a_x,b_x)
 \]
@@ -75,9 +79,9 @@ Define the **measure** as
 ---
 
 ### Definition — Riemann–Stieltjes Integral *(for reference)* <!-- % 리만-스틸체스 적분 -->
-Let \( f: [a,b] \to \mathbb{R} \) be bounded <span style="color:red">\( (\alpha: [a,b] \to \mathbb{R} \) be a monotone increasing function.)</span>
+Let $ f: [a,b] \to \mathbb{R} $ be bounded <span style="color:red">$ (\alpha: [a,b] \to \mathbb{R} $ be a monotone increasing function.)</span>
 
-Let \( P = \{x_0, x_1, \dots, x_n\} \in \mathcal{P}[a, b] \).
+Let $ P = \{x_0, x_1, \dots, x_n\} \in \mathcal{P}[a, b] $.
 
 #### Upper and Lower Sums
 \[
@@ -98,7 +102,7 @@ Let
 \underline{\int_a^b} f {\color{red}{d\alpha}} = \sup \{ U_a^b(f, p, {\color{red}{\alpha}}): p \in \mathcal{P}[a,b]  \}
 \]
 
-We say \( f \) is **Riemann–Stieltjes integrable** <span style="color:red">(with respect to \( \alpha \))</span> ($f \in \mathcal{R}(\alpha)$) if
+We say $ f $ is **Riemann–Stieltjes integrable** <span style="color:red">(with respect to $ \alpha $)</span> ($f \in \mathcal{R}(\alpha)$) if
 \[
 \overline{\int_a^b} f {\color{red}{d\alpha}}  = \underline{\int_a^b} f {\color{red}{d\alpha}} = \int_a^b f {\color{red}{d\alpha}} 
 \]

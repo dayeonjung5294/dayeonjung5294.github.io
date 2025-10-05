@@ -11,6 +11,11 @@
 {% assign condensed_class = "" %}
 {%- endif -%}
 
+{% if page.use_math %}
+    {% include mathjax_support.html %}
+{% endif %}
+
+
 <body>
   <main class="container">
     <section class="about">
