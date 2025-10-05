@@ -1,0 +1,63 @@
+---
+layout: default
+---
+  <div class="site-category">
+    <ul class='cat1'>
+      <li ><a href="/" class="ctext">Study</a>
+        <ul>
+          <li ><a href="/category/Real_analysis" class="ctext">Real analysis</a></li>
+          <li ><a href="/category/Deep_learning" class="ctext">Deep learning</a></li>
+          <li ><a href="/category/Git_blog" class="ctext">Git_blog</a></li>
+        </ul>
+      </li>
+      <li><a href="/" class="ctext">Project</a>
+        <ul>
+          <li><a href="/category/Stat_consulting" class="ctext">Stat_consulting</a></li>
+          <li><a href="/category/ML_DL" class="ctext">ML_DL</a></li>
+          <li><a href="/category/Seminar" class="ctext">Seminar</a></li>
+        </ul>
+      </li>
+
+    </ul>
+    </div>
+
+
+  <ul class="posts-list">
+  
+  {% assign category = page.category | default: page.title %}
+  {% for post in site.categories[category] %}
+	<li>
+        {%- assign date_format = site.plainwhite.date_format | default: "%b %-d, %Y" -%}
+        <a class="post-link" href="{{ post.url | relative_url }}">
+          <h2 class="post-title">{{ post.title | escape }}</h2>
+        </a>
+        <div class="post-meta">
+          <div class="post-date">
+            <i class="icon-calendar"></i>
+            {{ post.date | date: date_format }}
+          </div>
+          {%- if post.categories.size > 0-%}
+          <ul class="post-categories">
+            {%- for tag in post.categories -%}
+            <li>{{ tag }}</li>
+            {%- endfor -%}
+          </ul>
+          {%- endif -%}
+        </div>
+        <!--<div class="post">
+          {%- if site.show_excerpts -%}
+            {{ post.excerpt }}
+          {%- endif -%}
+        </div> 내용 표시 -->
+      </li>
+    <!--<li>
+      <h3>
+        <a href="{{ site.baseurl }}{{ post.url }}">
+          {{ post.title }}
+        </a>
+        <small>{{ post.date | date_to_string }}</small>
+      </h3>
+    </li>-->
+  {% endfor %}
+  
+</ul>
