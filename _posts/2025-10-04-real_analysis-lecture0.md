@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Real Analysis Lecture 0: Introduction and Motivation for Measure"
-date: 2025-10-05
+date: 2025-10-04
 categories: [Real_analysis]
 use_math: True
 ---
@@ -35,7 +35,7 @@ A function is Riemann integrable if and only if the set of all its discontinuiti
 #### Goal
 For a set $ E \subset \mathbb{R} $, we aim to define a function  
 \[
-\mu : 2^{\mathbb{R}} \to [0, \infty)
+\mu : 2^{\mathbb{R}} \to \lbrack 0, \infty \rbrack
 \]
 
 that assigns a meaningful **measure** (length, area, volume) to $E$.
@@ -57,12 +57,10 @@ that assigns a meaningful **measure** (length, area, volume) to $E$.
 #### Open Set Representation
 Let $ U \subset \mathbb{R} $ be open.  
 For each $ x \in U $:
-
 \[
-a_x = \inf \{ a \mid (a,x) \subset U \}, \quad
-b_x = \sup \{ b \mid (x,b) \subset U \}
+a_x = \inf \lbrace a \mid (a,x) \subset U \rbrace, \quad
+b_x = \sup \lbrace b \mid (x,b) \subset U \rbrace
 \]
-
 Then each $x$ belongs to the interval $(a_x,b_x)$, and
 \[
 U = \bigcup_{x \in U} (a_x,b_x)
@@ -72,7 +70,7 @@ Thus, every open set can be expressed as a countable union of disjoint intervals
 #### Measure Definition
 Define the **measure** as
 \[
-\mu(E) := \inf \{ \mu(U) \mid U \text{ open},\, E \subset U \}
+\mu(E) := \inf \lbrace \mu(U) \mid U \text{ open},\, E \subset U \rbrace
 \]
 
 ---
@@ -95,10 +93,10 @@ m_i = \inf_{x \in [x_{i-1}, x_i]} f(x)
 #### Integrability Condition
 Let 
 \[
-\overline{\int_a^b} f {\color{red}{d\alpha}} = \inf \{ U_a^b(f, p, {\color{red}{\alpha}}): p \in \mathcal{P}[a,b]  \}
+\overline{\int_a^b} f {\color{red}{d\alpha}} = \inf \lbrace U_a^b(f, p, {\color{red}{\alpha}}): p \in \mathcal{P} \lbrack a,b \rbrack  \rbrace
 \]
 \[
-\underline{\int_a^b} f {\color{red}{d\alpha}} = \sup \{ U_a^b(f, p, {\color{red}{\alpha}}): p \in \mathcal{P}[a,b]  \}
+\underline{\int_a^b} f {\color{red}{d\alpha}} = \sup \lbrace U_a^b(f, p, {\color{red}{\alpha}}): p \in \mathcal{P} \lbrack a,b \rbrack  \rbrace
 \]
 
 We say $ f $ is **Riemann–Stieltjes integrable** <span style="color:red">(with respect to $ \alpha $)</span> ($f \in \mathcal{R}(\alpha)$) if
