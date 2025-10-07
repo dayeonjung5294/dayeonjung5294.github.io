@@ -171,172 +171,243 @@ Since $\inf \lambda(U) = \inf \lbrace \lambda(U) \mid U \supset \bigcup S_n,\, U
 we conclude.
 
 ---
+---
 
-## [1c] Measurable Sets and Measure <!-- % 가측집합과 측도 -->
+## (01c) Measurable Sets and Measure <!-- % 가측집합과 측도 -->
 
 ### Definition
-A set $E \subset \mathbb{R}$ is **measurable** if
+$E \subset \mathbb{R}$ is **measurable**
 \[
-\forall A \subset \mathbb{R}, \quad \mu(A) = \mu(A \cap E) + \mu(A \cap E^c).
+\Leftrightarrow \forall A \subset \mathbb{R}, \quad \mu(A) = \mu(A \cap E) + \mu(A \cap E^c).
 \]
-<!-- % 측도의 분할공식 -->
 
-Let $\mathcal{M}$ denote the collection of all measurable sets.
-
-Then for disjoint measurable sets $E_n$,
-\[
-\mu\left( \bigcup_{n=1}^{\infty} E_n \right) = \sum_{n=1}^{\infty} \mu(E_n).
-\]
-<!-- % 가산가법성 -->
+Let $\mathcal{M}$: the collection of all measurable sets.
 
 ---
 
 ### Properties of Measurable Sets
 
-1. $\mathbb{R} \in \mathcal{M}$  
+1. $\emptyset \in \mathcal{M}, \mathbb{R} \in \mathcal{M}$  
 2. If $E \in \mathcal{M}$, then $E^c \in \mathcal{M}$  
-3. If $\{E_n\} \subset \mathcal{M}$, then $\bigcup E_n \in \mathcal{M}$  
+3. If $E_1, E_2, \ldots \in \mathcal{M}$, then $\bigcup_{n=1}^{\infty} E_n \in \mathcal{M}$  <span style="color:blue">(closed under countable unions)</span>
    <!-- % 시그마 대수 성질 -->
 
-Thus $\mathcal{M}$ is a **σ-algebra**. <!-- % 시그마-대수 -->
+Thus $\mathcal{M}$ is a **σ-algebra**. 
 
 ---
 
-### Proof Sketch
-Let $E, F \in \mathcal{M}$.  
-Then both $E \cup F$ and $E \cap F$ are measurable.
-
-Indeed,
+### Additivity
+For disjoint measurable sets $E_n$,
 \[
-\mu(A) = \mu(A \cap (E \cup F)) + \mu(A \cap (E \cup F)^c)
+\mu\left( \bigcup_{n=1}^{\infty} E_n \right) = \sum_{n=1}^{\infty} \mu(E_n).
 \]
-can be expanded using subadditivity and the fact that $E, F$ are measurable.  
-Hence $E \cup F \in \mathcal{M}$.
+
+### pf Step 1)
+
+Let $E, F \in \mathcal{M}$. ($E, F$ are disjoint)
+   
+Then 
+$
+\mu(A \cap (E \cup F)) 
+= \mu(A \cap (E \cup F) \cap E) + \mu(A \cap (E \cup F) \cap E^c)
+= \mu(A \cap E) + \mu(A \cap F)
+$
+
+### pf Step 2)
+Let $E_1, E_2, \ldots, E_n \in \mathcal{M}$.
+
+Then $\mu\left(A \cap \left( \bigcup_{i=1}^n E_i \right)\right) = \sum_{i=1}^n \mu(A \cap E_i)$, by mathematical induction
+
+### pf Step 3)
+
+**Step 3-1 ($\le$).**  
+
+Since $(A \cap E_i)$ are pairwise disjoint and $\mu$ is subadditive,  $\mu\left( A \cap \bigcup_{i=1}^{\infty} E_i \right) = \mu\left( \bigcup_{i=1}^{\infty} (A \cap E_i) \right) \le \sum_{i=1}^{\infty} \mu(A \cap E_i)$.  
+
+
+**Step 3-2 ($\ge$).**  
+
+Let $F_N := \bigcup_{i=1}^{N} E_i$ and $F := \bigcup_{i=1}^{\infty} E_i$.  
+
+Then $F_N \uparrow F$ and $F_N, F \in \mathcal{M}$ (Property 3).  
+
+By **finite additivity** on disjoint sets (proved in Step 2), $\mu\left( A \cap F_N \right) = \sum_{i=1}^{N} \mu(A \cap E_i)$.  
+
+By monotonicity, $\mu(A \cap F_N) \le \mu(A \cap F)$ for all $N$; hence $\sum_{i=1}^{N} \mu(A \cap E_i) \le \mu(A \cap F)$ for all $N$.  
+
+Taking the supremum over $N$, $\sum_{i=1}^{\infty} \mu(A \cap E_i) \le \mu(A \cap F)$.  
 
 ---
 
-### Countable Additivity
-Let $E_n$ be disjoint measurable sets and $E = \bigcup E_n$.  
-Then
+### Measure
+
+Let $X$ be a set, and let $\mathcal{M} \subseteq 2^{X}$.  
+
+Suppose there exists a function $\mu : \mathcal{M} \to \lbrack 0, \infty \rbrack$ that satisfies the following three properties of measurable sets:
+
+1. $\emptyset \in \mathcal{M}$.  
+2. If $E \in \mathcal{M}$, then $E^{c} \in \mathcal{M}$.  
+3. If $E_1, E_2, \ldots \in \mathcal{M}$, then $\bigcup_{n=1}^{\infty} E_n \in \mathcal{M}$.  
+
+In addition, if for any pairwise disjoint sequence $E_1, E_2, \ldots \in \mathcal{M}$, $\mu\left( \bigcup_{n=1}^{\infty} E_n \right) = \sum_{n=1}^{\infty} \mu(E_n)$,  
+
+then $\mu$ is called a **measure** on $\mathcal{M}$.
+
+
+
+---
+---
+
+## (01d) Measurable Sets and Topology <!-- % 잴 수 있는 집합과 위상 -->
+
+### Cantor Set
+
+The **Cantor set** $C$ is a subset of the closed interval $\lbrack 0, 1 \rbrack$ constructed as follows:
+
+1. **Start:** Begin with the closed interval $\lbrack 0, 1 \rbrack$.
+2. **Remove:** Delete the open middle third interval $\left( \frac{1}{3}, \frac{2}{3} \right)$.
+   The remaining set is $\lbrack 0, \frac{1}{3} \rbrack \cup \lbrack \frac{2}{3}, 1 \rbrack$.
+3. **Iterate:** From each remaining closed interval, remove its open middle third.
+   After the second step, the set is  
+   $\lbrack 0, \frac{1}{9} \rbrack \cup \lbrack \frac{2}{9}, \frac{1}{3} \rbrack \cup \lbrack \frac{2}{3}, \frac{7}{9} \rbrack \cup \lbrack \frac{8}{9}, 1 \rbrack$.
+4. **Continue indefinitely:** Repeat this process infinitely many times.
+
+The resulting set is  
 \[
-\mu(A) = \mu(A \cap E) + \mu(A \cap E^c)
-= \mu\left( A \cap \bigcup E_n \right) + \mu(A \cap E^c)
-= \sum_n \mu(A \cap E_n) + \mu(A \cap E^c).
+C = \bigcap_{n=1}^{\infty} C_n,
 \]
-Thus,
-\[
-\mu(E) = \sum_n \mu(E_n).
-\]
+where $C_n$ is the union of $2^n$ closed intervals remaining after the $n$-th step.
+
+$C$ is **uncountable** but has **measure zero**.
 
 
-## [1d] Further Properties of Measurable Sets <!-- % 절수 있는 집합과 측도의 성질 -->
+---
 
-Let $n \to \infty$.
-
-If $\{E_n\}$ is an **increasing sequence** of measurable sets,  
-then
+Let $\{E_n\}$ be increasing. Then
 \[
 \mu\left( \bigcup_{n=1}^{\infty} E_n \right) = \lim_{n \to \infty} \mu(E_n).
 \]
 
-If $\{F_n\}$ is a **decreasing sequence** of measurable sets with $\mu(F_1) < \infty$,  
-then
+Let $\{E_n\}$ be decreasing with $\mu(E_1) < \infty$. Then
 \[
-\mu\left( \bigcap_{n=1}^{\infty} F_n \right) = \lim_{n \to \infty} \mu(F_n).
-\]
-<!-- % 연속성: 증가/감소하는 집합열에서의 측도 극한 -->
-
----
-
-### Definition
-Let $X$ be a set and $\mathcal{L} \subset 2^X$.  
-If $\mu$ is defined on $\mathcal{L}$ and satisfies the above properties,  
-then we call $\mathcal{L}$ a **σ-algebra** and $\mu$ a **measure** on $\mathcal{L}$.  
-<!-- % 시그마 대수와 측도의 정의 -->
-
----
-
-### Countable and Uncountable Sets
-A **countable set** has measure zero. <!-- % 셀 수 있는 집합의 측도는 0 -->
-An **uncountable set** may have positive or zero measure depending on its structure.  
-
-Let $\{E_n\}$ be increasing. Then
-\[
-\mu\left( \bigcup_n E_n \right) = \lim_{n \to \infty} \mu(E_n).
-\]
-Let $\{F_n\}$ be decreasing with $\mu(F_1) < \infty$. Then
-\[
-\mu\left( \bigcap_n F_n \right) = \lim_{n \to \infty} \mu(F_n).
+\mu\left( \bigcap_{n=1}^{\infty} E_n \right) = \lim_{n \to \infty} \mu(E_n).
 \]
 
+### pf)
+Let $E_1 = F_1$ and define $F_n := E_n \setminus E_{n-1}$ for $n\ge 2$.  
+Then $\{F_n\}$ are pairwise disjoint and measurable, and for each $n$,
+\[
+E_n \;=\; \bigcup_{k=1}^{n} F_k, 
+\qquad
+\bigcup_{n=1}^{\infty} E_n \;=\; \bigcup_{n=1}^{\infty} F_n.
+\]
+<!-- % 증가열에서의 층별 분해: Fn이 서로소이고 En의 분해 및 합집합 일치 -->
+
+By **finite additivity** on disjoint measurable sets,
+\[
+\mu(E_n) \;=\; \sum_{k=1}^{n} \mu(F_k).
+\]
+Taking $n\to\infty$ (monotone limit of partial sums),
+\[
+\lim_{n\to\infty} \mu(E_n) 
+\;=\; \sum_{k=1}^{\infty} \mu(F_k).
+\]
+On the other hand, by **countable additivity** on the disjoint family $\{F_k\}$,
+\[
+\sum_{k=1}^{\infty} \mu(F_k)
+\;=\; \mu\left(\bigcup_{n=1}^{\infty} F_n\right)
+\;=\; \mu\left(\bigcup_{n=1}^{\infty} E_n\right).
+\]
+
+Therefore,
+\[
+\mu\left(\bigcup_{n=1}^{\infty} E_n\right) 
+\;=\; \lim_{n\to\infty} \mu(E_n).
+\]
+
+
 ---
 
-### Theorem: Equivalent Characterizations of Measurability
-For $E \subset \mathbb{R}$, the following are equivalent:
-
-1. $E \in \mathcal{L}$ (i.e., $E$ is measurable).  
-2. For every $\varepsilon > 0$, there exist an open set $U$ and a closed set $F$ such that  
-   \[
-   F \subset E \subset U, \quad \mu(U \setminus F) < \varepsilon.
-   \]
-   <!-- % 외부근사/내부근사에 의한 가측성 등가조건 -->
-
----
-
-### Definition: $F_\sigma$ and $G_\delta$ Sets
+### Definition: $F_\delta$ and $G_\delta$ Sets <!-- % F_delta, G_delta 집합의 정의 -->
 A set $A \subset \mathbb{R}$ is:
 
-- **$F_\sigma$ set** if it is a **countable union of closed sets**:  
+- **$F_\delta$ - set** $\Leftrightarrow$ **union of countable closed sets**:  
   \[
   A = \bigcup_{n=1}^{\infty} F_n, \quad F_n \text{ closed.}
   \]
 
-- **$G_\delta$ set** if it is a **countable intersection of open sets**:  
+- **$G_\delta$ - set** $\Leftrightarrow$ **intersection of countable open sets**:  
   \[
   A = \bigcap_{n=1}^{\infty} U_n, \quad U_n \text{ open.}
   \]
-  <!-- % F_sigma, G_delta 집합의 정의 -->
+  
+
 
 ---
 
-### Theorem: Approximation by $F_\sigma$ and $G_\delta$ Sets
-For any measurable set $E$, there exist a $G_\delta$ set $A$ and an $F_\sigma$ set $B$  
-such that
-\[
-B \subset E \subset A, \quad \mu(A \setminus B) = 0.
-\]
-<!-- % 가측집합의 근사: F_sigma와 G_delta로부터 -->
+### Theorem: Equivalent Characterizations of Measurability
+For $E \subset \mathbb{R}$, the following are equivalent (TFAE):
 
----
+1. $E \in \mathcal{M}$.
+2. $\forall \varepsilon > 0$, $\exists$ a open set $U$ and a closed set $F$ s.t.
+   \[
+   F \subset E \subset U, \quad \mu(U \setminus F) < \varepsilon.
+   \]
+3. $\exists \; G_\delta$ - set $A$ & $F_\delta$ - set $B$ s.t. $B \subset E \subset A, \; \mu(A \setminus B) = 0$.
 
-### Proof Sketch
-Let $\mathbb{R} = \bigcup_{k=-\infty}^{\infty} I_k$,  
-where $I_k = [k, k + 1)$ (a partition of $\mathbb{R}$ into bounded intervals).
+### pf 1) $\rightarrow$ 2)
+Let $\mathbb{R} = \bigcup_{n=1}^{\infty} k_n$, $\mu(k_n) < \infty$.
 
-Define $E_k = E \cap I_k$ for each $k$.
+Define $E_n = E \cap k_n$ for each $n$.
 
-For each $E_k$, take open sets $U_k \supset E_k$ such that
+Take open set $U_n$ s.t. $U_n \supset E_n$ & $\mu(U_n) < \mu(E_n) + \frac{\varepsilon}{2^{n+1}}$.
+
+Put $U = \bigcup_{n=1}^{\infty} U_n$, then $\mu(U) < \mu(E) + \frac{\varepsilon}{2}$.
+
+Similarly, take closed set $F_n$ s.t. $F_n \subset E_n$ & $\mu(F_n) > \mu(E_n) - \frac{\varepsilon}{2^{n+1}}$, and set $F = \bigcup_{n=1}^{\infty} F_n$. Then $\mu(E) < \mu(F) +\frac{\varepsilon}{2}$.
+
+### pf 2) $\rightarrow$ 3)
+
+For each $m \in \mathbb{N}$, choose open $U_m$ and closed $F_m$ such that
+$F_m \subset E \subset U_m$ and $\mu(U_m \setminus F_m) < 2^{-m}$.
+
+Define
 \[
-\mu(U_k) < \mu(E_k) + \frac{\varepsilon}{2^{k+1}}.
+A := \bigcap_{m=1}^{\infty} U_m \quad(\text{$G_\delta$ set}), 
+\qquad
+B := \bigcup_{m=1}^{\infty} F_m \quad(\text{$F_\delta$ set}).
 \]
-Let
+Then $B \subset E \subset A$.
+
+Note that
 \[
-U = \bigcup_k U_k.
+A \setminus B 
+\;\subset\; \bigcap_{m=1}^{\infty} U_m \setminus \bigcup_{m=1}^{\infty} F_m
+\;\subset\; \bigcap_{m=1}^{\infty} \bigcup_{k \ge m} \left(U_k \setminus F_k\right).
 \]
-Then
+
+Hence, since $\bigcup_{k \ge m} \left(U_k \setminus F_k\right)$ is a decreasing sequence of sets and by subadditivity, we have
 \[
-\mu(U) < \mu(E) + \varepsilon.
+\mu(A \setminus B) 
+\;\le\; \lim_{m\to\infty} \sum_{k \ge m} \mu\left(U_k \setminus F_k\right)
+\;\le\; \lim_{m\to\infty} \sum_{k \ge m} 2^{-k}
+\;=\; 0.
 \]
-Similarly, one can construct closed sets $F_k \subset E_k$ with
-\[
-\mu(F_k) > \mu(E_k) - \frac{\varepsilon}{2^{k+1}},
-\]
-and set $F = \bigcup_k F_k$.
-Thus,
-\[
-F \subset E \subset U, \quad \mu(U \setminus F) < \varepsilon.
-\]
-✅ Hence, measurable sets can be approximated arbitrarily closely by $F_\sigma$ and $G_\delta$ sets.
+
+
+### pf 3) $\rightarrow$ 1)
+
+
+- Open sets are measurable; hence closed sets are measurable; thus every $G_\delta$ and $F_\delta$ set is measurable (the measurable sets form a $\sigma$-algebra).
+- Since $A$ and $B$ are measurable and $\mu(A \setminus B)=0$, any subset of $A \setminus B$ is **null** and hence measurable.
+- Decompose
+  \[
+  E \;=\; B \,\cup\, \big(E \setminus B\big), 
+  \quad \text{with } E \setminus B \subset A \setminus B.
+  \]
+  Here $B$ is measurable and $E \setminus B$ is a subset of a null set, so measurable.
+
+Therefore $E$ is measurable, i.e., $E \in \mathcal{M}$.
 
 ---
 
