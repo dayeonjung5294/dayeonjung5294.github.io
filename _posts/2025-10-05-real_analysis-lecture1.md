@@ -1,15 +1,15 @@
 ---
 layout: post
-title: "Real Analysis Lecture 1: Countable Sets and Measure"
+title: "Real Analysis Lecture 1: Measurable Sets and Measure"
 date: 2025-10-05
 categories: [Real_analysis]
 use_math: True
 ---
 
 
-## (01a) Length of Open Sets <!-- % 열린집합의 길이 -->
+# (01a) Length of Open Sets <!-- % 열린집합의 길이 -->
 
-### Proposition 1.
+## Proposition 1.
 
 Let $U \subset \mathbb{R}$ be open.  
 Then
@@ -25,14 +25,14 @@ and define
 <!-- % 비음수 항의 무한합은 순서 바꿔도 동일 -->
  
 
-### Proposition 2.
+## Proposition 2.
 
 For $S \subset \mathbb{R}$, define
 \[
 \mu(S) := \inf \lbrace \lambda(U) \mid U \supset S, \, U \text{ open} \rbrace.
 \]
 
-#### Properties:
+### Properties:
 1. <span style="color:blue">Monotonicity</span>: $S \subset T \Rightarrow \mu(S) \le \mu(T)$ <!-- % 단조성 -->
 2. If $I$ is an interval, $\mu(I) =$ length of $I$. <!-- % 구간의 길이 -->
 3. $ x + S = \lbrace x + y \mid y \in S \rbrace \Rightarrow \mu(x + S) = \mu(S)$
@@ -45,7 +45,7 @@ For $S \subset \mathbb{R}$, define
 ---
 ---
 
-## (01b) Properties of Length <!-- % 길이의 성질 -->
+# (01b) Properties of Length <!-- % 길이의 성질 -->
 
 Let $A \subseteq \mathbb{R}$, then
 \[
@@ -73,7 +73,7 @@ Let $A \subseteq \mathbb{R}$, then
 
 ---
 
-### pf) Properties 1. Monotonicity <!-- % 증명 -->
+## pf) Properties 1. Monotonicity <!-- % 증명 -->
 \[S \subset T \Rightarrow \mu(S) \le \mu(T)\]
 
 1. Let $\mu(S)$: fixed. ($(i)$ method) 
@@ -96,13 +96,13 @@ Let $A \subseteq \mathbb{R}$, then
 
 ---
 
-### pf) Properties 4. Subadditivity
+## pf) Properties 4. Subadditivity
 
 \[
 \mu\left( \bigcup_{n=1}^{\infty} S_n \right) \le \sum_{n=1}^{\infty} \mu(S_n).
 \]
 
-#### Case (I): $S_n$: open interval
+### Case (I): $S_n$: open interval
 
 1. $\bigcup_{n=1}^{\infty} S_n = (a,b)$: open inverval 
 
@@ -132,7 +132,7 @@ Let $A \subseteq \mathbb{R}$, then
 > *Note: The first inequality follows from Case (I)-1, second follows for non-negative terms, the sum is independent of the order of addition.*
 
 
-#### Case (II): $S_n$: open set
+### Case (II): $S_n$: open set
 Each open set can be written as a countable union of disjoint open intervals:
 \[
 S_n = \bigcup_{k=1}^{\infty} I_{nk}.
@@ -150,7 +150,7 @@ Then
 
 
 
-#### Case (III): General case
+### Case (III): General case
 Given $\varepsilon > 0$, choose open sets $U_n \supset S_n$ s.t.
 $\mu(U_n) \le \mu(S_n) + \frac{\varepsilon}{2^n}$.
 
@@ -173,9 +173,9 @@ we conclude.
 ---
 ---
 
-## (01c) Measurable Sets and Measure <!-- % 가측집합과 측도 -->
+# (01c) Measurable Sets and Measure <!-- % 가측집합과 측도 -->
 
-### Definition
+## Definition
 $E \subset \mathbb{R}$ is **measurable**
 \[
 \Leftrightarrow \forall A \subset \mathbb{R}, \quad \mu(A) = \mu(A \cap E) + \mu(A \cap E^c).
@@ -185,7 +185,7 @@ Let $\mathcal{M}$: the collection of all measurable sets.
 
 ---
 
-### Properties of Measurable Sets
+## Properties of Measurable Sets
 
 1. $\emptyset \in \mathcal{M}, \mathbb{R} \in \mathcal{M}$  
 2. If $E \in \mathcal{M}$, then $E^c \in \mathcal{M}$  
@@ -196,7 +196,7 @@ Thus $\mathcal{M}$ is a **σ-algebra**.
 
 ---
 
-### Additivity
+## Additivity
 For disjoint measurable sets $E_n$,
 \[
 \mu\left( \bigcup_{n=1}^{\infty} E_n \right) = \sum_{n=1}^{\infty} \mu(E_n).
@@ -239,7 +239,7 @@ Taking the supremum over $N$, $\sum_{i=1}^{\infty} \mu(A \cap E_i) \le \mu(A \ca
 
 ---
 
-### Measure
+## Measure
 
 Let $X$ be a set, and let $\mathcal{M} \subseteq 2^{X}$.  
 
@@ -258,9 +258,9 @@ then $\mu$ is called a **measure** on $\mathcal{M}$.
 ---
 ---
 
-## (01d) Measurable Sets and Topology <!-- % 잴 수 있는 집합과 위상 -->
+# (01d) Measurable Sets and Topology <!-- % 잴 수 있는 집합과 위상 -->
 
-### Cantor Set
+## Cantor Set
 
 The **Cantor set** $C$ is a subset of the closed interval $\lbrack 0, 1 \rbrack$ constructed as follows:
 
@@ -328,7 +328,7 @@ Therefore,
 
 ---
 
-### Definition: $F_\delta$ and $G_\delta$ Sets <!-- % F_delta, G_delta 집합의 정의 -->
+## Definition: $F_\delta$ and $G_\delta$ Sets <!-- % F_delta, G_delta 집합의 정의 -->
 A set $A \subset \mathbb{R}$ is:
 
 - **$F_\delta$ - set** $\Leftrightarrow$ **union of countable closed sets**:  
@@ -345,7 +345,7 @@ A set $A \subset \mathbb{R}$ is:
 
 ---
 
-### Theorem: Equivalent Characterizations of Measurability
+## Theorem: Equivalent Characterizations of Measurability
 For $E \subset \mathbb{R}$, the following are equivalent (TFAE):
 
 1. $E \in \mathcal{M}$.

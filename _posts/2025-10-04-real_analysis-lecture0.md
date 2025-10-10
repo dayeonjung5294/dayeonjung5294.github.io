@@ -7,9 +7,9 @@ use_math: True
 ---
 
 
-## (00a) What is an Integral?
+# (00a) What is an Integral?
 
-### 1. Quadrature <!-- % 구적법 -->
+## 1. Quadrature <!-- % 구적법 -->
 The process of approximating area under a curve by partitioning an interval and summing up rectangular areas. (foundation of the Riemann integral)
 
 \[
@@ -19,7 +19,7 @@ The process of approximating area under a curve by partitioning an interval and 
 
 ---
 
-### 2. Riemann Integral <!-- % 리만 적분 -->
+## 2. Riemann Integral <!-- % 리만 적분 -->
 
 \[
 \lim_{n \to \infty} \sum_{k=1}^n f(s_k) (x_k - x_{k-1}) \rightarrow A
@@ -32,7 +32,7 @@ A function is Riemann integrable if and only if the set of all its discontinuiti
 
 
 
-#### Goal
+### Goal
 For a set $ E \subset \mathbb{R} $, we aim to define a function  
 \[
 \mu : 2^{\mathbb{R}} \to \lbrack 0, \infty \rbrack
@@ -40,7 +40,7 @@ For a set $ E \subset \mathbb{R} $, we aim to define a function
 
 that assigns a meaningful **measure** (length, area, volume) to $E$.
 
-#### Length of Intervals
+### Length of Intervals
 - For an open interval $(a,b)$,
   \[
   l((a,b)) = b - a
@@ -54,7 +54,7 @@ that assigns a meaningful **measure** (length, area, volume) to $E$.
   l\left(\bigcup_{n=1}^\infty (a_n,b_n)\right) = \sum_{n=1}^\infty (b_n - a_n)
   \]
 
-#### Open Set Representation
+### Open Set Representation
 Let $ U \subset \mathbb{R} $ be open.  
 For each $ x \in U $:
 \[
@@ -67,7 +67,7 @@ U = \bigcup_{x \in U} (a_x,b_x)
 \]
 Thus, every open set can be expressed as a countable union of disjoint intervals. 
 
-#### Measure Definition
+### Measure Definition
 Define the **measure** as
 \[
 \mu(E) := \inf \lbrace \mu(U) \mid U \text{ open},\, E \subset U \rbrace
@@ -75,12 +75,12 @@ Define the **measure** as
 
 ---
 
-### Definition — Riemann–Stieltjes Integral *(for reference)* <!-- % 리만-스틸체스 적분 -->
+## Definition — Riemann–Stieltjes Integral *(for reference)* <!-- % 리만-스틸체스 적분 -->
 Let $ f: [a,b] \to \mathbb{R} $ be bounded <span style="color:red">$ (\alpha: [a,b] \to \mathbb{R} $ be a monotone increasing function.)</span>
 
 Let $ P = \{x_0, x_1, \dots, x_n\} \in \mathcal{P}[a, b] $.
 
-#### Upper and Lower Sums
+### Upper and Lower Sums
 \[
 U(P,f,{\color{red}{\alpha}}) = \sum_{i=1}^{n} M_i ({\color{red}{\alpha}}(x_i) - {\color{red}{\alpha}}(x_{i-1})), \quad 
 M_i = \sup_{x \in [x_{i-1}, x_i]} f(x)
@@ -90,7 +90,7 @@ L(P,f,{\color{red}{\alpha}}) = \sum_{i=1}^{n} m_i ({\color{red}{\alpha}}(x_i) - 
 m_i = \inf_{x \in [x_{i-1}, x_i]} f(x)
 \]
 
-#### Integrability Condition
+### Integrability Condition
 Let 
 \[
 \overline{\int_a^b} f {\color{red}{d\alpha}} = \inf \lbrace U_a^b(f, p, {\color{red}{\alpha}}): p \in \mathcal{P} \lbrack a,b \rbrack  \rbrace
