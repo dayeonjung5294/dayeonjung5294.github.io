@@ -198,23 +198,28 @@ Therefore,
 \]
 ---
 
-## Levi’s Convergence Theorem
+## Levi’s Convergence Theorem <!-- % 절대적 수렴이면 적분의 급수와 함수의 급수가 교환 가능 -->
 
 If $\sum_{n=1}^\infty \int_E \lvert f_n \rvert < \infty$, then
 
 1. $f(x) = \sum_{n=1}^\infty f_n(x)$ exists a.e.,  
-2. \[
-   \int_E f = \sum_{n=1}^\infty \int_E f_n.
-   \]
-<!-- % 절대적 수렴이면 적분의 급수와 함수의 급수가 교환 가능 -->
+2. $\int_E f = \sum_{n=1}^\infty \int_E f_n$.
+   
+
 
 ---
 
 ## Applications and Related Results
 
 1. If $\sum_{n=1}^{\infty} \lvert a_n \rvert < \infty$, then $\sum_{n=1}^{\infty} a_n$ converges. 
-2. If $\sum_{n=1}^{\infty}  {\lvert \lvert f_n \rvert \rvert}_{\sup} < \infty$,  then $f(x) = \sum_{n=1}^{\infty} f_{n}(x)$ is continuous.
-3. If $\sum_{n=1}^{\infty}  {\lvert \lvert f_n \rvert \rvert}_{1} < \infty$,  then $f(x) = \sum_{n=1}^{\infty} f_{n}(x) \in L^1$.
+
+2. If $\sum_{n=1}^{\infty}  {\lVert f_n \rVert}_{\sup} < \infty$, 
+   
+   then $f(x) = \sum_{n=1}^{\infty} f_{n}(x)$ is continuous.
+
+3. If $\sum_{n=1}^{\infty}  {\lVert f_n \rVert}_{1} < \infty$, 
+   
+   then $f(x) = \sum_{n=1}^{\infty} f_{n}(x) \in L^1$.
 
 
 > *Note:*  
@@ -222,26 +227,24 @@ If $\sum_{n=1}^\infty \int_E \lvert f_n \rvert < \infty$, then
 
 ---
 
-## Differentiation Under the Integral Sign
+## Differentiation Under the Integral Sign <!-- % 미분과 적분의 교환 정리 -->
 
-Let $f : I \times J \to \mathbb{C}$, and define  
+Let $f : I \times J \to \mathbb{C}$, and define  $F(x) = \int_J f(x, y) \, dy$.
+
+Suppose $\exists g \in L^1(J)$ s.t.  
 \[
-F(x) = \int_J f(x, y) \, dy.
+\lvert D_x f(x, y) \rvert = \left\lvert \frac{\partial f}{\partial x} \right\rvert \le g(y).
 \]
 
-Suppose there exists $g \in L^1(J)$ such that  
-\[
-\lvert D_x f(x, y) \rvert = \left\lvert \frac{\partial f}{\partial x}(x, y) \right\rvert \le g(y).
-\]
-Then $F'(x)$ exists and
+Then 
 \[
 \frac{d}{dx} \int_J f(x, y) \, dy = \int_J D_x f(x, y) \, dy.
 \]
-<!-- % 적분기호 아래 미분: 지배수렴정리를 이용한 미분과 적분의 교환 정리 -->
 
-### Proof Sketch
 
-Let $h_n \to 0$, and write
+### pf)
+
+Let $x_n \to x$, then
 \[
 \frac{F(x_n) - F(x)}{x_n - x}
 = \int_J \frac{f(x_n, y) - f(x, y)}{x_n - x} \, dy.
@@ -249,120 +252,126 @@ Let $h_n \to 0$, and write
 By **LDCT (Lebesgue Dominated Convergence Theorem)**,
 \[
 \lim_{n \to \infty} \frac{F(x_n) - F(x)}{x_n - x}
+= \int_J \lim_{n \to \infty} D_x f(s_n, y) \, dy (x_n \le s_n \le x)
+\]
+\[
 = \int_J D_x f(x, y) \, dy.
 \]
-<!-- % LDCT를 사용한 미분과 적분의 교환 증명 -->
+
+
+---
+---
 
 # (03c) Riemann and Lebesgue Integrals <!-- % 리만적분과 르벡적분 -->
 
 ## Definition
 
-Let a partition  
-\[
-P = \lbrace a = x_0, x_1, x_2, \dots, x_{n-1}, x_n = b \rbrace
-\]
-of the interval $[a,b]$ be given.
+Let $P = \lbrace a = x_0, x_1, x_2, \dots, x_{n-1}, x_n = b \rbrace$.
 
 Then the **lower sum** and **upper sum** of $f$ with respect to $P$ are  
 \[
-L_P = L^a_b(f, P), \quad U_P = U^a_b(f, P).
+\int_{[a,b)} L_P = L^a_b(f, P), \quad \int_{[a,b)} U_P = U^a_b(f, P).
 \]
-<!-- % 리만 하합/상합 -->
 
-Here, $L_P$ can be viewed as a step function constructed from the **lower sums** of $f$.  
-<!-- % low sum으로 만든 step 함수 -->
+<span style="color:blue">($L_P$ is a step function constructed from the lower sums of $f$)</span> 
+
 
 Let $\lVert P \rVert = \max_i (x_i - x_{i-1})$.  
-If $P_1 \subset P_2 \subset \cdots$ and $\lVert P_n \rVert \to 0$,  
+
+If $P_1 \subseteq P_2 \subseteq \cdots$ and $\lVert P_n \rVert \to 0$,  
 then
 \[
-L_{P_n} \nearrow f, \quad U_{P_n} \searrow f.
+L_{P_n} \nearrow f
+\;\Rightarrow\;
+\lim_{n \to \infty} \int_{[a,b)} L_{P_n} = \int_{[a,b)} L_P = \underline{\int_a^b} f
 \]
-By the **Monotone Convergence Theorem**, we have
 \[
-\lim_{n \to \infty} \int_{[a,b]} L_{P_n}
-= \int_{[a,b]} f
-= \lim_{n \to \infty} \int_{[a,b]} U_{P_n}.
+U_{P_n} \searrow f
+\;\Rightarrow\;
+\lim_{n \to \infty} \int_{[a,b)} U_{P_n} = \int_{[a,b)} U_P = \overline{\int_a^b} f
 \]
-<!-- % 단조수렴정리를 이용한 리만적분과 르벡적분의 연결 -->
+
+### pf)
+<span style="color:red">(Do it yourself using MCT between $L_{P_n}$ and $\min f$)</span> 
+
 
 ---
 
-## Relationship Between Integrals
+## Riemann Integrable
 
-The function $f$ is **Riemann integrable** on $[a,b]$ if and only if
+The function $f$ is **Riemann integrable** on $[a,b]$ if and only if $\overline{\int_a^b} f = \underline{\int_a^b} f$.
+
 \[
-\int_a^b f = \int_a^b f.
+\Leftrightarrow\;
+\int_{[a,b)} (U - L) = 0
+\]
+\[
+\Leftrightarrow\;
+U = L \; \text{a.e.}
+\]
+\[
+\Leftrightarrow\;
+f \; \text{is continuous at} \; x (x \neq a, x \neq b)
 \]
 
-Equivalently,
-\[
-\int_a^b (U - L) = 0,
-\]
-which implies $U = L$ a.e.  
-Hence, $f$ is Riemann integrable iff $f$ is **continuous almost everywhere**.
-<!-- % 불연속점이 measure 0이면 리만적분 가능 -->
-
-> *Riemann integrability criterion:*  
-> $f$ is Riemann integrable $\iff$ the set of discontinuities of $f$ has measure $0$.
+Hence, $f$ is Riemann integrable iff the set of discontinuities of $f$ has measure $0$.
 
 ---
+---
 
-# (03d) Vitali Covering Lemma <!-- % 비탈리 덮음정리 -->
+# (03d) Vitali's Lemma <!-- % 비탈리 도움 정리 -->
 
 ## Statement
 
-Let $E$ be a measurable set with $\mu(E) < \infty$,  
-and let $\mathcal{F}$ be a family of closed intervals.
+Let $E$ be a measurable set with $\mu(E) < \infty$,  and let $\mathcal{F}$ be a class of closed intervals.
 
-Then, for every $\varepsilon > 0$,  
-there exist finitely many **disjoint intervals** $I_1, I_2, \dots, I_n \in \mathcal{F}$  
-such that
+Then, $\forall \varepsilon > 0$, there exist **disjoint intervals** $I_1, I_2, \dots, I_n \in \mathcal{F}$ s.t.
 \[
 \mu\Big( E \setminus \bigcup_{k=1}^n I_k \Big) < \varepsilon.
 \]
-<!-- % 유한 개의 서로소한 닫힌구간으로 거의 다 덮을 수 있음 -->
 
----
-
-## Proof Sketch
+### pf)
 
 Let $U$ be an open set such that $E \subset U$ and $\mu(U) < \infty$.  
 By the Vitali property of $\mathcal{F}$, for each $x \in E$, there exists $I_x \in \mathcal{F}$ such that $x \in I_x \subset U$.
 
 By countable additivity,
 \[
-\sum_k \mu(I_k) < \mu(U) < \infty.
+\sum_{k=1}^{\infty} \mu(I_k) \le \mu(U) < \infty.
 \]
-We construct intervals inductively:
+We construct intervals:
 
-- Choose $I_1$ from $\mathcal{F}$ arbitrarily.  
-- Let $I_2$ be chosen so that $\mu(I_2) > \frac{1}{2} \mu(I_1)$ and $I_2 \cap I_1 = \emptyset$.  
-- Continue selecting intervals $I_3, I_4, \dots$ satisfying  
-  $\mu(I_{k+1}) > \frac{1}{2} \mu(I_k)$ and $I_j \cap I_i = \emptyset$ for $i < j$.  
+- Choose $I_1$ from $\mathcal{F}$ arbitrarily.
+- Let $\alpha_2 = \sup \lbrace \mu(I) \mid I \in \mathcal{F}, I \cap I_1 = \emptyset \rbrace$ and take $I_2 \in \mathcal{F}$ s.t. $\mu(I) > \frac{\alpha_2}{2}$ and $I \cap I_1 = \emptyset$.  
+- Continue selecting intervals $I_3, I_4, \dots$ inductively.  
 
-If this process terminates, the measure of uncovered points is $0$.  
-Otherwise, since $\sum \mu(I_k) < \infty$, there exists $n$ such that  
+If this process terminates, then $\alpha_n = 0$. Otherwise,  $\sum_{k=1}^{\infty} \mu(I_k) < \infty$.
+
+Take $n$ s.t.
 \[
 \sum_{k=n+1}^\infty \mu(I_k) < \frac{\varepsilon}{5}.
 \]
 
-Let
-\[
-D = E \setminus \bigcup_{k=1}^n I_k.
-\]
-For $y \in D$, define $I_y$ as an interval in $\mathcal{F}$ centered at $y$.
+Let $x \in D := E \setminus \bigcup_{k=1}^n I_k$ and $J_k$ be an interval having the same center as $I_k$ but five times its length
 
-By the choice of $n$,
+For $y \in D$, define $I_\nu$ as an interval in $\mathcal{F}$ centered at $y$ that overlaps with $I$.
+
+Then
+\[
+\mu(I) \le \alpha_{\nu} < 2 \mu(I_{\nu}).
+\]
+
+\[
+\Rightarrow \lvert x - y \rvert < \frac{1}{2} \mu(I_{\nu}) + \mu(I) < \frac{5}{2} \mu I_(\nu)
+\]
+\[
+\Rightarrow x \in J_{\nu}.
+\]
+
+Hence, $D \subset (\bigcup_{k>n} J_k)$ and
 \[
 \mu(D) \le \sum_{k>n} \mu(I_k) < \varepsilon.
 \]
-Thus,
-\[
-\mu\Big( E \setminus \bigcup_{k=1}^n I_k \Big) < \varepsilon.
-\]
-$\square$
-<!-- % 비탈리 덮음정리 증명 개요 -->
 
 ---
 
