@@ -25,7 +25,7 @@ Let $\int_E f_n \nearrow L$ ($\lim_{n \to \infty} \int_E f_n := L$)
 
 $\forall n, f_n \le f \;\Rightarrow\; \int_E. f_n \le \int_E f$
 
-Then, 
+Then, do
 \[ L ( = \lim_{n \to \infty} \int_E f_n) \le \int_E f \]
 
 **($\Leftarrow$)**
