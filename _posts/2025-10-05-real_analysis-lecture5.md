@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Real Analysis Lecture 5: Space of Integrable Functions"
-date: 2025-10-26
+date: 2025-10-05
 categories: [Real_analysis]
 use_math: True
 ---

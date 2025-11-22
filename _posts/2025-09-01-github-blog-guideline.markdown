@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Github Blog Guideline"
-date:   2025-10-04
+date:   2025-09-01
 categories: [Git_blog]
 ---
 ## 1. Initial install

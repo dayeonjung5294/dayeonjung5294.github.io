@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Real Analysis Lecture 4: Lebesgue Integration and Differentiation"
-date: 2025-10-19
+date: 2025-09-28
 categories: [Real_analysis]
 use_math: True
 ---

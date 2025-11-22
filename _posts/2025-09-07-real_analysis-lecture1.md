@@ -1,10 +1,14 @@
 ---
 layout: post
 title: "Real Analysis Lecture 1: Measurable Sets and Measure"
-date: 2025-10-05
+date: 2025-09-07
 categories: [Real_analysis]
 use_math: True
 ---
+
+> *Disclaimer:* This post is a personal study note based on the Real Analysis course I attended.  
+> The explanations and formulations are written in my own words for educational purposes only,  
+> and do not reproduce or distribute any copyrighted material from the original lectures.
 
 
 # (01a) Length of Open Sets <!-- % 열린집합의 길이 -->

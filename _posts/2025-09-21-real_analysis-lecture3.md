@@ -1,10 +1,14 @@
 ---
 layout: post
 title: "Real Analysis Lecture 3: Convergence Theorem of Integral"
-date: 2025-10-12
+date: 22025-09-21
 categories: [Real_analysis]
 use_math: True
 ---
+
+> *Disclaimer:* This post is a personal study note based on the Real Analysis course I attended.  
+> The explanations and formulations are written in my own words for educational purposes only,  
+> and do not reproduce or distribute any copyrighted material from the original lectures.
 
 # (03a) Monotone Convergence Theorem <!-- % 단조수렴정리 -->
 

@@ -1,11 +1,14 @@
 ---
 layout: post
 title: "Real Analysis Lecture 2: Measurable Functions and Integral"
-date: 2025-10-09
+date: 2025-09-14
 categories: [Real_analysis]
 use_math: True
 ---
 
+> *Disclaimer:* This post is a personal study note based on the Real Analysis course I attended.  
+> The explanations and formulations are written in my own words for educational purposes only,  
+> and do not reproduce or distribute any copyrighted material from the original lectures.
 
 # (02a) Measurable Functions
 

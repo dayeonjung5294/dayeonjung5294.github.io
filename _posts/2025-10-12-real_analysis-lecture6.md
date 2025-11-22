@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Real Analysis Lecture 6: Two-sided Measure and Integration"
-date: 2025-11-02
+date: 2025-10-12
 categories: [Real_analysis]
 use_math: True
 ---
