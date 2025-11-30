@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Real Analysis Lecture 10: Fourier Integral</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Real Analysis Lecture 10: Fourier Integral | Dayeon Jung</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Real Analysis Lecture 10: Fourier Integral" />
+<meta name="author" content="Dayeon Jung" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures." />
+<meta property="og:description" content="Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures." />
+<link rel="canonical" href="http://localhost:4000/real_analysis/2025/11/09/real_analysis-leacture10.html" />
+<meta property="og:url" content="http://localhost:4000/real_analysis/2025/11/09/real_analysis-leacture10.html" />
+<meta property="og:site_name" content="Dayeon Jung" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-11-09T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Real Analysis Lecture 10: Fourier Integral" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dayeon Jung"},"dateModified":"2025-11-09T00:00:00+09:00","datePublished":"2025-11-09T00:00:00+09:00","description":"Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures.","headline":"Real Analysis Lecture 10: Fourier Integral","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/real_analysis/2025/11/09/real_analysis-leacture10.html"},"url":"http://localhost:4000/real_analysis/2025/11/09/real_analysis-leacture10.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['\[', '\]'], ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/" alt="Dayeon Jung" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">Dayeon Jung</a>
+      </h2>
+      </div><p class="tagline">Statistician & Data Scientist</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/dayeonjung5294" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:dayeonjung5294@gmail.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2025</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/real_analysis/2025/11/09/real_analysis-leacture10.html">
+    <h2 class="post-title">Real Analysis Lecture 10: Fourier Integral</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Nov 9, 2025</div><ul class="post-categories"><li>Real_analysis</li></ul></div>
+  <div class="post">
+    <blockquote>
+  <p><em>Disclaimer:</em> This post is a personal study note based on the Real Analysis course I attended.<br />
+The explanations and formulations are written in my own words for educational purposes only,<br />
+and do not reproduce or distribute any copyrighted material from the original lectures.</p>
+</blockquote>
+
+<h1 id="10a-fourier-series-and-fourier-integral-">(10a) Fourier Series and Fourier Integral <!-- % 푸리에 급수와 푸리에 적분 --></h1>
+
+<h2 id="definition-fourier-transform">Definition: Fourier Transform</h2>
+<p>For $f \in L^1(\mathbb{R})$, define
+[
+\widehat{f}(\alpha)
+= \int_{\mathbb{R}} f(x)\, e^{-i \alpha x}\, dx, \; \alpha \in \mathbb{R}
+]</p>
+
+<p>Then:</p>
+
+<ol>
+  <li>
+    <p>$\widehat{f} \in C_0(\mathbb{R}) \;(L^1(\mathbb{R}) \to C_0(\mathbb{R}))$</p>
+  </li>
+  <li>
+    <p>$f \mapsto \widehat{f}$ is linear and bounded.</p>
+  </li>
+  <li>
+    <p>Linear Trigonometric: $\widehat{(f \ast g)}(\alpha) = \widehat{f}(\alpha) \cdot \widehat{g}(\alpha).$</p>
+  </li>
+  <li>
+    <p>$\lVert \widehat{f} \rVert_{\sup} \le \lVert f\rVert_1$</p>
+  </li>
+</ol>
+
+<h2 id="theorem-10-1">Theorem 10-1.</h2>
+
+<p>If</p>
+<ol>
+  <li>$h_n \ge 0$,</li>
+  <li>$\int_{\mathbb{R}} h_n=1$</li>
+  <li>$\lim_{\lambda\to\infty} \int_{\mathbb{R} \setminus \lbrack -\delta, \delta \rbrack} h_{\lambda} = 0, \; \forall \lambda, \delta &gt; 0$,</li>
+</ol>
+
+<p>Then,</p>
+
+<ul>
+  <li>
+    <p>$f \in L^1(\mathbb{R}) \Rightarrow \lVert f - f\ast h_{\lambda}\rVert_1 \to 0$</p>
+  </li>
+  <li>
+    <p>If $f$ is bounded and uniformly continuous, $\Rightarrow \lVert f - f\ast h_{\lambda}\rVert_{\infty} \to 0.$</p>
+  </li>
+  <li>
+    <p>$f \ast u_{\alpha} = \widehat{f}(\alpha) \cdot u_{\alpha}$</p>
+  </li>
+</ul>
+
+<hr />
+<hr />
+
+<h1 id="10b-approximate-identity-">(10b) Approximate Identity <!-- % 근사 항등원 --></h1>
+
+<h2 id="basic-formulas-for-fourier-trnasform">Basic Formulas for Fourier Trnasform</h2>
+
+<ul>
+  <li>
+    <p>$\widehat{f’}(\alpha) = i\alpha\, \widehat{f}(\alpha)$</p>
+  </li>
+  <li>
+    <p>$(\widehat{f})_{\alpha} = \widehat{g}(\alpha)$, where $g(x) = -ixf(x)$</p>
+  </li>
+  <li>
+    <p>$\widehat{f \cdot u_\alpha} = (\widehat{f})_{\alpha}$,</p>
+
+    <p>where $(\widehat{f})_{\alpha}$: $\alpha$ translation of $\widehat{f}$</p>
+  </li>
+  <li>
+    <p>$(\widehat{f_\alpha})(\alpha) = \widehat{f}(\alpha) \cdot u_\alpha (-x)$</p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="example-10-1">Example 10-1.</h2>
+<p>For $a&gt;0$,</p>
+
+<ol>
+  <li>
+    <p>$f(x)=e^{-\lvert x\rvert /a} \;\Rightarrow\; \widehat{f}(\alpha) = \int_{-\infty}^\infty e^{-\lvert x\rvert /a} \cdot e^{-i\alpha x} dx = \frac{2a}{1 + a^2\alpha^2}.$</p>
+  </li>
+  <li>
+    <p>$f(x)=\chi_{\lbrack -a, a \rbrack} \;\Rightarrow\; \widehat{f}(\alpha) = \int_{-a}^a  e^{-i\alpha x} dx = \frac{2\sin{ax}}{\alpha}.$</p>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="constructing-kernels-approximate-identity">Constructing Kernels (Approximate Identity)</h2>
+
+<ol>
+  <li>
+    <p>Let $h\ge 0$, $\int_{\mathbb{R}} h=1$. Define
+[
+h_{\lambda}(x)=\lambda h(\lambda x), \; x \in \mathbb{R}, \; \lambda&gt;0.
+]</p>
+  </li>
+  <li>
+    <p>Let $p \in L^1(\mathbb{R}), \;0 \le p \le 1, \;p(0) = \lim_{\alpha \to 0} p(\alpha) = 1$. Define
+[
+h(x) = \frac{1}{2\pi} \int_{\mathbb{R}} p(\alpha) \cdot u_\alpha (x) d\alpha 
+]
+[\Rightarrow h_{\lambda}(x)=\lambda h(\lambda x)]</p>
+  </li>
+</ol>
+
+<p>Example:
+[
+H(x)=\frac{1}{2\pi} \int_{\mathbb{R}} e^{-\lvert\alpha\rvert} \cdot e^{i\alpha x} \, dx
+= \frac{1}{\pi} \cdot \frac{1}{1 + x^2}
+]
+[
+\Rightarrow H_{\lambda}(x)
+= \frac{1}{2\pi} \cdot \frac{2\lambda}{1+\lambda^2 x^2}.
+]</p>
+
+<hr />
+<hr />
+
+<h1 id="10c-inversion-formula-">(10c) Inversion Formula <!-- % 역변환 공식 --></h1>
+
+<h2 id="theorem-10-2">Theorem 10-2.</h2>
+<p>If  $\lim_{\alpha \to \pm \infty} \hat f(\alpha) = 0$, then
+[
+\widehat{f} \in C_0(\mathbb{R}).
+]</p>
+
+<h3 id="pf">pf)</h3>
+<p>By definition,
+[
+\hat f(\alpha)
+= - \int_{\mathbb{R}} f(x)\, e^{-i\alpha (x + \frac{\pi}{\alpha})}\, dx
+= \int_{\mathbb{R}} f(x-\tfrac{\pi}{\alpha})\, e^{-i\alpha x}\, dx.
+]</p>
+
+<p>Thus,
+[
+2\,\hat f(\alpha)
+= \int_{\mathbb{R}} \lbrace f(x) - f_{\frac{\pi}{\alpha}}(x) \rbrace e^{-i\alpha x}\, dx.
+]
+[
+2\, \lvert \hat f(\alpha)\rvert
+\le \lVert f - f_{\frac{\pi}{\alpha}} \rVert_1 \to 0.
+]</p>
+
+<hr />
+
+<p>Using the identity $(f \ast g)’ = f \ast g’$, we see the relation<br />
+[
+L^1(\mathbb{R}) \ast C^{\infty}_C(\mathbb{R}) \subset C^{\infty}_C(\mathbb{R}).
+]</p>
+
+<p>Thus <strong>$C^{\infty}_0(\mathbb{R})$ is dense in $L^1(\mathbb{R})$</strong>.</p>
+
+<hr />
+
+<h2 id="theorem-10-3">Theorem 10-3.</h2>
+
+<p>If $\hat f \in L^1(\mathbb{R})$, then 
+[
+f(x) = \frac{1}{2\pi} \int_{\mathbb{R}} \hat f(\alpha)\, e^{i\alpha x}\, d\alpha \; \text{a.e.}
+]</p>
+
+<h3 id="pf-1">pf)</h3>
+<blockquote>
+  <p>$(h_\lambda \ast f)(x) = \int_{\mathbb{R}} f(x-y)\, h_\lambda(y)\, dy$,</p>
+
+  <p>$= \int_{\mathbb{R}} \left\lbrack f(x-y) \cdot \frac{\lambda}{2\pi} \int p(\alpha) e^{-i\alpha \lambda y} d\alpha \right\rbrack \, dy$</p>
+
+  <p>$= \frac{1}{2\pi} \int_{\mathbb{R}} \left\lbrack f(x-y) \int p(\frac{\alpha}{\lambda}) e^{-i\alpha y} d\alpha \right\rbrack \, dy$</p>
+
+  <p>$= \frac{1}{2\pi} \int_{\mathbb{R}} p(\frac{\alpha}{\lambda}) \int  f(x-y)  e^{-i\alpha y} dy \,  d\alpha $</p>
+
+  <p>$= \frac{1}{2\pi} \int_{\mathbb{R}} p(\frac{\alpha}{\lambda}) \int  f(y)  e^{i\alpha (x-y)} dy \,  d\alpha $</p>
+
+  <p>$= \frac{1}{2\pi} \int_{\mathbb{R}} p(\frac{\alpha}{\lambda}) \hat f(\alpha)  e^{i\alpha x} \,  d\alpha $</p>
+
+  <p>$\to \frac{1}{2\pi} \int_{\mathbb{R}}  \hat f(\alpha)  e^{i\alpha x} \,  d\alpha $ when $\hat f \in L^1(\mathbb{R})$</p>
+
+</blockquote>
+
+<p>Since $\lVert h_\lambda \ast f - f \rVert_1 \to 0$,<br />
+we obtain<br />
+[
+h_{\lambda_n} \ast f(x) \to f(x)
+\quad \text{a.e.}
+]</p>
+
+<hr />
+
+<h2 id="theorem-10-4">Theorem 10-4.</h2>
+<p>$f, \; \hat f$ is one-to-one (i.e., uniquely determined).</p>
+
+<hr />
+<hr />
+
+<h1 id="10d-examples-of-fourier-transforms-">(10d) Examples of Fourier Transforms <!-- % 푸리에 변환 예시 --></h1>
+
+<h2 id="example-10-2">Example 10-2.</h2>
+<p>Let $p(\alpha) = \max\lbrace 1 - \frac{\lvert \alpha\rvert}{\lambda}, 0 \rbrace,$ then</p>
+
+<p>[
+k_\lambda (x)
+= \frac{1}{2\pi \lambda} \cdot \frac{\sin^2(\frac{\lambda x}{2})}{(\frac{x}{2})^2}
+]</p>
+
+<hr />
+
+<h2 id="example-10-3">Example 10-3.</h2>
+<p>Let $p(\alpha) = e^{- \frac{\alpha^{2}}{2} }$, then
+[
+G(x)
+= \frac{1}{\sqrt{2\pi}}\, e^{- \frac{x^2}{2}},
+]
+[
+G_{\lambda}(x)
+= \frac{\lambda}{\sqrt{2\pi}}\, e^{- \frac{(\lambda x)^2}{2}},
+]</p>
+
+<hr />
+
+<p>📚 <em>Reference:</em> <a href="https://www.math.snu.ac.kr/~kye/lecture_V/V_real/index.html">Real Analysis Lecture by Prof. Seung-Hyeok Kye (SNU)</a></p>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/dayeonjung5294" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:dayeonjung5294@gmail.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2025</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+  <script src="/assets/js/simple-jekyll-search.min.js"></script>
+  <script src="/assets/js/search.js"></script>
+  
+</body>
+
+</html>

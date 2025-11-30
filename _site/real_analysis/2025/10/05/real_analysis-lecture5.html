@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Real Analysis Lecture 5: Space of Integrable Functions</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Real Analysis Lecture 5: Space of Integrable Functions | Dayeon Jung</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Real Analysis Lecture 5: Space of Integrable Functions" />
+<meta name="author" content="Dayeon Jung" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures." />
+<meta property="og:description" content="Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures." />
+<link rel="canonical" href="http://localhost:4000/real_analysis/2025/10/05/real_analysis-lecture5.html" />
+<meta property="og:url" content="http://localhost:4000/real_analysis/2025/10/05/real_analysis-lecture5.html" />
+<meta property="og:site_name" content="Dayeon Jung" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-10-05T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Real Analysis Lecture 5: Space of Integrable Functions" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dayeon Jung"},"dateModified":"2025-10-05T00:00:00+09:00","datePublished":"2025-10-05T00:00:00+09:00","description":"Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures.","headline":"Real Analysis Lecture 5: Space of Integrable Functions","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/real_analysis/2025/10/05/real_analysis-lecture5.html"},"url":"http://localhost:4000/real_analysis/2025/10/05/real_analysis-lecture5.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['\[', '\]'], ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/" alt="Dayeon Jung" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">Dayeon Jung</a>
+      </h2>
+      </div><p class="tagline">Statistician & Data Scientist</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/dayeonjung5294" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:dayeonjung5294@gmail.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2025</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/real_analysis/2025/10/05/real_analysis-lecture5.html">
+    <h2 class="post-title">Real Analysis Lecture 5: Space of Integrable Functions</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Oct 5, 2025</div><ul class="post-categories"><li>Real_analysis</li></ul></div>
+  <div class="post">
+    <blockquote>
+  <p><em>Disclaimer:</em> This post is a personal study note based on the Real Analysis course I attended.<br />
+The explanations and formulations are written in my own words for educational purposes only,<br />
+and do not reproduce or distribute any copyrighted material from the original lectures.</p>
+</blockquote>
+
+<h1 id="05a-lebesgue-spaces-">(05a) Lebesgue Spaces <!-- % 르벡 공간 --></h1>
+
+<h2 id="definition">Definition</h2>
+
+<p>[
+L^1(E) = \lbrace f : \int_E \lvert f \rvert &lt; \infty \rbrace, \quad
+L^2(E) = \lbrace f : \int_E \lvert f \rvert^2 &lt; \infty \rbrace.
+]</p>
+
+<hr />
+
+<h2 id="jensens-inequality-">Jensen’s Inequality <!-- % 젠센 부등식 --></h2>
+
+<p>Let $\phi : (a,b) \to \mathbb{R}$ be <strong>convex</strong>, and let $f : [0,1] \to (a,b)$ be integrable.<br />
+Then
+[
+\phi \left(\int_0^1 f(t)\,dt\right) \le \int_0^1 \phi(f(t))\,dt.
+]</p>
+
+<h3 id="pf">pf)</h3>
+<p>Let $\alpha = \int_0^1 f(x)\,dx$, and $\beta = \sup \lbrace \frac{\phi(\alpha) - \phi(s)}{\alpha - s} \rbrace$ for $a &lt; s &lt; \alpha &lt; b$.<br />
+[
+\Rightarrow \phi(s) - \phi(\alpha) \ge \beta(s - \alpha), \; \forall s \in (a,b)
+]
+[
+\Rightarrow \phi(f(x)) - \phi(\alpha) \ge \beta(f(x) - \alpha).
+]</p>
+
+<p>Hence
+[
+\int_0^1 \phi(f(t))\,dt - \phi \left(\int_0^1 f(t)\,dt\right) \ge 0.
+]</p>
+
+<h2 id="example-exponential-case">Example (Exponential Case)</h2>
+
+<p>Let $a_i&gt;0$ with $\sum_{i=1}^n a_i = 1$, and let $s_1 \le s_2 \le \cdots \le s_n$,</p>
+
+<p>$t_0 := 0,\; t_k := \sum_{i=1}^k a_i \ \ (k=1,\dots,n)$, so that $0=t_0 &lt; t_1 &lt; \cdots &lt; t_n = 1$ .</p>
+
+<p>Define the step function $f:\lbrack 0,1 \rbrack \to \mathbb{R}$ s.t.
+[
+f(x)= \sum_{i=1}^n s_i \,\chi_{\lbrack t_{i-1},\, t_i )}(x).
+]</p>
+
+<p>Define $\phi(x) = e^x$.</p>
+
+<p>Then</p>
+
+<ol>
+  <li>
+    <p>$e^{a_1 s_1 + a_2 s_2 + \dots + a_n s_n} \le a_1 e^{s_1} + a_2 e^{s_2} + \dots + a_n e^{s_n}$</p>
+  </li>
+  <li>
+    <p>$t_1^{a_1} \dots t_b^{a_n} \le a_1 t_1 + \dots + a_n t_n \; (t_i &gt; 0)$</p>
+  </li>
+  <li>
+    <p>$s^{\frac{1}{p}} \cdot t^{\frac{1}{q}} \le \frac{1}{p} \cdot s + \frac{1}{q} \cdot t (\frac{1}{p} + \frac{1}{q} = 1, \; 0&lt;p,q&lt; \infty)$</p>
+  </li>
+  <li>
+    <p>$S \cdot T \le \frac{1}{p} \cdot S^p + \frac{1}{q} \cdot T^q \; (S, T \ge 0)$</p>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="hölders-inequality-">Hölder’s Inequality <!-- % 홀더 부등식 --></h2>
+
+<p>For $f,g : E \to [0,\infty]$ and $1 &lt; p, q &lt; \infty$ with $\frac{1}{p} + \frac{1}{q} = 1$,<br />
+[
+\int_E f g \le \left(\int_E f^p\right)^{1/p} \left(\int_E g^q\right)^{1/q}.
+]</p>
+
+<h3 id="pf-1">pf)</h3>
+<p>Let
+[
+A = \left(\int_E f^p\right)^{1/p}, \quad
+B = \left(\int_E g^q\right)^{1/q}.
+]
+Define
+[
+F = \frac{f}{A}, \quad G = \frac{g}{B}.
+]
+Then $\int_E F^p = \int_E G^q = 1$.</p>
+
+<p>By Jensen’s inequality,
+[
+F(x) G(x) \le \frac{F(x)^p}{p} + \frac{G(x)^q}{q},
+]
+and integrating both sides gives
+[
+\int_E F G \le \frac{1}{p} + \frac{1}{q} = 1.
+]
+Multiplying both sides by $AB$ yields Hölder’s inequality.</p>
+
+<hr />
+
+<h2 id="minkowskis-inequality-">Minkowski’s Inequality <!-- % 민코프스키 부등식 --></h2>
+
+<p>For $p &gt; 1$,
+[
+\left(\int_E (f+g)^p \right)^{1/p} \le 
+\left(\int_E f^p \right)^{1/p} + \left(\int_E g^p \right)^{1/p}.
+]</p>
+
+<h3 id="pf-2">pf)</h3>
+<p>First,
+[
+\int_E (f+g)^p
+= \int_E (f+g)\,(f+g)^{p-1}
+= \int_E f\,(f+g)^{p-1} + \int_E g\,(f+g)^{p-1}.
+]</p>
+
+<p>Apply <strong>Hölder’s inequality</strong> to each term with exponents $(p,q)$:
+[
+\int_E f\,(f+g)^{p-1}
+\le \lVert f\rVert_p \,\lVert (f+g)^{p-1}\rVert_q,
+\qquad
+\int_E g\,(f+g)^{p-1}
+\le \lVert g\rVert_p \,\lVert (f+g)^{p-1}\rVert_q.
+]</p>
+
+<p>Since $q=\dfrac{p}{p-1}$, we have
+[
+\lVert (f+g)^{p-1}\rVert_q
+= \Big(\int_E (f+g)^{(p-1)q}\Big)^{1/q}
+= \Big(\int_E (f+g)^p\Big)^{1/q}
+= \lVert f+g\rVert_p^{\,p-1}.
+]</p>
+
+<p>Combining the estimates,
+[
+\int_E (f+g)^p
+\le \big(\lVert f\rVert_p+\lVert g\rVert_p\big)\, \lVert f+g\rVert_p^{\,p-1}.
+]</p>
+
+<p>Divide both sides by $\lVert f+g\rVert_p^{\,p-1}$ to obtain
+[
+\lVert f+g\rVert_p \le \lVert f\rVert_p + \lVert g\rVert_p,
+]
+which is Minkowski’s inequality. $\square$</p>
+
+<hr />
+
+<h2 id="definition-lp-space">Definition (Lp Space)</h2>
+
+<p>For a measurable set $E \subset \mathbb{R}$, define
+[
+L^p(E) = \lbrace f : E \to \mathbb{C} \text{ measurable and } \int_E \lvert f \rvert^p &lt; \infty \rbrace.
+]</p>
+
+<h3 id="properties">Properties</h3>
+<ol>
+  <li>
+    <p>$L^p(E)$ is a <strong>vector space</strong> for $1 \le p &lt; \infty$.</p>
+  </li>
+  <li>
+    <p>The <strong>norm</strong>
+[
+\lVert f \rVert_p = \left( \int_E \lvert f \rvert^p \right)^{1/p}
+]
+satisfies:</p>
+
+    <ol>
+      <li>
+        <p>$\lVert f \rVert_p = 0 \Rightarrow f = 0 \text{ a.e.}$</p>
+      </li>
+      <li>
+        <p>$\lVert a f \rVert_p = \lvert a \rvert \lVert f \rVert_p$</p>
+      </li>
+      <li>
+        <p>$\lVert f + g \rVert_p \le \lVert f \rVert_p + \lVert g \rVert_p$</p>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+<p>Thus $L^p(E)$ is a <strong>normed space</strong>.</p>
+
+<hr />
+<hr />
+
+<h1 id="05b-completeness-of-lebesgue-spaces-">(05b) Completeness of Lebesgue Spaces <!-- % 르벡공간의 완비성 --></h1>
+
+<p>For $f : E \to [0,\infty]$, define 
+[
+\operatorname*{ess\,sup} f = \inf \lbrace \alpha \in \mathbb{R} : \mu( f^{-1} (\alpha, \infty) ) = 0 \rbrace.
+]</p>
+
+<p>Then
+[
+\lVert f \rVert_\infty = \operatorname*{ess\,sup} \lvert f \rvert.
+]</p>
+
+<p>Also,
+[
+f \in L^\infty(E) \;\Leftrightarrow\; \lVert f \rVert_\infty &lt; \infty.
+]</p>
+
+<hr />
+
+<h2 id="theorem">Theorem</h2>
+<p>$L^p(E)$ is a <strong>complete normed space</strong> for $1 \le p \le \infty$.</p>
+
+<ul>
+  <li>$X$ is <strong>complete</strong>
+[
+\Leftrightarrow \; \sum_{n=1}^{\infty} \lVert x_n \rVert &lt; \infty \longrightarrow
+\exists \; x \in X \text{ s.t. } \lim_{N \rightarrow \infty} \lVert x - \sum_{n=1}^{N} x_n \rVert
+]</li>
+</ul>
+
+<h3 id="case-1-p--infty">Case 1: $p = \infty$</h3>
+
+<p>Let $\lbrace f_n \rbrace$ be a Cauchy sequence in $L^\infty(E)$.</p>
+
+<p>Define<br />
+[
+A_{k} = \lbrace x \in E : \lvert f_k(x) \rvert &gt; \lVert f_k \rVert_\infty \rbrace.
+]
+[
+B_{m,n} = \lbrace x \in E : \lvert f_m(x) - f_n(x) \rvert &gt; \lVert f_m - f_n \rVert_\infty \rbrace.
+]</p>
+
+<p>Let $F$ be union of $A_k$ and $B_{m,n}$. Then $\mu(F) = 0$.</p>
+
+<p>For $x \in E \setminus F$, the sequence $\lbrace f_n(x) \rbrace$ is Cauchy in $\mathbb{R}$, hence convergent to some $f(x)$.</p>
+
+<p>(i.e. $\lvert f_m(x) - f_n(x) \rvert &lt; \lVert f_m - f_n \rVert \rightarrow 0$ as $m,n \rightarrow 0$)</p>
+
+<p>Define $f(x) = \lim_{n \to \infty} f_n(x)$ on $E \setminus F$.</p>
+
+<p>Then
+[
+\lVert f_n - f \rVert_\infty \to 0,
+]
+and thus $L^\infty(E)$ is complete.</p>
+
+<h3 id="case-2-1-le-p--infty">Case 2: $1 \le p &lt; \infty$</h3>
+
+<p>Let $\lbrace f_n \rbrace$ be a Cauchy sequence in $L^p(E)$.</p>
+
+<p>Take a subsequence $\lbrace f_{n_i} \rbrace$ such that<br />
+[
+\lVert f_{n_{i+1}} - f_{n_i} \rVert_p \le 2^{-i}.
+]</p>
+
+<p>Define
+[
+g_k = \sum_{i=1}^k \lvert f_{n_{i+1}} - f_{n_i} \rvert, \quad
+g = \sum_{i=1}^\infty \lvert f_{n_{i+1}} - f_{n_i} \rvert.
+]</p>
+
+<p>Then by <strong>Fatou’s lemma</strong> and since $\lVert g_k \rVert_p &lt; 1, \; \forall k = 1,2,\ldots$,
+[
+\int_E g^p \le \sum_{k=1}^\infty \int_E g_k^p \le 1,
+]</p>
+
+<p>so $g \in L^p(E)$.</p>
+
+<p>Define
+[
+f = f_{n_1} + (f_{n_2} - f_{n_1}) + (f_{n_3} - f_{n_2}) + \dots,
+]</p>
+
+<p>then $f = \sum (f_{n_{k+1}} - f_{n_k})$ converges absolutely a.e.</p>
+
+<p>Thus $L^p(E)$ is complete. ✅</p>
+
+<hr />
+<hr />
+
+<h1 id="05c-luzins-theorem-">(05c) Luzin’s Theorem <!-- % 루진 정리 --></h1>
+
+<h2 id="lemma-5-1">Lemma 5-1</h2>
+<p>Let $U$ be open and $K \subset U$ be compact set.</p>
+
+<p>Then there exists a continuous function $f$ s.t.
+[
+f(x) = 1, x \in K \; / \; f(x) = 0, x \in U^c
+]</p>
+
+<h3 id="pf-3">pf)</h3>
+
+<p>Assume $K\subset\mathbb{R}$ and use compactness: choose finitely many closed intervals
+[
+K \subset \bigcup_{j=1}^{N} I_j \subset U
+]
+with disjoint interiors such that $\operatorname{dist}(I_j, U^{c})&gt;0$ for all $j$.</p>
+
+<p>For each $j$, pick continuous $\varphi_j:\mathbb{R}\to[0,1]$ with
+[
+\varphi_j\equiv 1 \text{ on } I_j, \qquad \operatorname{supp}\varphi_j \subset J_j\subset U,
+]
+where $J_j$ are slightly larger open intervals still inside $U$.</p>
+
+<p>(Construct $\varphi_j$ piecewise linearly on $J_j$ so that it tapers to $0$ at $\partial J_j$.)</p>
+
+<p>Let
+[
+s(x):=\sum_{j=1}^{N}\varphi_j(x),\qquad
+f(x):=\min\lbrace1,\, s(x) \rbrace.
+]
+Then $f$ is continuous, $f\equiv 1$ on $K$ (since each $x\in K$ lies in some $I_j$), and $f\equiv 0$ on $U^{c}$ because $\operatorname{supp} f \subset \bigcup_j J_j \subset U$. $\square$</p>
+
+<hr />
+
+<h2 id="theorem-5-1-luzin">Theorem 5-1 (Luzin)</h2>
+<p>Let $f : [a,b] \to \mathbb{C}$ be measurable. Then</p>
+
+<ol>
+  <li>
+    <p>$\forall \varepsilon &gt; 0, \; \exists \; g: [a,b] \to \mathbb{C}$ continuous function s.t. $\mu(\lbrace x : f(x) \ne g(x) \rbrace) &lt; \varepsilon.$</p>
+  </li>
+  <li>
+    <p>If $f \in L^{\infty} [a,b]$, then $\exists \; g \in C[a,b]$ s.t. $\lVert g \rVert_{sup} \le \lVert f \rVert_{\infty}$ and $\mu(\lbrace x : f(x) \ne g(x) \rbrace) &lt; \varepsilon$.</p>
+  </li>
+</ol>
+
+<h3 id="pf-4">pf)</h3>
+
+<h3 id="case-1-0-le-f--1">Case 1: $0 \le f &lt; 1$</h3>
+
+<p>Construct step functions
+[
+S_n(x) = \sum_{k=1}^{2^n} \frac{k-1}{2^n} \chi_{A_k}(x),
+]
+where $A_k = \lbrace x : \frac{k-1}{2^n} \le f(x) &lt; \frac{k}{2^n} \rbrace$.</p>
+
+<p>Then define
+[
+t_n = S_n - S_{n-1} = \frac{1}{2^n} \chi_{T_n}, \quad T_n = \lbrace x : \lvert t_n(x) \rvert &gt; 0 \rbrace.
+]</p>
+
+<p>Take open $U_n$ and compact $K_n$ with $K_n \subseteq T_n \subseteq U_n$ and $\mu(U_n \setminus K_n) &lt; \varepsilon / 2^n$.</p>
+
+<p>By the <strong>Lemma 5-1</strong>, built continuous $h_n$ so that
+[
+h_n=\chi_{T_n}\quad\text{on}\quad \big(U_n\setminus K_n\big)^c.
+]</p>
+
+<p>Define set $G:= [a,b]\setminus \bigcup_{n=1}^{\infty}(U_n\setminus K_n)$.</p>
+
+<p>Then for every $x\in G$ and every $n$,
+[
+h_n(x)=\chi_{T_n}(x).
+]</p>
+
+<p>Hence, on $G$,
+[
+g(x)=\sum_{n=1}^{\infty}2^{-n}h_n(x)
+=\sum_{n=1}^{\infty}2^{-n}\chi_{T_n}(x)
+=\sum_{n=1}^{\infty}\big(S_n(x)-S_{n-1}(x)\big)
+=\lim_{N\to\infty} S_N(x)=f(x).
+]</p>
+
+<p>Therefore ${x:f(x)\ne g(x)}\subseteq G^c=\bigcup_{n\ge1}(U_n\setminus K_n)$ and</p>
+
+<p>[
+\mu\big({x:f(x)\ne g(x)}\big)
+\le \mu\left(\bigcup_{n=1}^{\infty}(U_n\setminus K_n)\right)
+\le \sum_{n=1}^{\infty}\mu(U_n\setminus K_n)
+&lt; \sum_{n=1}^{\infty}\frac{\varepsilon}{2^n}=\varepsilon.
+]</p>
+
+<h3 id="case-2-f-is-a-bounded-and-complex-function">Case 2: $f$ is a bounded and complex function</h3>
+
+<p>Write
+[
+f = (f_1 - f_2) + i (f_3 - f_4),
+]
+where $f_1, f_2, f_3, f_4$ satisfy <strong>Case 1</strong>.</p>
+
+<h3 id="case-3-f-is-a-not-bounded">Case 3: $f$ is a not bounded</h3>
+
+<p>Let $A_n = \lbrace x \in [a,b] : \lvert f(x) \rvert &gt; n \rbrace$. Then $\mu(A_n) \downarrow 0$ as $n \to \infty$.</p>
+
+<p>For any $\varepsilon &gt; 0$, choose $N$ such that<br />
+[
+\mu(A_N) &lt; \frac{\varepsilon}{2}.
+]</p>
+
+<p>Define 
+[
+h(x) = (1 - \chi_{A_N}(x)) \cdot f(x)
+]</p>
+
+<p>Since $h$ is bounded and measurable, by <strong>Luzin’s theorem for bounded functions</strong>,<br />
+there exists a continuous function $g$ on $[a,b]$ such that
+[
+\mu({x : h(x) \ne g(x)}) &lt; \frac{\varepsilon}{2}.
+]</p>
+
+<p>Because $f = h$ outside $A_N$, we have
+[
+\lbrace x : f(x) \ne g(x)\rbrace
+\subseteq
+A_N \cup \lbrace x : h(x) \ne g(x)\rbrace.
+]</p>
+
+<p>Hence
+[
+\mu({x : f(x) \ne g(x)})
+\le
+\mu(A_N) + \mu({x : h(x) \ne g(x)})
+&lt; \frac{\varepsilon}{2} + \frac{\varepsilon}{2}
+= \varepsilon.
+]</p>
+
+<h3 id="case-4-f-in-linftyab">Case 4: $f \in L^\infty([a,b])$</h3>
+
+<p>Take continuous $\varphi: \mathcal{C} \to \mathcal{C}$ s.t.</p>
+
+<ol>
+  <li>
+    <p>$z \to z, \lvert z \rvert \le \lVert f \rVert_{\infty}$</p>
+  </li>
+  <li>
+    <p>$z \to \frac{z}{\lvert z \rvert} \cdot \lVert f \rVert_{\infty}, \lvert z \rvert &gt; \lVert f \rVert_{\infty}$</p>
+  </li>
+</ol>
+
+<p>Given $\varepsilon&gt;0$, by the bounded (Luzin) case for complex functions, choose a continuous $g:[a,b]\to\mathbb{C}$ such that
+[
+\mu\big({x : f(x)\ne g(x)}\big)&lt;\varepsilon .
+]</p>
+
+<p>Set
+[
+\tilde g := \varphi\circ g .
+]
+Then $\tilde g$ is continuous and $\lVert \tilde g\rVert_\infty \le M=\lVert f\rVert_\infty$.</p>
+
+<p>Moreover, on the set where $g=f$ we have $|f(x)|\le M$, hence
+[
+\tilde g(x)=\varphi(g(x))=\varphi(f(x))=f(x).
+]</p>
+
+<p>Therefore
+[
+\lbrace x: f(x)\ne \tilde g(x) \rbrace \subseteq \lbrace x: f(x)\ne g(x) \rbrace,
+]
+and consequently
+[
+\mu\big(\lbrace x: f(x)\ne \tilde g(x)\rbrace \big)
+\le
+\mu\big(\lbrace x: f(x)\ne g(x)\rbrace \big)
+&lt;\varepsilon.
+]</p>
+
+<hr />
+<hr />
+
+<h1 id="05d-lebesgue-space-and-continuous-functions-">(05d) Lebesgue Space and Continuous Functions <!-- % 르벡공간과 연속함수 --></h1>
+
+<h2 id="theorem-5-2">Theorem 5-2</h2>
+<p>For $1 \le p &lt; \infty$, the set $C[a,b]$ of continuous functions is <strong>dense</strong> in $L^p([a,b])$:
+$C[a,b] \subset L^p([a,b]).$
+<!-- % 연속함수는 Lp공간에서 조밀 --></p>
+
+<h3 id="pf-5">pf)</h3>
+
+<p>Let $f \in L^p([a,b])$ and $\varepsilon &gt; 0$.</p>
+
+<ol>
+  <li>
+    <p><strong>Approximation by step functions:</strong><br />
+There exists a step function $S_n$ such that<br />
+[
+\lVert f - S_n \rVert_p &lt; \varepsilon.
+]</p>
+  </li>
+  <li>
+    <p><strong>Approximation by simple functions:</strong><br />
+Since $\lVert S_n - f \rVert_p \to 0$,<br />
+we can take a <strong>simple function</strong> $S$ satisfying<br />
+[
+\lVert S - f \rVert_p &lt; \varepsilon.
+]</p>
+  </li>
+  <li>
+    <p><strong>Approximation by continuous functions (Luzin):</strong><br />
+By Luzin’s theorem, there exists a continuous function $g \in C[a,b]$ such that<br />
+[
+\lVert g \rVert_{\sup} \le \lVert S \rVert_\infty, \quad
+\mu(\lbrace x : S(x) \ne g(x) \rbrace) &lt; \varepsilon.
+]
+Hence $\lVert S - g \rVert_p &lt; \varepsilon$,<br />
+and therefore $\lVert f - g \rVert_p &lt; 2\varepsilon$.</p>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="theorem-5-3">Theorem 5-3</h2>
+<p>$C_c(\mathbb{R})$ is dense in $L^p(\mathbb{R})$ for $1 \le p &lt; \infty$.<br />
+Here $C_c(\mathbb{R})$ denotes the space of continuous functions with compact support.
+<!-- % 유한 지지 연속함수의 조밀성 --></p>
+
+<h3 id="pf-6">pf)</h3>
+
+<p>Let $f \in L^p(\mathbb{R})$.<br />
+Then
+[
+\int_{-\infty}^\infty \lvert f \rvert^p &lt; \infty.
+]
+Hence there exists $N &gt; 0$ such that
+[
+\int_{\lvert x \rvert &gt; N} \lvert f(x) \rvert^p &lt; \varepsilon^p.
+]</p>
+
+<p>Let $g \in C[-N, N]$ such that $ \lVert g - f \rVert_p &lt; \varepsilon^p$.</p>
+
+<p>Take $\alpha_1, \alpha_2 &gt; 0$ and define a continuous cutoff function
+$h(x) = 1,  x \in [-N+\alpha_1, N-\alpha_2]$ and 
+$0, x \notin [-N, N]$</p>
+
+<p>Then $h g \in C_c(\mathbb{R})$ and
+[
+\lVert f - h g \rVert_p \le \lVert f - g \rVert_p + \lVert g - h g \rVert_p &lt; 2\varepsilon.
+]</p>
+
+<hr />
+
+<h2 id="corollary">Corollary</h2>
+<p>$[C_c(\mathbb{R}), \lVert \rVert_\sup]$ is dense in $C_0(\mathbb{R})$,<br />
+where
+[
+C_0(\mathbb{R}) = \lbrace f \in C(\mathbb{R}) : \lim_{\lvert x \rvert \to \infty} f(x) = 0 \rbrace.
+]</p>
+
+<hr />
+
+<h2 id="theorem-5-4">Theorem 5-4</h2>
+<p>For $f \in L^p(\mathbb{R})$, define 
+[
+f_y(x) = f(x - y).
+]
+Then the map $y \mapsto f_y$ is <strong>uniformly continuous</strong> in $L^p(\mathbb{R})$:
+[
+\lim_{y \to 0} \lVert f_y - f \rVert_p = 0.
+]</p>
+
+<h3 id="pf-7">pf)</h3>
+
+<p>Let $g \in C_c(\mathbb{R})$. Then [ \lVert f_x - f_y \rVert_p \le \lVert f_x - g_x \rVert_p + \lVert g_x - g_y \rVert_p + \lVert f_y - g_y \rVert_p, ]</p>
+
+<p>Fix $\varepsilon&gt;0$. Choose $g\in C_c(\mathbb{R})$ with $|f-g|_{p}&lt;\frac{\varepsilon}{3}$ (using the density of $C_c$ in $L^p$).</p>
+
+<p>For any $x,y\in\mathbb{R}$ the translation is an isometry in $L^p$:
+[
+\lvert f_x-g_x\rvert_{p} = \lvert f-g \rvert_{p} &lt; \frac{\varepsilon}{3}.
+]</p>
+
+<p>Hence, for all $y$,
+$
+\lvert  f_y-f\rvert_{p} \le \lvert f_y-g_y\rvert_{p} + \lvert g_y-g\rvert_{p} + \lvert g-f\rvert_{p}
+&lt; \frac{2\varepsilon}{3}+\lvert g_y-g\rvert_{p}.
+$</p>
+
+<p>It remains to show $\lvert g_y-g\rvert_{p}\to 0$ as $y\to0$ for $g\in C_c(\mathbb{R})$.</p>
+
+<p>Let $\operatorname{supp} g\subset K$ with $0&lt;\lvert K \rvert &lt;\infty$.</p>
+
+<p>Since $g$ is uniformly continuous on $K$,  define the modulus of continuity
+$
+\omega(\delta):=\sup_{\lvert h\rvert \le\delta}\ \sup_{x\in\mathbb{R}}\lvert g(x-h)-g(x) \rvert \xrightarrow[\delta\downarrow 0]{} 0.
+$</p>
+
+<p>For $\lvert y\rvert\le \delta$ we have $\lvert g(x-y)-g(x)\rvert \le \omega(\delta)$, and the support of
+$g(x-y)-g(x)$ is contained in $K\cup(K+y)$, whose measure is at most $2 \lvert K\rvert$.</p>
+
+<p>Therefore,
+[
+\lvert g_y-g\rvert_{p}^{p}=\int_{\mathbb{R}} \lvert g(x-y)-g(x)\rvert^{p}dx
+\le \omega(\delta)^{p}\, \lvert K\cup(K+y)\rvert \le \omega(\delta)^{p}\,2\lvert K\rvert.
+]</p>
+
+<p>Taking $p$-th roots gives
+$
+\lvert g_y-g\rvert_{p}\le \omega(\delta)\,(2 \lvert K\rvert)^{1/p}\xrightarrow[\delta\downarrow 0]{}0.
+$</p>
+
+<p>Hence there exists $\delta&gt;0$ such that $\lvert y\rvert &lt;\delta\Rightarrow \lvert g_y-g\rvert_{p}&lt;\varepsilon/3$.</p>
+
+<p>Plugging this into (1) yields $\lvert f_y-f\rvert_{p}&lt;\varepsilon$ for all $ \lvert y\rvert&lt;\delta$.<br />
+Since $\varepsilon&gt;0$ was arbitrary, $\lvert f_y-f\rvert_{p}\to 0$ as $y\to 0$. $\square$</p>
+
+<hr />
+
+<p>📚 <em>Reference:</em> <a href="https://www.math.snu.ac.kr/~kye/lecture_V/V_real/index.html">Real Analysis Lecture by Prof. Seung-Hyeok Kye (SNU)</a></p>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/dayeonjung5294" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:dayeonjung5294@gmail.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2025</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+  <script src="/assets/js/simple-jekyll-search.min.js"></script>
+  <script src="/assets/js/search.js"></script>
+  
+</body>
+
+</html>

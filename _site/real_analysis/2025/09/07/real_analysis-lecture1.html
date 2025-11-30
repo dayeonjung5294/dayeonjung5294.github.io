@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Real Analysis Lecture 1: Measurable Sets and Measure</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Real Analysis Lecture 1: Measurable Sets and Measure | Dayeon Jung</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Real Analysis Lecture 1: Measurable Sets and Measure" />
+<meta name="author" content="Dayeon Jung" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures." />
+<meta property="og:description" content="Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures." />
+<link rel="canonical" href="http://localhost:4000/real_analysis/2025/09/07/real_analysis-lecture1.html" />
+<meta property="og:url" content="http://localhost:4000/real_analysis/2025/09/07/real_analysis-lecture1.html" />
+<meta property="og:site_name" content="Dayeon Jung" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-09-07T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Real Analysis Lecture 1: Measurable Sets and Measure" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dayeon Jung"},"dateModified":"2025-09-07T00:00:00+09:00","datePublished":"2025-09-07T00:00:00+09:00","description":"Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures.","headline":"Real Analysis Lecture 1: Measurable Sets and Measure","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/real_analysis/2025/09/07/real_analysis-lecture1.html"},"url":"http://localhost:4000/real_analysis/2025/09/07/real_analysis-lecture1.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['\[', '\]'], ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/" alt="Dayeon Jung" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">Dayeon Jung</a>
+      </h2>
+      </div><p class="tagline">Statistician & Data Scientist</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/dayeonjung5294" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:dayeonjung5294@gmail.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2025</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/real_analysis/2025/09/07/real_analysis-lecture1.html">
+    <h2 class="post-title">Real Analysis Lecture 1: Measurable Sets and Measure</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Sep 7, 2025</div><ul class="post-categories"><li>Real_analysis</li></ul></div>
+  <div class="post">
+    <blockquote>
+  <p><em>Disclaimer:</em> This post is a personal study note based on the Real Analysis course I attended.<br />
+The explanations and formulations are written in my own words for educational purposes only,<br />
+and do not reproduce or distribute any copyrighted material from the original lectures.</p>
+</blockquote>
+
+<h1 id="01a-length-of-open-sets-">(01a) Length of Open Sets <!-- % 열린집합의 길이 --></h1>
+
+<h2 id="proposition-1">Proposition 1.</h2>
+
+<p>Let $U \subset \mathbb{R}$ be open.<br />
+Then
+[
+U = \bigcup_{n=1}^{\infty} (a_n, b_n),
+]
+and define
+[
+\lambda(U) := \sum_{n=1}^{\infty} (b_n - a_n).
+]</p>
+
+<blockquote>
+  <p><em>Note: For non-negative terms, the sum is independent of the order of addition.</em><br />
+<!-- % 비음수 항의 무한합은 순서 바꿔도 동일 --></p>
+</blockquote>
+
+<h2 id="proposition-2">Proposition 2.</h2>
+
+<p>For $S \subset \mathbb{R}$, define
+[
+\mu(S) := \inf \lbrace \lambda(U) \mid U \supset S, \, U \text{ open} \rbrace.
+]</p>
+
+<h3 id="properties">Properties:</h3>
+<ol>
+  <li><span style="color:blue">Monotonicity</span>: $S \subset T \Rightarrow \mu(S) \le \mu(T)$ <!-- % 단조성 --></li>
+  <li>If $I$ is an interval, $\mu(I) =$ length of $I$. <!-- % 구간의 길이 --></li>
+  <li>$ x + S = \lbrace x + y \mid y \in S \rbrace \Rightarrow \mu(x + S) = \mu(S)$</li>
+  <li><span style="color:blue">Subadditivity</span>:
+[
+\mu\left( \bigcup_{n=1}^{\infty} S_n \right) \le \sum_{n=1}^{\infty} \mu(S_n).
+]
+<!-- % 가산부등식 (subadditivity) --></li>
+</ol>
+
+<hr />
+<hr />
+
+<h1 id="01b-properties-of-length-">(01b) Properties of Length <!-- % 길이의 성질 --></h1>
+
+<p>Let $A \subseteq \mathbb{R}$, then
+[
+\lambda = \inf A 
+]
+[
+\Leftrightarrow 
+(i) \; \lambda \le a, \forall a \in A 
+\quad \&amp; \quad 
+(ii) \; \lambda_1 \le a, \forall a \in A \Rightarrow \lambda_1 \le \lambda
+]
+[
+\Leftrightarrow 
+(i) \; \lambda \le a, \forall a \in A 
+\quad \&amp; \quad 
+(ii) \; \forall \varepsilon &gt; 0, \exists a \in A \; \textit{s.t.} \; a &lt; \lambda + \varepsilon
+]
+[\color{blue}{
+\Leftrightarrow 
+(i) \; \lambda \le \inf A
+\quad \&amp; \quad 
+(ii) \; \inf A \le \lambda
+}
+]</p>
+
+<hr />
+
+<h2 id="pf-properties-1-monotonicity-">pf) Properties 1. Monotonicity <!-- % 증명 --></h2>
+<p>[S \subset T \Rightarrow \mu(S) \le \mu(T)]</p>
+
+<ol>
+  <li>
+    <p>Let $\mu(S)$: fixed. ($(i)$ method)</p>
+
+    <p>Let $U$ open with $U \supset T$, then $S \subset U$.</p>
+
+    <p>by def of $\mu(S) := \inf \lbrace \lambda(U) \mid U \supset S, \, U \text{ open} \rbrace$, $\mu(S) \le \lambda(U)$ for $\forall U$</p>
+
+    <p>$\therefore \mu(S) \le \mu(T) := \inf \lbrace \lambda(U) \mid U \supset T, \, T \text{ open} \rbrace$</p>
+  </li>
+  <li>
+    <p>Similarly, Let $\mu(T)$: fixed. ($(ii)$ method)</p>
+
+    <p>Given $\varepsilon &gt; 0$, let $U$ open with $U \supset T$, Then $S \subset U$.</p>
+
+    <p>by def of $\mu(T) := \inf \lbrace \lambda(U) \mid U \supset T, \, T \text{ open} \rbrace$, $\lambda(U) &lt; \mu(T) + \varepsilon$.</p>
+
+    <p>$\therefore \mu(T) \ge \inf \lbrace \lambda(U) \mid U \supset S, \, U \text{ open} \rbrace = \mu(S)$.</p>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="pf-properties-4-subadditivity">pf) Properties 4. Subadditivity</h2>
+
+<p>[
+\mu\left( \bigcup_{n=1}^{\infty} S_n \right) \le \sum_{n=1}^{\infty} \mu(S_n).
+]</p>
+
+<h3 id="case-i-s_n-open-interval">Case (I): $S_n$: open interval</h3>
+
+<ol>
+  <li>
+    <p>$\bigcup_{n=1}^{\infty} S_n = (a,b)$: open inverval</p>
+
+    <p>$\forall \varepsilon &gt; 0, \; \exists N \; \textit{s.t.} \; [a + \varepsilon, b - \varepsilon] \subset \bigcup_{n=1}^N S_n$. <span style="color:blue">(* Definition of compact set)</span></p>
+
+    <p>Then
+$b - a - 2\varepsilon \le \mu\left( \bigcup_{n=1}^N S_n \right) \le \sum_{n=1}^N \mu(S_n) \le \sum_{n=1}^{\infty} \mu(S_n)$.</p>
+
+    <p><span style="color:blue">(measure inequality holds for any finite or countable collection of sets)</span></p>
+
+    <p>Since $\varepsilon &gt; 0$ is arbitrary, $b - a \le \sum_{n=1}^{\infty} \mu(S_n)$.</p>
+
+    <p>Thus $\mu(\bigcup_{n=1}^{\infty} S_n) \le \sum_{n=1}^{\infty} \mu(S_n)$.</p>
+  </li>
+  <li>
+    <p>If $\bigcup_{n=1}^{\infty} S_n$ is <strong>not a single interval</strong> but rather a union of disjoint open intervals $I_m$ ($\bigcup_{n=1}^{\infty} S_n = \bigcup_{m=1}^{\infty} I_m$),</p>
+
+    <p>Let $A(m) = \lbrace n \in \mathcal{N} \mid S_n \in I_m \rbrace$, then $\bigcup_{n \in A(m)} S_n = I_m$.</p>
+
+    <p>Then [
+\mu \left(\bigcup_{n=1}^{\infty} S_n\right) 
+= \mu \left(\bigcup_{m=1}^{\infty} I_m\right)
+= \sum_{m=1}^{\infty} \mu (I_m) 
+\le \sum_{m=1}^{\infty} \sum_{n \in A(m)} \mu(S_n) 
+\le \sum_{n=1}^{\infty} \mu(S_n) 
+]</p>
+  </li>
+</ol>
+
+<blockquote>
+  <p><em>Note: The first inequality follows from Case (I)-1, second follows for non-negative terms, the sum is independent of the order of addition.</em></p>
+</blockquote>
+
+<h3 id="case-ii-s_n-open-set">Case (II): $S_n$: open set</h3>
+<p>Each open set can be written as a countable union of disjoint open intervals:
+[
+S_n = \bigcup_{k=1}^{\infty} I_{nk}.
+]
+Then
+[
+\mu\left( \bigcup_{n=1}^{\infty} S_n \right)
+= \mu\left( \bigcup_{n,k=1}^{\infty} I_{nk} \right)
+\le \sum_{n,k=1}^{\infty} \mu(I_{nk})
+= \sum_{n=1}^{\infty} \left( \sum_{k=1}^{\infty} \mu(I_{nk}) \right)
+= \sum_{n=1}^{\infty} \mu(S_n).
+]</p>
+
+<blockquote>
+  <p><em>Note: The inequality follows from Case (I).</em></p>
+</blockquote>
+
+<h3 id="case-iii-general-case">Case (III): General case</h3>
+<p>Given $\varepsilon &gt; 0$, choose open sets $U_n \supset S_n$ s.t.
+$\mu(U_n) \le \mu(S_n) + \frac{\varepsilon}{2^n}$.</p>
+
+<p>Let $U = \bigcup_{n=1}^{\infty} U_n$.</p>
+
+<p>Then by Case (II),
+[
+\lambda(U) \le \sum_{n=1}^{\infty} \mu(U_n) \le \sum_{n=1}^{\infty} \mu(S_n) + \varepsilon.
+]
+Then 
+[
+\inf \lambda(U) \le \sum_{n=1}^{\infty} \mu(S_n)
+]</p>
+
+<p>Let $\sum_{n=1}^{\infty} \mu(S_n)$ be assumed to be a fixed finite value.</p>
+
+<p>Since $\inf \lambda(U) = \inf \lbrace \lambda(U) \mid U \supset \bigcup S_n,\, U \text{ open} \rbrace := \mu \left( \bigcup_{n=1}^{\infty} S_n \right)$,
+we conclude.</p>
+
+<hr />
+<hr />
+
+<h1 id="01c-measurable-sets-and-measure-">(01c) Measurable Sets and Measure <!-- % 가측집합과 측도 --></h1>
+
+<h2 id="definition">Definition</h2>
+<p>$E \subset \mathbb{R}$ is <strong>measurable</strong>
+[
+\Leftrightarrow \forall A \subset \mathbb{R}, \quad \mu(A) = \mu(A \cap E) + \mu(A \cap E^c).
+]</p>
+
+<p>Let $\mathcal{M}$: the collection of all measurable sets.</p>
+
+<hr />
+
+<h2 id="properties-of-measurable-sets">Properties of Measurable Sets</h2>
+
+<ol>
+  <li>$\emptyset \in \mathcal{M}, \mathbb{R} \in \mathcal{M}$</li>
+  <li>If $E \in \mathcal{M}$, then $E^c \in \mathcal{M}$</li>
+  <li>If $E_1, E_2, \ldots \in \mathcal{M}$, then $\bigcup_{n=1}^{\infty} E_n \in \mathcal{M}$  <span style="color:blue">(closed under countable unions)</span>
+<!-- % 시그마 대수 성질 --></li>
+</ol>
+
+<p>Thus $\mathcal{M}$ is a <strong>σ-algebra</strong>.</p>
+
+<hr />
+
+<h2 id="additivity">Additivity</h2>
+<p>For disjoint measurable sets $E_n$,
+[
+\mu\left( \bigcup_{n=1}^{\infty} E_n \right) = \sum_{n=1}^{\infty} \mu(E_n).
+]</p>
+
+<h3 id="pf-step-1">pf Step 1)</h3>
+
+<p>Let $E, F \in \mathcal{M}$. ($E, F$ are disjoint)</p>
+
+<p>Then 
+$
+\mu(A \cap (E \cup F)) 
+= \mu(A \cap (E \cup F) \cap E) + \mu(A \cap (E \cup F) \cap E^c)
+= \mu(A \cap E) + \mu(A \cap F)
+$</p>
+
+<h3 id="pf-step-2">pf Step 2)</h3>
+<p>Let $E_1, E_2, \ldots, E_n \in \mathcal{M}$.</p>
+
+<p>Then $\mu\left(A \cap \left( \bigcup_{i=1}^n E_i \right)\right) = \sum_{i=1}^n \mu(A \cap E_i)$, by mathematical induction</p>
+
+<h3 id="pf-step-3">pf Step 3)</h3>
+
+<p><strong>Step 3-1 ($\le$).</strong></p>
+
+<p>Since $(A \cap E_i)$ are pairwise disjoint and $\mu$ is subadditive,  $\mu\left( A \cap \bigcup_{i=1}^{\infty} E_i \right) = \mu\left( \bigcup_{i=1}^{\infty} (A \cap E_i) \right) \le \sum_{i=1}^{\infty} \mu(A \cap E_i)$.</p>
+
+<p><strong>Step 3-2 ($\ge$).</strong></p>
+
+<p>Let $F_N := \bigcup_{i=1}^{N} E_i$ and $F := \bigcup_{i=1}^{\infty} E_i$.</p>
+
+<p>Then $F_N \uparrow F$ and $F_N, F \in \mathcal{M}$ (Property 3).</p>
+
+<p>By <strong>finite additivity</strong> on disjoint sets (proved in Step 2), $\mu\left( A \cap F_N \right) = \sum_{i=1}^{N} \mu(A \cap E_i)$.</p>
+
+<p>By monotonicity, $\mu(A \cap F_N) \le \mu(A \cap F)$ for all $N$; hence $\sum_{i=1}^{N} \mu(A \cap E_i) \le \mu(A \cap F)$ for all $N$.</p>
+
+<p>Taking the supremum over $N$, $\sum_{i=1}^{\infty} \mu(A \cap E_i) \le \mu(A \cap F)$.</p>
+
+<hr />
+
+<h2 id="measure">Measure</h2>
+
+<p>Let $X$ be a set, and let $\mathcal{M} \subseteq 2^{X}$.</p>
+
+<p>Suppose there exists a function $\mu : \mathcal{M} \to \lbrack 0, \infty \rbrack$ that satisfies the following three properties of measurable sets:</p>
+
+<ol>
+  <li>$\emptyset \in \mathcal{M}$.</li>
+  <li>If $E \in \mathcal{M}$, then $E^{c} \in \mathcal{M}$.</li>
+  <li>If $E_1, E_2, \ldots \in \mathcal{M}$, then $\bigcup_{n=1}^{\infty} E_n \in \mathcal{M}$.</li>
+</ol>
+
+<p>In addition, if for any pairwise disjoint sequence $E_1, E_2, \ldots \in \mathcal{M}$, $\mu\left( \bigcup_{n=1}^{\infty} E_n \right) = \sum_{n=1}^{\infty} \mu(E_n)$,</p>
+
+<p>then $\mu$ is called a <strong>measure</strong> on $\mathcal{M}$.</p>
+
+<hr />
+<hr />
+
+<h1 id="01d-measurable-sets-and-topology-">(01d) Measurable Sets and Topology <!-- % 잴 수 있는 집합과 위상 --></h1>
+
+<h2 id="cantor-set">Cantor Set</h2>
+
+<p>The <strong>Cantor set</strong> $C$ is a subset of the closed interval $\lbrack 0, 1 \rbrack$ constructed as follows:</p>
+
+<ol>
+  <li><strong>Start:</strong> Begin with the closed interval $\lbrack 0, 1 \rbrack$.</li>
+  <li><strong>Remove:</strong> Delete the open middle third interval $\left( \frac{1}{3}, \frac{2}{3} \right)$.
+The remaining set is $\lbrack 0, \frac{1}{3} \rbrack \cup \lbrack \frac{2}{3}, 1 \rbrack$.</li>
+  <li><strong>Iterate:</strong> From each remaining closed interval, remove its open middle third.
+After the second step, the set is<br />
+$\lbrack 0, \frac{1}{9} \rbrack \cup \lbrack \frac{2}{9}, \frac{1}{3} \rbrack \cup \lbrack \frac{2}{3}, \frac{7}{9} \rbrack \cup \lbrack \frac{8}{9}, 1 \rbrack$.</li>
+  <li><strong>Continue indefinitely:</strong> Repeat this process infinitely many times.</li>
+</ol>
+
+<p>The resulting set is<br />
+[
+C = \bigcap_{n=1}^{\infty} C_n,
+]
+where $C_n$ is the union of $2^n$ closed intervals remaining after the $n$-th step.</p>
+
+<p>$C$ is <strong>uncountable</strong> but has <strong>measure zero</strong>.</p>
+
+<hr />
+
+<p>Let ${E_n}$ be increasing. Then
+[
+\mu\left( \bigcup_{n=1}^{\infty} E_n \right) = \lim_{n \to \infty} \mu(E_n).
+]</p>
+
+<p>Let ${E_n}$ be decreasing with $\mu(E_1) &lt; \infty$. Then
+[
+\mu\left( \bigcap_{n=1}^{\infty} E_n \right) = \lim_{n \to \infty} \mu(E_n).
+]</p>
+
+<h3 id="pf">pf)</h3>
+<p>Let $E_1 = F_1$ and define $F_n := E_n \setminus E_{n-1}$ for $n\ge 2$.<br />
+Then ${F_n}$ are pairwise disjoint and measurable, and for each $n$,
+[
+E_n \;=\; \bigcup_{k=1}^{n} F_k, 
+\qquad
+\bigcup_{n=1}^{\infty} E_n \;=\; \bigcup_{n=1}^{\infty} F_n.
+]
+<!-- % 증가열에서의 층별 분해: Fn이 서로소이고 En의 분해 및 합집합 일치 --></p>
+
+<p>By <strong>finite additivity</strong> on disjoint measurable sets,
+[
+\mu(E_n) \;=\; \sum_{k=1}^{n} \mu(F_k).
+]
+Taking $n\to\infty$ (monotone limit of partial sums),
+[
+\lim_{n\to\infty} \mu(E_n) 
+\;=\; \sum_{k=1}^{\infty} \mu(F_k).
+]
+On the other hand, by <strong>countable additivity</strong> on the disjoint family ${F_k}$,
+[
+\sum_{k=1}^{\infty} \mu(F_k)
+\;=\; \mu\left(\bigcup_{n=1}^{\infty} F_n\right)
+\;=\; \mu\left(\bigcup_{n=1}^{\infty} E_n\right).
+]</p>
+
+<p>Therefore,
+[
+\mu\left(\bigcup_{n=1}^{\infty} E_n\right) 
+\;=\; \lim_{n\to\infty} \mu(E_n).
+]</p>
+
+<hr />
+
+<h2 id="definition-f_delta-and-g_delta-sets-">Definition: $F_\delta$ and $G_\delta$ Sets <!-- % F_delta, G_delta 집합의 정의 --></h2>
+<p>A set $A \subset \mathbb{R}$ is:</p>
+
+<ul>
+  <li>
+    <p><strong>$F_\delta$ - set</strong> $\Leftrightarrow$ <strong>union of countable closed sets</strong>:<br />
+[
+A = \bigcup_{n=1}^{\infty} F_n, \quad F_n \text{ closed.}
+]</p>
+  </li>
+  <li>
+    <p><strong>$G_\delta$ - set</strong> $\Leftrightarrow$ <strong>intersection of countable open sets</strong>:<br />
+[
+A = \bigcap_{n=1}^{\infty} U_n, \quad U_n \text{ open.}
+]</p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="theorem-equivalent-characterizations-of-measurability">Theorem: Equivalent Characterizations of Measurability</h2>
+<p>For $E \subset \mathbb{R}$, the following are equivalent (TFAE):</p>
+
+<ol>
+  <li>$E \in \mathcal{M}$.</li>
+  <li>$\forall \varepsilon &gt; 0$, $\exists$ a open set $U$ and a closed set $F$ s.t.
+[
+F \subset E \subset U, \quad \mu(U \setminus F) &lt; \varepsilon.
+]</li>
+  <li>$\exists \; G_\delta$ - set $A$ &amp; $F_\delta$ - set $B$ s.t. $B \subset E \subset A, \; \mu(A \setminus B) = 0$.</li>
+</ol>
+
+<h3 id="pf-1-rightarrow-2">pf 1) $\rightarrow$ 2)</h3>
+<p>Let $\mathbb{R} = \bigcup_{n=1}^{\infty} k_n$, $\mu(k_n) &lt; \infty$.</p>
+
+<p>Define $E_n = E \cap k_n$ for each $n$.</p>
+
+<p>Take open set $U_n$ s.t. $U_n \supset E_n$ &amp; $\mu(U_n) &lt; \mu(E_n) + \frac{\varepsilon}{2^{n+1}}$.</p>
+
+<p>Put $U = \bigcup_{n=1}^{\infty} U_n$, then $\mu(U) &lt; \mu(E) + \frac{\varepsilon}{2}$.</p>
+
+<p>Similarly, take closed set $F_n$ s.t. $F_n \subset E_n$ &amp; $\mu(F_n) &gt; \mu(E_n) - \frac{\varepsilon}{2^{n+1}}$, and set $F = \bigcup_{n=1}^{\infty} F_n$. Then $\mu(E) &lt; \mu(F) +\frac{\varepsilon}{2}$.</p>
+
+<h3 id="pf-2-rightarrow-3">pf 2) $\rightarrow$ 3)</h3>
+
+<p>For each $m \in \mathbb{N}$, choose open $U_m$ and closed $F_m$ such that
+$F_m \subset E \subset U_m$ and $\mu(U_m \setminus F_m) &lt; 2^{-m}$.</p>
+
+<p>Define
+[
+A := \bigcap_{m=1}^{\infty} U_m \quad(\text{$G_\delta$ set}), 
+\qquad
+B := \bigcup_{m=1}^{\infty} F_m \quad(\text{$F_\delta$ set}).
+]
+Then $B \subset E \subset A$.</p>
+
+<p>Note that
+[
+A \setminus B 
+\;\subset\; \bigcap_{m=1}^{\infty} U_m \setminus \bigcup_{m=1}^{\infty} F_m
+\;\subset\; \bigcap_{m=1}^{\infty} \bigcup_{k \ge m} \left(U_k \setminus F_k\right).
+]</p>
+
+<p>Hence, since $\bigcup_{k \ge m} \left(U_k \setminus F_k\right)$ is a decreasing sequence of sets and by subadditivity, we have
+[
+\mu(A \setminus B) 
+\;\le\; \lim_{m\to\infty} \sum_{k \ge m} \mu\left(U_k \setminus F_k\right)
+\;\le\; \lim_{m\to\infty} \sum_{k \ge m} 2^{-k}
+\;=\; 0.
+]</p>
+
+<h3 id="pf-3-rightarrow-1">pf 3) $\rightarrow$ 1)</h3>
+
+<ul>
+  <li>Open sets are measurable; hence closed sets are measurable; thus every $G_\delta$ and $F_\delta$ set is measurable (the measurable sets form a $\sigma$-algebra).</li>
+  <li>Since $A$ and $B$ are measurable and $\mu(A \setminus B)=0$, any subset of $A \setminus B$ is <strong>null</strong> and hence measurable.</li>
+  <li>Decompose
+[
+E \;=\; B \,\cup\, \big(E \setminus B\big), 
+\quad \text{with } E \setminus B \subset A \setminus B.
+]
+Here $B$ is measurable and $E \setminus B$ is a subset of a null set, so measurable.</li>
+</ul>
+
+<p>Therefore $E$ is measurable, i.e., $E \in \mathcal{M}$.</p>
+
+<hr />
+
+<p>📚 <em>Reference:</em> <a href="https://www.math.snu.ac.kr/~kye/lecture_V/V_real/index.html">Real Analysis Lecture by Prof. Seung-Hyeok Kye (SNU)</a></p>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/dayeonjung5294" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:dayeonjung5294@gmail.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2025</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+  <script src="/assets/js/simple-jekyll-search.min.js"></script>
+  <script src="/assets/js/search.js"></script>
+  
+</body>
+
+</html>

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Real Analysis Lecture 3: Convergence Theorem of Integral</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Real Analysis Lecture 3: Convergence Theorem of Integral | Dayeon Jung</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Real Analysis Lecture 3: Convergence Theorem of Integral" />
+<meta name="author" content="Dayeon Jung" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures." />
+<meta property="og:description" content="Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures." />
+<link rel="canonical" href="http://localhost:4000/real_analysis/2025/09/21/real_analysis-lecture3.html" />
+<meta property="og:url" content="http://localhost:4000/real_analysis/2025/09/21/real_analysis-lecture3.html" />
+<meta property="og:site_name" content="Dayeon Jung" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-09-21T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Real Analysis Lecture 3: Convergence Theorem of Integral" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dayeon Jung"},"dateModified":"2025-09-21T00:00:00+09:00","datePublished":"2025-09-21T00:00:00+09:00","description":"Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures.","headline":"Real Analysis Lecture 3: Convergence Theorem of Integral","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/real_analysis/2025/09/21/real_analysis-lecture3.html"},"url":"http://localhost:4000/real_analysis/2025/09/21/real_analysis-lecture3.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['\[', '\]'], ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/" alt="Dayeon Jung" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">Dayeon Jung</a>
+      </h2>
+      </div><p class="tagline">Statistician & Data Scientist</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/dayeonjung5294" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:dayeonjung5294@gmail.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2025</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/real_analysis/2025/09/21/real_analysis-lecture3.html">
+    <h2 class="post-title">Real Analysis Lecture 3: Convergence Theorem of Integral</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Sep 21, 2025</div><ul class="post-categories"><li>Real_analysis</li></ul></div>
+  <div class="post">
+    <blockquote>
+  <p><em>Disclaimer:</em> This post is a personal study note based on the Real Analysis course I attended.<br />
+The explanations and formulations are written in my own words for educational purposes only,<br />
+and do not reproduce or distribute any copyrighted material from the original lectures.</p>
+</blockquote>
+
+<h1 id="03a-monotone-convergence-theorem-">(03a) Monotone Convergence Theorem <!-- % 단조수렴정리 --></h1>
+
+<h2 id="monotone-convergence-theorem">Monotone Convergence Theorem</h2>
+
+<p>Let $\lbrace f_n \rbrace$ be a sequence of measurable functions s.t. $0 \le f_n \nearrow f$.
+[
+\Rightarrow \quad
+\lim_{n \to \infty} \int_E f_n = \int_E \left( \lim_{n \to \infty} f_n \right).
+]</p>
+
+<h3 id="pf">pf)</h3>
+
+<p>Let $\int_E f_n \nearrow L$ ($\lim_{n \to \infty} \int_E f_n := L$)</p>
+
+<p><strong>($\Rightarrow$)</strong></p>
+
+<p>$\forall n, f_n \le f \;\Rightarrow\; \int_E. f_n \le \int_E f$</p>
+
+<p>Then, do
+[ L ( = \lim_{n \to \infty} \int_E f_n) \le \int_E f ]</p>
+
+<p><strong>($\Leftarrow$)</strong></p>
+
+<p>Let $s$ be a simple function such that $0 \le s \le f$, and take $c \in (0,1)$ and define
+[
+E_n = \lbrace x \in E \mid c \cdot s(x) &lt; f_n(x) \rbrace.
+]
+Then
+[
+E_n \nearrow E = \bigcup_{n=1}^{\infty} E_n.
+]</p>
+
+<p>Since $0 \le c \cdot s \cdot \chi_{E_n} \le f_n$ for all $n$, we have
+[
+\int_E c s \chi_{E_n} \le \int_E f_n.
+]</p>
+
+<p>By continuity of measure ($\lim_n \mu(E_n) = \mu(\lim_n E_n)$),
+[
+\lim_{n \to \infty} \int_E c s \chi_{E_n}
+= c \lim_{n \to \infty} \int_{E_n} s
+= c \int_E s.
+]</p>
+
+<p>Thus,
+[
+c \int_E s
+\le \lim_{n \to \infty} \int_E f_n
+= L.
+]</p>
+
+<p>Letting $c \to 1$, we get $\int_E s \le L$ for all simple $s \le f$.</p>
+
+<p>Hence,
+[
+\int_E f = \sup \lbrace \int_E s \rbrace \le L.
+]</p>
+
+<hr />
+
+<h2 id="fatous-lemma-">Fatou’s Lemma <!-- % Fatou 보조정리 --></h2>
+
+<p>If $0 \le f_n$, then
+[
+\int_E \left( \liminf_{n \to \infty} f_n \right) \le \liminf_{n \to \infty} \int_E f_n.
+]</p>
+
+<h3 id="pf-1">pf)</h3>
+
+<p>Let $f = \liminf f_n$ and define
+[
+g_k = \inf \lbrace f_k, f_{k+1}, f_{k+2}, \dots \rbrace,
+\quad \text{so that } g_k \nearrow f.
+]</p>
+
+<p>By MCT,
+[
+\int_E f 
+= \int_E \left( \lim_{k \to \infty} g_k \right)
+= \lim_{k \to \infty} \int_E g_k.
+]</p>
+
+<p>Since $g_k \le f_n$ for all $n \ge k \; (\forall k)$,
+[
+\int_E g_k \le \int_E f_n
+\;\Rightarrow\;
+\int_E g_k \le \inf_{n \ge k} \int_E f_n.
+]
+Taking limits,
+[
+\lim_{k \to \infty} \int_E g_k
+= \int_E f 
+\le \lim_{k \to \infty} \inf_{n \ge k} \int_E f_n
+= \liminf_{n \to \infty} \int_E f_n.
+]</p>
+
+<hr />
+
+<h2 id="corollary">Corollary</h2>
+
+<p>If $f_n \ge 0$, then
+[
+\int_E \Big( \sum_{n=1}^\infty f_n \Big)
+= \sum_{n=1}^\infty \int_E f_n.
+]</p>
+
+<h3 id="pf-2">pf)</h3>
+<p>Let the partial sums be
+[
+s_N(x)=\sum_{n=1}^N f_n(x), \qquad x\in E.
+]</p>
+
+<p>Then each $s_N$ is measurable and nonnegative, and
+[
+s_N(x)\nearrow s(x):=\sum_{n=1}^\infty f_n(x) \in \lbrack 0, \infty \rbrack
+\quad \forall x \in E.
+]</p>
+
+<p>By MCT,
+[
+\int_E s \,
+= \lim_{N\to\infty} \int_E s_N.
+]</p>
+
+<p>By linearity, for each finite $N$,
+[
+\int_E s_N \, d\mu
+= \int_E \sum_{n=1}^N f_n \, d\mu
+= \sum_{n=1}^N \int_E f_n \, d\mu,
+]
+so taking limits and using monotonicity of the partial sums yields
+[
+\int_E \Big( \sum_{n=1}^\infty f_n \Big) \, d\mu
+= \lim_{N\to\infty} \sum_{n=1}^N \int_E f_n \, d\mu
+= \sum_{n=1}^\infty \int_E f_n \, d\mu .
+]</p>
+
+<hr />
+<hr />
+
+<h1 id="03b-lebesgue-dominated-convergence-theorem-">(03b) Lebesgue Dominated Convergence Theorem <!-- % 르벡 수렴정리 --></h1>
+
+<h2 id="theorem">Theorem</h2>
+
+<p>Let $\lbrace f_n \rbrace$ be a sequence of measurable functions on $E$ such that</p>
+
+<p>[
+\exists g \in L^1(E) \text{ with } \lvert f_n \rvert \le g \text{ for all } n, 
+\; \text{and} \; \lim_{n \to \infty} f_n(x) = f(x).
+]</p>
+
+<p>Then
+[
+\int_E f = \lim_{n \to \infty} \int_E f_n.
+]</p>
+
+<h3 id="pf-3">pf)</h3>
+
+<p>Since $\lvert f - f_n \rvert \le 2g$, $\; 2g - \lvert f - f_n \rvert \ge 0$.</p>
+
+<p>By <strong>Fatou’s lemma</strong>,<br />
+[
+\int_E \liminf_n (2g - \lvert f - f_n \rvert)
+\le
+\liminf_n \int_E (2g - \lvert f - f_n \rvert).
+]</p>
+
+<p>Thus,
+[
+\int_E 2 g \le \int_E 2 g - \int_E \limsup_n \lvert f - f_n \rvert.
+]</p>
+
+<p>Since $\int_E g &lt; \infty$, we get
+[
+\limsup_n \int_E \lvert f - f_n \rvert \le 0.
+]</p>
+
+<p>i.e.
+[
+0 \le \liminf_n \int_E \lvert f - f_n \rvert \le \limsup_n \int_E \lvert f - f_n \rvert \le 0.
+]</p>
+
+<p>Therefore,
+[
+\int_E \lvert f - f_n \rvert \to 0.
+]
+—</p>
+
+<h2 id="levis-convergence-theorem-">Levi’s Convergence Theorem <!-- % 절대적 수렴이면 적분의 급수와 함수의 급수가 교환 가능 --></h2>
+
+<p>If $\sum_{n=1}^\infty \int_E \lvert f_n \rvert &lt; \infty$, then</p>
+
+<ol>
+  <li>$f(x) = \sum_{n=1}^\infty f_n(x)$ exists a.e.,</li>
+  <li>$\int_E f = \sum_{n=1}^\infty \int_E f_n$.</li>
+</ol>
+
+<hr />
+
+<h2 id="applications-and-related-results">Applications and Related Results</h2>
+
+<ol>
+  <li>
+    <p>If $\sum_{n=1}^{\infty} \lvert a_n \rvert &lt; \infty$, then $\sum_{n=1}^{\infty} a_n$ converges.</p>
+  </li>
+  <li>
+    <p>If $\sum_{n=1}^{\infty}  {\lVert f_n \rVert}_{\sup} &lt; \infty$,</p>
+
+    <p>then $f(x) = \sum_{n=1}^{\infty} f_{n}(x)$ is continuous.</p>
+  </li>
+  <li>
+    <p>If $\sum_{n=1}^{\infty}  {\lVert f_n \rVert}_{1} &lt; \infty$,</p>
+
+    <p>then $f(x) = \sum_{n=1}^{\infty} f_{n}(x) \in L^1$.</p>
+  </li>
+</ol>
+
+<blockquote>
+  <p><em>Note:</em><br />
+Application 3. is a new tool that defines a suitable integrable function.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="differentiation-under-the-integral-sign-">Differentiation Under the Integral Sign <!-- % 미분과 적분의 교환 정리 --></h2>
+
+<p>Let $f : I \times J \to \mathbb{C}$, and define  $F(x) = \int_J f(x, y) \, dy$.</p>
+
+<p>Suppose $\exists g \in L^1(J)$ s.t.<br />
+[
+\lvert D_x f(x, y) \rvert = \left\lvert \frac{\partial f}{\partial x} \right\rvert \le g(y).
+]</p>
+
+<p>Then 
+[
+\frac{d}{dx} \int_J f(x, y) \, dy = \int_J D_x f(x, y) \, dy.
+]</p>
+
+<h3 id="pf-4">pf)</h3>
+
+<p>Let $x_n \to x$, then
+[
+\frac{F(x_n) - F(x)}{x_n - x}
+= \int_J \frac{f(x_n, y) - f(x, y)}{x_n - x} \, dy.
+]
+By <strong>LDCT (Lebesgue Dominated Convergence Theorem)</strong>,
+[
+\lim_{n \to \infty} \frac{F(x_n) - F(x)}{x_n - x}
+= \int_J \lim_{n \to \infty} D_x f(s_n, y) \, dy (x_n \le s_n \le x)
+]
+[
+= \int_J D_x f(x, y) \, dy.
+]</p>
+
+<hr />
+<hr />
+
+<h1 id="03c-riemann-and-lebesgue-integrals-">(03c) Riemann and Lebesgue Integrals <!-- % 리만적분과 르벡적분 --></h1>
+
+<h2 id="definition">Definition</h2>
+
+<p>Let $P = \lbrace a = x_0, x_1, x_2, \dots, x_{n-1}, x_n = b \rbrace$.</p>
+
+<p>Then the <strong>lower sum</strong> and <strong>upper sum</strong> of $f$ with respect to $P$ are<br />
+[
+\int_{[a,b)} L_P = L^a_b(f, P), \quad \int_{[a,b)} U_P = U^a_b(f, P).
+]</p>
+
+<p><span style="color:blue">($L_P$ is a step function constructed from the lower sums of $f$)</span></p>
+
+<p>Let $\lVert P \rVert = \max_i (x_i - x_{i-1})$.</p>
+
+<p>If $P_1 \subseteq P_2 \subseteq \cdots$ and $\lVert P_n \rVert \to 0$,<br />
+then
+[
+L_{P_n} \nearrow f
+\;\Rightarrow\;
+\lim_{n \to \infty} \int_{[a,b)} L_{P_n} = \int_{[a,b)} L_P = \underline{\int_a^b} f
+]
+[
+U_{P_n} \searrow f
+\;\Rightarrow\;
+\lim_{n \to \infty} \int_{[a,b)} U_{P_n} = \int_{[a,b)} U_P = \overline{\int_a^b} f
+]</p>
+
+<h3 id="pf-5">pf)</h3>
+<p><span style="color:red">(Do it yourself using MCT between $L_{P_n}$ and $\min f$)</span></p>
+
+<hr />
+
+<h2 id="riemann-integrable">Riemann Integrable</h2>
+
+<p>The function $f$ is <strong>Riemann integrable</strong> on $[a,b]$ if and only if $\overline{\int_a^b} f = \underline{\int_a^b} f$.</p>
+
+<p>[
+\Leftrightarrow\;
+\int_{[a,b)} (U - L) = 0
+]
+[
+\Leftrightarrow\;
+U = L \; \text{a.e.}
+]
+[
+\Leftrightarrow\;
+f \; \text{is continuous at} \; x (x \neq a, x \neq b)
+]</p>
+
+<p>Hence, $f$ is Riemann integrable iff the set of discontinuities of $f$ has measure $0$.</p>
+
+<hr />
+<hr />
+
+<h1 id="03d-vitalis-lemma-">(03d) Vitali’s Lemma <!-- % 비탈리 도움 정리 --></h1>
+
+<h2 id="statement">Statement</h2>
+
+<p>Let $E$ be a measurable set with $\mu(E) &lt; \infty$,  and let $\mathcal{F}$ be a class of closed intervals.</p>
+
+<p>Then, $\forall \varepsilon &gt; 0$, there exist <strong>disjoint intervals</strong> $I_1, I_2, \dots, I_n \in \mathcal{F}$ s.t.
+[
+\mu\Big( E \setminus \bigcup_{k=1}^n I_k \Big) &lt; \varepsilon.
+]</p>
+
+<h3 id="pf-6">pf)</h3>
+
+<p>Let $U$ be an open set such that $E \subset U$ and $\mu(U) &lt; \infty$.<br />
+By the Vitali property of $\mathcal{F}$, for each $x \in E$, there exists $I_x \in \mathcal{F}$ such that $x \in I_x \subset U$.</p>
+
+<p>By countable additivity,
+[
+\sum_{k=1}^{\infty} \mu(I_k) \le \mu(U) &lt; \infty.
+]
+We construct intervals:</p>
+
+<ul>
+  <li>Choose $I_1$ from $\mathcal{F}$ arbitrarily.</li>
+  <li>Let $\alpha_2 = \sup \lbrace \mu(I) \mid I \in \mathcal{F}, I \cap I_1 = \emptyset \rbrace$ and take $I_2 \in \mathcal{F}$ s.t. $\mu(I) &gt; \frac{\alpha_2}{2}$ and $I \cap I_1 = \emptyset$.</li>
+  <li>Continue selecting intervals $I_3, I_4, \dots$ inductively.</li>
+</ul>
+
+<p>If this process terminates, then $\alpha_n = 0$. Otherwise,  $\sum_{k=1}^{\infty} \mu(I_k) &lt; \infty$.</p>
+
+<p>Take $n$ s.t.
+[
+\sum_{k=n+1}^\infty \mu(I_k) &lt; \frac{\varepsilon}{5}.
+]</p>
+
+<p>Let $x \in D := E \setminus \bigcup_{k=1}^n I_k$ and $J_k$ be an interval having the same center as $I_k$ but five times its length</p>
+
+<p>For $y \in D$, define $I_\nu$ as an interval in $\mathcal{F}$ centered at $y$ that overlaps with $I$.</p>
+
+<p>Then
+[
+\mu(I) \le \alpha_{\nu} &lt; 2 \mu(I_{\nu}).
+]</p>
+
+<p>[
+\Rightarrow \lvert x - y \rvert &lt; \frac{1}{2} \mu(I_{\nu}) + \mu(I) &lt; \frac{5}{2} \mu I_(\nu)
+]
+[
+\Rightarrow x \in J_{\nu}.
+]</p>
+
+<p>Hence, $D \subset (\bigcup_{k&gt;n} J_k)$ and
+[
+\mu(D) \le \sum_{k&gt;n} \mu(I_k) &lt; \varepsilon.
+]</p>
+
+<hr />
+
+<blockquote>
+  <p><em>Note:</em><br />
+The Vitali covering lemma is essential in the proof of the <strong>Lebesgue Differentiation Theorem</strong>,<br />
+providing a method to approximate measurable sets by disjoint intervals.
+<!-- % 르벡 미분정리 증명에 사용되는 핵심 도구 --></p>
+</blockquote>
+
+<hr />
+
+<p>📚 <em>Reference:</em> <a href="https://www.math.snu.ac.kr/~kye/lecture_V/V_real/index.html">Real Analysis Lecture by Prof. Seung-Hyeok Kye (SNU)</a></p>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/dayeonjung5294" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:dayeonjung5294@gmail.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2025</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+  <script src="/assets/js/simple-jekyll-search.min.js"></script>
+  <script src="/assets/js/search.js"></script>
+  
+</body>
+
+</html>

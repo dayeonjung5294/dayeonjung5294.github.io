@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Real Analysis Lecture 8: Fubini’s Theorem</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Real Analysis Lecture 8: Fubini’s Theorem | Dayeon Jung</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Real Analysis Lecture 8: Fubini’s Theorem" />
+<meta name="author" content="Dayeon Jung" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures." />
+<meta property="og:description" content="Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures." />
+<link rel="canonical" href="http://localhost:4000/real_analysis/2025/10/26/real_analysis-lecture8.html" />
+<meta property="og:url" content="http://localhost:4000/real_analysis/2025/10/26/real_analysis-lecture8.html" />
+<meta property="og:site_name" content="Dayeon Jung" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-10-26T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Real Analysis Lecture 8: Fubini’s Theorem" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dayeon Jung"},"dateModified":"2025-10-26T00:00:00+09:00","datePublished":"2025-10-26T00:00:00+09:00","description":"Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures.","headline":"Real Analysis Lecture 8: Fubini’s Theorem","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/real_analysis/2025/10/26/real_analysis-lecture8.html"},"url":"http://localhost:4000/real_analysis/2025/10/26/real_analysis-lecture8.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['\[', '\]'], ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/" alt="Dayeon Jung" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">Dayeon Jung</a>
+      </h2>
+      </div><p class="tagline">Statistician & Data Scientist</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/dayeonjung5294" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:dayeonjung5294@gmail.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2025</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/real_analysis/2025/10/26/real_analysis-lecture8.html">
+    <h2 class="post-title">Real Analysis Lecture 8: Fubini’s Theorem</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Oct 26, 2025</div><ul class="post-categories"><li>Real_analysis</li></ul></div>
+  <div class="post">
+    <blockquote>
+  <p><em>Disclaimer:</em> This post is a personal study note based on the Real Analysis course I attended.<br />
+The explanations and formulations are written in my own words for educational purposes only,<br />
+and do not reproduce or distribute any copyrighted material from the original lectures.</p>
+</blockquote>
+
+<h1 id="08a-fubinis-theorem-">(08a) Fubini’s Theorem <!-- % 푸비니 정리 --></h1>
+
+<p>Let $f : X \times Y \to \mathbb{C}$ and write<br />
+[
+f_x(y) = f(x,y), \qquad f^y(x) = f(x,y).
+]</p>
+
+<h2 id="tonellis-theorem-">Tonelli’s Theorem <!-- % 토넬리 정리 --></h2>
+
+<p>If $f : (\mathcal{S}\times\mathcal{T})$ - measurable and $f \ge 0$, then</p>
+
+<ol>
+  <li>
+    <p>For each $x$,<br />
+$f_x : Y \to \lbrack 0,\infty\rbrack$ is $\mathcal{T}$-measurable.</p>
+  </li>
+  <li>
+    <p>For each $y$,<br />
+$f^y : X \to \lbrack 0,\infty\rbrack$ is $\mathcal{S}$-measurable.</p>
+  </li>
+  <li>
+    <p>The functions<br />
+[
+x \mapsto \int_Y f_x\, d\nu
+\quad\text{and}\quad<br />
+y \mapsto \int_X f^y\, d\mu
+]
+are $\mathcal{S}$-measurable and $\mathcal{T}$-measurable.</p>
+  </li>
+</ol>
+
+<p>Moreover,
+[
+\int_{X\times Y} f\, d(\mu\times\nu)
+=
+\int_X \left( \int_Y f_x \, d\nu \right) d\mu
+=
+\int_Y \left( \int_X f^y \, d\mu \right) d\nu.
+]</p>
+
+<hr />
+
+<h2 id="fubinis-theorem-">Fubini’s Theorem <!-- % 푸비니 정리 --></h2>
+
+<p>If $f \in L^1(\mu\times\nu)$, i.e.
+[
+\int_{X\times Y} \lvert f(x,y)\rvert \, d(\mu\times\nu) &lt; \infty,
+]
+then:</p>
+
+<ul>
+  <li>$f_x \in L^1(\nu)$ for a.e. $x$</li>
+  <li>$f^y \in L^1(\mu)$ for a.e. $y$</li>
+</ul>
+
+<p>Define
+[
+\varphi(x) = \int_Y f_x\, d\nu(y),
+\qquad
+\psi(y) = \int_X f^y\, d\mu(x).
+]</p>
+
+<p>Then
+[
+\varphi \in L^1(\mu), \qquad \psi \in L^1(\nu),
+]
+and
+[
+\int_{X\times Y} f\, d(\mu\times\nu)
+=
+\int_X \varphi\, d\mu
+=
+\int_Y \psi \, d\nu.
+]</p>
+
+<hr />
+<hr />
+
+<h1 id="08b-borel-product--lebesgue-measure-">(08b) Borel Product &amp; Lebesgue Measure <!-- % 보렐 측도와 르벡측도 --></h1>
+
+<p>Consider $(\mathbb{R}\times\mathbb{R}, \mathcal{L}\times\mathcal{L}, m\times m)$.</p>
+
+<p>Let<br />
+[
+\mathcal{L}_2 = (\mathcal{L}\times\mathcal{L})^\ast
+]
+be the <strong>completion</strong> of the product measure.</p>
+
+<h2 id="definition-completion-of-a-measure-space-">Definition: Completion of a measure space <!-- % 완비화 정의 --></h2>
+<p>For a measure space $(X, \mathcal{A}, \mu)$, the <em>completion</em> is the process of
+enlarging $\mathcal{A}$ by including all subsets of measure–zero sets.
+Formally, the completed $\sigma$–algebra is<br />
+[
+\mathcal{A}^\ast
+=
+\lbrace E \subseteq X :
+\exists A,B \in \mathcal{A},\ A \subseteq E \subseteq B,\ 
+\mu(B \setminus A)=0 \rbrace.
+]
+This makes every null set and every subset of a null set measurable.</p>
+
+<hr />
+
+<p>We conclude
+[
+\mathcal{B}_2 \subseteq \mathcal{L}\times\mathcal{L} \subseteq (\mathcal{L}\times\mathcal{L})^\ast.
+]</p>
+
+<h3 id="pf">pf)</h3>
+<h4 id="1-mathcalb_2-subseteq-mathcalltimesmathcall">1. $\mathcal{B}_2 \subseteq \mathcal{L}\times\mathcal{L}$</h4>
+
+<ul>
+  <li>$\mathcal{B}_2$ is the <strong>Borel σ-algebra</strong> on $\mathbb{R}^2$, generated by all open sets.</li>
+  <li>Every open set in $\mathbb{R}^2$ belongs to $\mathcal{L}\times\mathcal{L}$ because:
+    <ul>
+      <li>open sets in $\mathbb{R}$ are Lebesgue measurable,</li>
+      <li>products of Lebesgue measurable sets are measurable in $\mathcal{L}\times\mathcal{L}$,</li>
+      <li>$\mathcal{L}\times\mathcal{L}$ is a σ-algebra and contains all measurable rectangles.</li>
+    </ul>
+  </li>
+  <li>Since $\mathcal{B}_2$ is the <em>smallest</em> σ-algebra containing all open sets,<br />
+it must be contained in <strong>any</strong> σ-algebra that contains all open sets.</li>
+</ul>
+
+<h4 id="2-mathcalltimesmathcall-subseteq-mathcalltimesmathcallast">2. $\mathcal{L}\times\mathcal{L} \subseteq (\mathcal{L}\times\mathcal{L})^\ast$</h4>
+
+<ul>
+  <li>$(\mathcal{L}\times\mathcal{L})^\ast$ is the <strong>completion</strong> of the product σ-algebra.</li>
+  <li>By definition of completion,
+[
+\mathcal{A} \subseteq \mathcal{A}^\ast
+\qquad\text{for any σ-algebra } \mathcal{A}.
+]</li>
+  <li>Thus every set in the Lebesgue product σ-algebra automatically belongs to its completion.</li>
+</ul>
+
+<hr />
+
+<h2 id="theorem-8-3">Theorem 8-3.</h2>
+
+<p>If $f : \mathbb{R}^2 \to \mathbb{C}$ is $\mathcal{L}$-measurable, then</p>
+
+<blockquote>
+  <p>$\exists\; g: \mathbb{R}^2 \to \mathbb{C}$ Borel–measurable with $f=g\;$ a.e.</p>
+</blockquote>
+
+<h3 id="pf-1">pf)</h3>
+
+<p>Let $f = \sum_{k=1}^\infty c_k \cdot \chi_{E_k}$.</p>
+
+<p>Take $g = \sum_{k=1}^\infty c_k \cdot \chi_{A_k}$ s.t.</p>
+<ul>
+  <li>$A_k, B_k$ Borel-measurable,</li>
+  <li>$A_k \subseteq E \subseteq B_k$,</li>
+  <li>$(m \times m)^\ast(B_k\setminus A_k)=0$.</li>
+</ul>
+
+<h2 id="property-8-1">Property 8-1.</h2>
+
+<p>If $f : \mathbb{R}^2 \to \mathbb{C}$ is $\mathcal{L}$-measurable, then</p>
+
+<p>[
+\Rightarrow f = g + h
+]
+, wherer $g$ is Borel-measurable and $h$ is zero a.e.</p>
+
+<hr />
+<hr />
+
+<h1 id="08c-convolution-of-integrable-functions-">(08c) Convolution of Integrable Functions <!-- % 적분가능 함수의 곱하기(합성곱) --></h1>
+
+<p>Let $f,g \in L^1(\mathbb{R})$.</p>
+
+<h2 id="definition-convolution">Definition: Convolution</h2>
+
+<p>For $f, g \in L^1(\mathbb{R})$,
+[
+(f\ast g)(x)
+=
+\int_{\mathbb{R}} f(y)\, g(x-y)\, dy.
+]</p>
+
+<p>This corresponds to the “real” version of the group algebra convolution.</p>
+
+<hr />
+
+<h2 id="basic-computation">Basic Computation</h2>
+
+<p>Using Fubini’s Theorem and translation invariance of Lebesgue measure:</p>
+
+<p>[
+\int_{\mathbb{R}} \left\lbrace \int_{\mathbb{R}} \lvert f(y)g(x-y) \rvert \, dx \right\rbrace dy
+\le
+\int_{\mathbb{R}} \left\lbrace \int_{\mathbb{R}} \lvert f(y)\rvert \; \lvert g(x-y) \rvert \, dx \right\rbrace dy
+]
+[
+= 
+\int_{\mathbb{R}} \left\lbrace \lvert f(y) \rvert \int_{\mathbb{R}} \lvert g(x-y) \rvert \, dx \right\rbrace dy
+]
+[
+= \int_{\mathbb{R}} \left\lbrace \lvert f(y) \rvert \int_{\mathbb{R}} \lvert g(x) \rvert \, dx \right\rbrace dy
+]
+[
+= \int_{\mathbb{R}} \lvert f(y) \rvert \, dy \cdot \int_{\mathbb{R}} \lvert g(x) \rvert \, dx
+]</p>
+
+<p>Thus,
+[
+\lVert f\ast g \rVert_1 \le \lVert f\rVert_1 \lVert g\rVert_1.
+]</p>
+
+<p>This shows that $(L^1(\mathbb{R}), \ast)$ is a <strong>Banach algebra</strong>.</p>
+
+<h2 id="definition-banach-algebra">Definition: Banach Algebra</h2>
+
+<p>A <strong>Banach algebra</strong> is a mathematical structure that combines:</p>
+
+<ol>
+  <li>
+    <p><strong>Banach space</strong><br />
+A complete normed vector space (every Cauchy sequence converges).</p>
+  </li>
+  <li>
+    <p><strong>Algebra structure</strong><br />
+A multiplication operation $a \ast b$ defined on the space
+that is associative and bilinear.</p>
+  </li>
+  <li>
+    <p><strong>Norm compatibility</strong><br />
+The multiplication satisfies
+[
+\lVert a \ast b \rVert \le \lVert a \rVert \, \lVert b \rVert.
+]</p>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="algebraic-properties">Algebraic Properties</h2>
+
+<p>For $f,g,h\in L^1$:</p>
+
+<ol>
+  <li>$(f\ast g)\ast h = f\ast(g\ast h)$</li>
+  <li>$(af + bg)\ast h = af\ast h + bg\ast h$</li>
+  <li>$f\ast g = g\ast f$</li>
+  <li>$(f\ast g)’ = f\ast g’$</li>
+</ol>
+
+<hr />
+
+<h2 id="approximation-via-convolution">Approximation via Convolution</h2>
+
+<p>Let $1&lt;p,q&lt;\infty$ and $\frac{1}{p} + \frac{1}{q} = 1$.</p>
+
+<p>If $f\in L^p(\mathbb{R})$ and $g\in L^q(\mathbb{R})$, then
+[
+f\ast g \in L^\infty.
+]</p>
+
+<h3 id="pf-2">pf)</h3>
+<p>Hölder’s inequality gives:
+[
+\lvert(f\ast g)(x)\rvert
+= \left\lvert\int_{\mathbb{R}} f(y) g(x-y)\, dy\right\rvert
+= \int_{\mathbb{R}} \lvert f(y) g_{-x}(-y) \rvert \, dy
+\le \lVert f\rVert_p \lVert g\rVert_q.
+]</p>
+
+<hr />
+
+<h2 id="theorem-8-4">Theorem 8-4.</h2>
+<p>If $f\in L^p(\mathbb{R})$ and $g\in L^q(\mathbb{R})$, then<br />
+[
+f\ast g \in C_0(\mathbb{R}).
+]</p>
+
+<h3 id="pf-3">pf)</h3>
+
+<p>Let $x_n\to x$. Then
+[
+(f\ast g)(x_n) - (f\ast g)(x)
+=
+\int_{\mathbb{R}} f(y)g(x_n-y)\, dy
+-
+\int_{\mathbb{R}} f(y)g(x-y)\, dy.
+]</p>
+
+<p>Rewrite:
+[
+(f\ast g)(x_n)-(f\ast g)(x)
+=
+\int_{\mathbb{R}} f(y) \lbrack g(x_n-y)-g(x-y) \rbrack \, dy.
+]</p>
+
+<p>Let $h_n := x_n - x$,
+[
+(f \ast g)(x_n) - (f \ast g)(x)
+=
+\int_{\mathbb{R}} f(y)\, \lbrack g(x + h_n - y) - g(x - y) \rbrack \, dy
+]
+[
+=
+\int_{\mathbb{R}} f(x - t)\, \lbrack g(t + h_n) - g(t) \rbrack \, dt.
+]</p>
+
+<p>Let $\tau_{h} g(t) = g(t + h)$ and using <strong>Hölder’s inequality</strong>,
+[
+\lvert (f \ast g)(x_n) - (f \ast g)(x) \rvert
+\le
+\lVert f \rVert_p \, \lVert \tau_{h_n} g - g \rVert_q.
+]</p>
+
+<p>By the previously established result on the $L^{q}$–continuity of translations,
+[
+h_n \to 0 \;\Rightarrow\; \lVert \tau_{h_n} g - g \rVert_q \to 0.
+]</p>
+
+<p>Consequently,
+[
+(f \ast g)(x_n) \to (f \ast g)(x),
+]
+which shows that $f \ast g$ is continuous on $\mathbb{R}$.</p>
+
+<hr />
+
+<p>📚 <em>Reference:</em> <a href="https://www.math.snu.ac.kr/~kye/lecture_V/V_real/index.html">Real Analysis Lecture by Prof. Seung-Hyeok Kye (SNU)</a></p>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/dayeonjung5294" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:dayeonjung5294@gmail.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2025</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+  <script src="/assets/js/simple-jekyll-search.min.js"></script>
+  <script src="/assets/js/search.js"></script>
+  
+</body>
+
+</html>

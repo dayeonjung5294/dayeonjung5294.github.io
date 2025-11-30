@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Real Analysis Lecture 9: Fourier Series</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Real Analysis Lecture 9: Fourier Series | Dayeon Jung</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Real Analysis Lecture 9: Fourier Series" />
+<meta name="author" content="Dayeon Jung" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures." />
+<meta property="og:description" content="Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures." />
+<link rel="canonical" href="http://localhost:4000/real_analysis/2025/11/02/real_analysis-lecture9.html" />
+<meta property="og:url" content="http://localhost:4000/real_analysis/2025/11/02/real_analysis-lecture9.html" />
+<meta property="og:site_name" content="Dayeon Jung" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-11-02T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Real Analysis Lecture 9: Fourier Series" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dayeon Jung"},"dateModified":"2025-11-02T00:00:00+09:00","datePublished":"2025-11-02T00:00:00+09:00","description":"Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures.","headline":"Real Analysis Lecture 9: Fourier Series","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/real_analysis/2025/11/02/real_analysis-lecture9.html"},"url":"http://localhost:4000/real_analysis/2025/11/02/real_analysis-lecture9.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['\[', '\]'], ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/" alt="Dayeon Jung" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">Dayeon Jung</a>
+      </h2>
+      </div><p class="tagline">Statistician & Data Scientist</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/dayeonjung5294" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:dayeonjung5294@gmail.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2025</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/real_analysis/2025/11/02/real_analysis-lecture9.html">
+    <h2 class="post-title">Real Analysis Lecture 9: Fourier Series</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Nov 2, 2025</div><ul class="post-categories"><li>Real_analysis</li></ul></div>
+  <div class="post">
+    <blockquote>
+  <p><em>Disclaimer:</em> This post is a personal study note based on the Real Analysis course I attended.<br />
+The explanations and formulations are written in my own words for educational purposes only,<br />
+and do not reproduce or distribute any copyrighted material from the original lectures.</p>
+</blockquote>
+
+<h1 id="09a-fourier-series-of-periodic-functions-">(09a) Fourier Series of Periodic Functions <!-- % 주기함수의 푸리에 급수 --></h1>
+
+<h2 id="introduction">Introduction</h2>
+<p>Fourier series express a periodic function as a sum of complex exponentials.<br />
+For a $2\pi$-periodic function $f$, (i.e. $f(t + 2\pi) = f(t)$) the basic idea is:</p>
+
+<p>[
+f(t) \sim \sum_{n\in\mathbb{Z}} \widehat{f}(n) e^{int}.
+]</p>
+
+<p>Here</p>
+<ul>
+  <li>$e^{int}$ are the <em>Fourier basis functions</em>,</li>
+  <li>$\widehat{f}(n)$ are the <em>Fourier coefficients</em>,</li>
+  <li>and the symbol $\sim$ represents convergence in an appropriate sense (e.g., $L^2$, pointwise a.e., etc.).</li>
+</ul>
+
+<hr />
+
+<p>Let<br />
+[
+\mathbb{T} = \mathbb{R}/2\pi\mathbb{Z} = ( -\pi, \pi \rbrack.
+]</p>
+
+<ul>
+  <li>
+    <p>If $f, g \in L^1(\mathbb{T} )$, then $f \ast g \in L^1(\mathbb{T} )$ and 
+$\lVert f \ast g \rVert_1 \le \lVert f \rVert_1 \lVert g \rVert_1$</p>
+  </li>
+  <li>
+    <p>If $f \in L^1(\mathbb{T} )$, then $x \mapsto \tau_x f$ is <strong>uniformly continuous</strong> as a map $\mathbb{T}  \to L^1(\mathbb{T} )$,</p>
+
+    <p>where $\tau_x f(t) = f(t+x)$</p>
+  </li>
+  <li>
+    <p>$C(\mathbb{T} )$ is dense in $L^1(\mathbb{T} )$</p>
+  </li>
+</ul>
+
+<hr />
+
+<p>The Fourier coefficients of $f\in L^1(\mathbb{T} )$ are defined as<br />
+[
+\widehat{f}(n)
+=
+\int_{\mathbb{T} } f(t)\, e^{-int}\, dt.
+]</p>
+
+<p>Define
+[
+u_n(t) = e^{int}, \qquad n\in\mathbb{Z}.
+]</p>
+
+<p>They satisfy the orthogonality relation
+[
+\langle u_n, u_m \rangle
+= \,\delta_{nm}.
+]</p>
+
+<p>Thus, ${u_n}$ forms an orthogonal system in $L^2(\mathbb{T} )$.<br />
+<!-- % e^{int}는 직교기저 역할 --></p>
+
+<hr />
+
+<p>Let $f : \mathbb{T}  \to \mathbb{C}$. (Define $\int_\mathbb{T}  f = \frac{1}{2\mathbb{T} } \int_{-\mathbb{T} }^\mathbb{T}  f(t) dt$ )</p>
+
+<ul>
+  <li>
+    <p>$\widehat{f \ast u_n}(m) = \widehat{f}(m) \cdot \widehat{u_n}(m) = \widehat{f}(n) \cdot \delta_{nm} $</p>
+
+    <p>$\Rightarrow \widehat{f \ast u_n} = \widehat{f}(n) \cdot e_n = \widehat{f}(n) \cdot \widehat{u_n}$</p>
+
+    <p>$\Rightarrow f \ast u_n = \widehat{f}(n)\, u_n.$</p>
+  </li>
+</ul>
+
+<hr />
+<hr />
+
+<h1 id="09b-fejér-kernel-">(09b) Fejér Kernel <!-- % 페제르핵 --></h1>
+
+<h2 id="theorem-9-1">Theorem 9-1.</h2>
+
+<p>Let $h_n \in L^1(\mathbb{T})$ satisfy:
+[
+h_n \ge 0,\qquad 
+\int_{\mathbb{T}} h_n = 1,\qquad
+\forall \delta \in (0,\pi),\;
+\lim_{n\to\infty} \int_{\mathbb{T} \setminus [-\delta,\delta]} h_n = 0.
+]</p>
+
+<p>Then for any $ f \in L^1(\mathbb{T})$,
+[
+\lVert f - f\ast h_n \rVert_1 \longrightarrow 0.
+]</p>
+
+<h3 id="pf">pf)</h3>
+
+<p>For each $t \in \mathbb{T}$,</p>
+
+<p>[
+f(t) - (f\ast h_n)(t)
+= \int_{\mathbb{T}} h_n(s)\, ( f(t)-f(t-s) ) \, ds.
+]</p>
+
+<p>Taking $L^1$-norm:</p>
+
+<p>[
+\lVert f - f\ast h_n \rVert_1
+\le \int_{\mathbb{T}} \int_{\mathbb{T}} h_n(s)\, \lvert f(t) - f_s(t) \rvert \, dt ds,
+= \int_{\mathbb{T}} h_n(s)\, \lVert f - f_s \rVert_1\, ds,
+]
+where $f_s(t)=f(t-s)$.</p>
+
+<p>For any $\varepsilon&gt;0$, $\exists\, \delta&gt;0$ s.t.
+[
+|s|&lt;\delta \Rightarrow \lVert f - f_s \rVert_1 &lt; \varepsilon.
+]</p>
+
+<p>Split the integral:</p>
+
+<ol>
+  <li>On $\lvert s\rvert &lt;\delta$: $\int_{[-\delta, \delta]} h_n(s)\, \lVert f-f_s\rVert_1 \,ds &lt;\varepsilon$.</li>
+  <li>On $|s|\ge\delta$:<br />
+[
+\int_{\mathbb{T} \setminus [-\delta, \delta]} h_n(s)\, \lVert f-f_s\rVert_1 \,ds
+  \le 2\lVert f\rVert_1 \int_{\mathbb{T} \setminus [-\delta, \delta]} h_n(s)
+  \longrightarrow 0.
+]</li>
+</ol>
+
+<p>Hence
+[
+\lVert f - f\ast h_n \rVert_1 \to 0.
+]</p>
+
+<hr />
+
+<h2 id="theorem-9-2">Theorem 9-2.</h2>
+
+<p>If $f \in C(\mathbb{T})$, then<br />
+[
+\lVert f - f\ast h_n\rVert_{\sup} \to 0.
+]</p>
+
+<h3 id="proof">Proof</h3>
+
+<p>Because $f$ is uniformly continuous on compact $\mathbb{T}$,<br />
+for any $\varepsilon&gt;0$ there exists $\delta&gt;0$ such that
+[
+|s|&lt;\delta \Rightarrow |f(t)-f(t-s)|&lt;\varepsilon.
+]</p>
+
+<p>Then</p>
+
+<p>[
+|f(t) - (f\ast h_n)(t)|
+\le \int_{\mathbb{T}} h_n(s)\, |f(t)-f(t-s)|\, ds.
+]</p>
+
+<p>Split into $\lvert s\rvert&lt;\delta$ and $\lvert s\rvert\ge\delta$ regions, obtain</p>
+
+<p>[
+\lVert f - f\ast h_n\rVert_{\sup} \to 0.
+]</p>
+
+<hr />
+
+<h2 id="property-9-1">Property 9-1.</h2>
+<p>Trigonometric polynomials $T(\mathbb{T})$ are dense in $L^1(\mathbb{T})$.</p>
+
+<h2 id="property-9-2">Property 9-2.</h2>
+<p>If $\widehat{f}(n)=0$ for all $n\in\mathbb{Z}$, then $f=0$ a.e.</p>
+
+<h3 id="proof-1">Proof</h3>
+<p>Fejér means satisfy<br />
+[
+\sigma_n(f) = f \ast h_n = \sum_{k=-\infty}^{\infty} \widehat{f}(k)\widehat{h_n}(k)u_k.
+]
+All coefficients vanish ⇒ every Fejér mean is identically 0 ⇒<br />
+[
+f = \lim_{n\to\infty} f\ast h_n = 0 \quad\text{a.e.}
+]</p>
+
+<h2 id="property-9-3">Property 9-3.</h2>
+<p>If $\widehat{f} \in \ell^1(\mathbb{Z})$, then</p>
+
+<p>[
+f(t) = \sum_{n=-\infty}^{\infty} \widehat{f}(n) e^{int}
+]
+uniformly.</p>
+
+<h3 id="proof-2">Proof</h3>
+<p>Absolute convergence of<br />
+[
+\sum |\widehat{f}(n)| &lt; \infty
+]
+implies uniform convergence of the Fourier series, and the limit must equal $f$.</p>
+
+<h2 id="property-9-4">Property 9-4.</h2>
+<p>If $f \in L^1(\mathbb{T})$, then Fejér means converge uniformly<br />
+iff $f\in C_0(\mathbb{Z})$.</p>
+
+<hr />
+
+<p>📚 <em>Reference:</em> <a href="https://www.math.snu.ac.kr/~kye/lecture_V/V_real/index.html">Real Analysis Lecture by Prof. Seung-Hyeok Kye (SNU)</a></p>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/dayeonjung5294" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:dayeonjung5294@gmail.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2025</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+  <script src="/assets/js/simple-jekyll-search.min.js"></script>
+  <script src="/assets/js/search.js"></script>
+  
+</body>
+
+</html>

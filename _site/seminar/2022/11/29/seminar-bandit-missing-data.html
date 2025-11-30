@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Seminar in Statistics — Multi-Armed Bandit with Missing Data</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Seminar in Statistics — Multi-Armed Bandit with Missing Data | Dayeon Jung</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Seminar in Statistics — Multi-Armed Bandit with Missing Data" />
+<meta name="author" content="Dayeon Jung" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Note: This post summarizes the project completed in the graduate seminar “Seminar in Statistics: Missing Data and Online Decision Making” at Seoul National University (Fall 2022)." />
+<meta property="og:description" content="Note: This post summarizes the project completed in the graduate seminar “Seminar in Statistics: Missing Data and Online Decision Making” at Seoul National University (Fall 2022)." />
+<link rel="canonical" href="http://localhost:4000/seminar/2022/11/29/seminar-bandit-missing-data.html" />
+<meta property="og:url" content="http://localhost:4000/seminar/2022/11/29/seminar-bandit-missing-data.html" />
+<meta property="og:site_name" content="Dayeon Jung" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-11-29T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Seminar in Statistics — Multi-Armed Bandit with Missing Data" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dayeon Jung"},"dateModified":"2022-11-29T00:00:00+09:00","datePublished":"2022-11-29T00:00:00+09:00","description":"Note: This post summarizes the project completed in the graduate seminar “Seminar in Statistics: Missing Data and Online Decision Making” at Seoul National University (Fall 2022).","headline":"Seminar in Statistics — Multi-Armed Bandit with Missing Data","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/seminar/2022/11/29/seminar-bandit-missing-data.html"},"url":"http://localhost:4000/seminar/2022/11/29/seminar-bandit-missing-data.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/" alt="Dayeon Jung" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">Dayeon Jung</a>
+      </h2>
+      </div><p class="tagline">Statistician & Data Scientist</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/dayeonjung5294" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:dayeonjung5294@gmail.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2025</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/seminar/2022/11/29/seminar-bandit-missing-data.html">
+    <h2 class="post-title">Seminar in Statistics — Multi-Armed Bandit with Missing Data</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Nov 29, 2022</div><ul class="post-categories"><li>Seminar</li></ul></div>
+  <div class="post">
+    <blockquote>
+  <p><strong>Note</strong>: This post summarizes the project completed in the graduate seminar <strong>“Seminar in Statistics: Missing Data and Online Decision Making”</strong> at Seoul National University (Fall 2022).</p>
+</blockquote>
+
+<h1 id="-project-summary">📝 Project Summary</h1>
+<p>This project examines how <strong>missing data influences multi-armed bandit (MAB) algorithms</strong> and whether <strong>mean imputation</strong> improves allocation decisions.<br />
+Using binary-reward two-armed bandits under MAR settings, we simulate four algorithms—<strong>Tuned Thompson Sampling, Raw Thompson Sampling, Current Belief, and UCB</strong>—across various missingness patterns.</p>
+
+<p>Key findings:</p>
+<ul>
+  <li><strong>Explorative algorithms</strong> (TTS, RTS, UCB) remain <strong>stable</strong> even with missing outcomes.</li>
+  <li><strong>Current Belief</strong>, an exploitative method, is <strong>highly sensitive</strong> and performs poorly under missingness.</li>
+  <li><strong>Mean imputation</strong> strengthens explorative policies but offers limited improvement for exploitative ones.</li>
+</ul>
+
+<p>Overall, explorative bandit strategies combined with simple imputation yield reliable performance even when outcome data are missing.</p>
+
+<hr />
+
+<h2 id="-project-code-repository">🔗 Project Code Repository</h2>
+<p>👉 <strong><a href="https://github.com/dayeonjung5294/bandit-with-missing">GitHub: bandit-with-missing</a></strong></p>
+
+<hr />
+
+<h2 id="-final-report-pdf">📄 Final Report PDF</h2>
+
+<p>👉 <strong><a href="/assets/pdf/Seminar_in_Statistics___final_paper.pdf">Download:  <em>Seminar_in_Statistics</em>__final_paper.pdf_</a></strong></p>
+
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/dayeonjung5294" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:dayeonjung5294@gmail.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2025</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+  <script src="/assets/js/simple-jekyll-search.min.js"></script>
+  <script src="/assets/js/search.js"></script>
+  
+</body>
+
+</html>

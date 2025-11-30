@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Real Analysis Lecture 12: Banach Spaces and Hilbert Spaces</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Real Analysis Lecture 12: Banach Spaces and Hilbert Spaces | Dayeon Jung</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Real Analysis Lecture 12: Banach Spaces and Hilbert Spaces" />
+<meta name="author" content="Dayeon Jung" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures." />
+<meta property="og:description" content="Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures." />
+<link rel="canonical" href="http://localhost:4000/real_analysis/2025/11/23/real_analysis-leacture12.html" />
+<meta property="og:url" content="http://localhost:4000/real_analysis/2025/11/23/real_analysis-leacture12.html" />
+<meta property="og:site_name" content="Dayeon Jung" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-11-23T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Real Analysis Lecture 12: Banach Spaces and Hilbert Spaces" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dayeon Jung"},"dateModified":"2025-11-23T00:00:00+09:00","datePublished":"2025-11-23T00:00:00+09:00","description":"Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures.","headline":"Real Analysis Lecture 12: Banach Spaces and Hilbert Spaces","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/real_analysis/2025/11/23/real_analysis-leacture12.html"},"url":"http://localhost:4000/real_analysis/2025/11/23/real_analysis-leacture12.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['\[', '\]'], ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/" alt="Dayeon Jung" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">Dayeon Jung</a>
+      </h2>
+      </div><p class="tagline">Statistician & Data Scientist</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/dayeonjung5294" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:dayeonjung5294@gmail.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2025</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/real_analysis/2025/11/23/real_analysis-leacture12.html">
+    <h2 class="post-title">Real Analysis Lecture 12: Banach Spaces and Hilbert Spaces</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Nov 23, 2025</div><ul class="post-categories"><li>Real_analysis</li></ul></div>
+  <div class="post">
+    <blockquote>
+  <p><em>Disclaimer:</em> This post is a personal study note based on the Real Analysis course I attended.<br />
+The explanations and formulations are written in my own words for educational purposes only,<br />
+and do not reproduce or distribute any copyrighted material from the original lectures.</p>
+</blockquote>
+
+<h1 id="12a-uniform-boundedness-principle-">(12a) Uniform Boundedness Principle <!-- % 고른 유계 원칙 --></h1>
+
+<h2 id="theorem-12-1-closed-graph-theorem">Theorem 12-1. (Closed Graph Theorem)</h2>
+<p>Let $X, Y$ be Banach spaces and let $T: X \to Y$ be linear.</p>
+
+<p>Suppose that whenever $x_n \in X$ satisfies
+[
+x_n \to x,<br />
+\qquad T(x_n) \to y,
+]
+then $T(x) = y$ (graph is closed).</p>
+
+<p>Then <strong>$T$ is bounded</strong>.</p>
+
+<h3 id="pf">pf)</h3>
+<p>Define a new norm on $X$ by
+[
+\lVert x\rVert’ = \lVert x\rVert + \lVert T(x)\rVert.
+]</p>
+
+<p>Then $(X, \lVert\cdot\rVert’)$ is a normed space, and
+[
+\lVert x\rVert \le \lVert x\rVert’ \le M \lVert x\rVert
+]
+for some $M&gt;0$, because the graph is closed and $X$ is complete.</p>
+
+<p>Thus the norms $\lVert\cdot\rVert$ and $\lVert\cdot\rVert’$ are equivalent.</p>
+
+<p>Since the map $x \mapsto T(x)$ is continuous under $\lVert\cdot\rVert’$, it is also continuous under $\lVert\cdot\rVert$. Therefore $T$ is bounded.</p>
+
+<hr />
+
+<h2 id="theorem-12-2-uniform-boundedness-principle-banachsteinhaus">Theorem 12-2. (Uniform Boundedness Principle, Banach–Steinhaus)</h2>
+
+<p>Let $X$ be a Banach space and $Y$ a normed space.<br />
+Let $\lbrace T_\alpha : \alpha \in A \rbrace$ be a family of bounded linear maps from $X$ to $Y$.</p>
+
+<p>Assume that for each $x \in X$,
+[
+M(x) := \sup_{\alpha \in A} \lVert T_\alpha(x)\rVert &lt; \infty.
+]</p>
+
+<p>Then
+[
+\sup_{\alpha \in A} \lVert T_\alpha\rVert &lt; \infty.
+]</p>
+
+<h3 id="pf-1">pf)</h3>
+<p>For $n = 1,2,\ldots$ and define the closed sets
+[
+C_n = \bigcap_{\alpha \in A} 
+\lbrace x \in X : \lVert T_\alpha(x)\rVert \le n \rbrace.
+]
+Each $C_n$ is closed (as an intersection of inverse of closed sets), and by assumption $X = \bigcup_{n=1}^{\infty} C_n.$</p>
+
+<p>By the <strong>Baire category theorem</strong>, some $C_N$ contains a ball<br />
+[
+N(x_0, r) \subset C_N.
+]</p>
+
+<p>Thus, if $\lVert x - x_0\rVert &lt; r$, then for all $\alpha \in A$,
+[
+\lVert T_\alpha(x)\rVert \le N.
+]</p>
+
+<p>Let $x \in X$ with $\lVert x\rVert &lt; r$. Then
+[
+\lVert T_\alpha(x)\rVert 
+\le \lVert T_\alpha(x) - T_\alpha(x_0)\rVert + \lVert T_\alpha(x_0)\rVert
+\le \lVert T_\alpha\rVert \lVert x - x_0\rVert + N \le N + M(x_0).
+]</p>
+
+<p>Hence
+[
+\sup_{\alpha \in A} \lVert T_\alpha\rVert &lt; \infty.
+]</p>
+
+<hr />
+<hr />
+
+<h1 id="12b-dual-space-of-a-hilbert-space-">(12b) Dual Space of a Hilbert Space <!-- % 힐베르트 공간의 쌍대공간 --></h1>
+
+<h2 id="definition-12-1">Definition 12-1.</h2>
+<p>Let $H$ be a Hilbert space and $C \subset H$ a nonempty subset.</p>
+
+<ol>
+  <li>
+    <p>$C$ is <strong>convex</strong> if for all $x,y \in C$ and $t \in \lbrack 0,1\rbrack$,
+[
+tx + (1-t)y \in C.
+]</p>
+  </li>
+  <li>
+    <p>For $x_0 \in H$ we define the distance from $x_0$ to $C$ by
+[
+d\left(x_0,C\right)
+= \inf\limits_{y\in C} \lVert x_0 - y\rVert.
+]</p>
+  </li>
+</ol>
+
+<p>A point $y_0 \in C$ with $\lVert x_0 - y_0\rVert = d\left(x_0,C\right)$ is called a <strong>best approximation</strong> (or the metric projection of $x_0$ onto $C$).</p>
+
+<hr />
+
+<h2 id="theorem-12-3-projection-onto-a-closed-convex-set">Theorem 12-3. (Projection onto a Closed Convex Set)</h2>
+<p>Let $H$ be a Hilbert space and let $C \subset H$ be nonempty, closed, and convex.<br />
+For $x_0 \in H \setminus C$ set
+[
+d = d\left(x_0,C\right) = \inf\limits_{y\in C} \lVert x_0 - y\rVert.
+]
+Then there exists unique $y_0 \in C$ such that
+[
+\lVert x_0 - y_0\rVert = d.
+]</p>
+
+<h3 id="pf-2">pf)</h3>
+<p>By translating $C$ we may assume $x_0 = 0$; it suffices to find $y_0 \in C$ with
+[
+\lVert y_0\rVert = \inf\limits_{y\in C} \lVert y\rVert =: d.
+]</p>
+
+<p>Choose a sequence $\lbrace y_n\rbrace \subset C$ such that $\lVert y_n\rVert \to d$.<br />
+We show that $\lbrace y_n\rbrace$ is Cauchy.</p>
+
+<p>In a Hilbert space we have, for all $x,y \in H$,
+[
+\frac{1}{4}\,\lVert x-y\rVert^2
+\le \frac{1}{2}\,\lVert x\rVert^2 + \frac{1}{2}\,\lVert y\rVert^2 - \left\lVert \frac{x+y}{2} \right\rVert^2.
+]</p>
+
+<p>Since $C$ is convex, the midpoint $\frac{y_n + y_m}{2}$ belongs to $C$, and hence
+[
+\left\lVert \frac{y_n + y_m}{2} \right\rVert^2
+\ge d^2.
+]
+Therefore
+[
+\frac{1}{4}\,\lVert y_n - y_m\rVert^2
+\le \frac{1}{2}\,\lVert y_n\rVert^2 + \frac{1}{2}\,\lVert y_m\rVert^2 - d^2.
+]</p>
+
+<p>Letting $n,m \to \infty$ and using $\lVert y_n\rVert, \lVert y_m\rVert \to d$, we get
+[
+\limsup_{n,m\to\infty} \lVert y_n - y_m\rVert^2 \le 0,
+]
+so $\lbrace y_n\rbrace$ is Cauchy.<br />
+Since $H$ is complete and $C$ is closed, there exists $y_0 \in C$ with $y_n \to y_0$.<br />
+By continuity of the norm,
+[
+\lVert y_0\rVert = \lim_{n\to\infty} \lVert y_n\rVert = d.
+]
+Thus $y_0$ is a best approximation of $0$ (and hence of $x_0$ before translation).</p>
+
+<hr />
+
+<h2 id="theorem-12-4-orthogonal-decomposition-wrt-a-closed-subspace">Theorem 12-4. (Orthogonal Decomposition w.r.t. a Closed Subspace)</h2>
+<p>Let $E$ be a closed subspace of a Hilbert space $H$ and let $x_0 \in H \setminus E$.<br />
+Then there exists a unique $y_0 \in E$ such that
+[
+\lVert x_0 - y_0\rVert \le \lVert x_0 - y\rVert \quad \text{for all } y \in E.
+]
+Moreover,
+[
+x_0 - y_0 \perp E.
+]</p>
+
+<h3 id="pf-3">pf)</h3>
+<p>Apply <strong>Theorem 12-3</strong> to the closed convex set $C = E$ to obtain $y_0 \in E$ with
+[
+\lVert x_0 - y_0\rVert \le \lVert x_0 - y\rVert \quad \text{for all } y \in E.
+]</p>
+
+<p>Put $z_0 = x_0 - y_0$. We prove $z_0 \perp E$.<br />
+Fix $y \in E$ and consider, for $\alpha \in \mathbb{R}$,
+[
+\lVert x_0 - (y_0 + \alpha y)\rVert^2
+= \lVert z_0 - \alpha y\rVert^2 + \alpha^2 \lVert y\rVert^2.
+]</p>
+
+<p>By minimality of $y_0$, the function
+[
+f(\alpha) = \lVert z_0 - \alpha y\rVert^2
+]
+has a minimum at $\alpha = 0$. Hence $f’(0) = 0$, which gives
+[
+-2 \operatorname{Re}\langle z_0, y\rangle = 0.
+]</p>
+
+<p>Since this holds for all $y \in E$, we obtain $\langle z_0, y\rangle = 0$ for all $y \in E$, i.e.,
+[
+z_0 \perp E.
+]</p>
+
+<p>Uniqueness: if $x_0 = y_0 + z_0 = y_1 + z_1$ with $y_0,y_1 \in E$ and $z_0,z_1 \perp E$, then
+[
+(y_0 - y_1) = (z_1 - z_0) \in E \cap E^\perp = \lbrace 0\rbrace,
+]
+so $y_0 = y_1$ and $z_0 = z_1$.</p>
+
+<hr />
+
+<h2 id="theorem-12-5-riesz-representation-theorem">Theorem 12-5. (Riesz Representation Theorem)</h2>
+<p>Define, for $y \in H$, the functional
+[
+\varphi_y : H \to H^\ast, 
+\quad \varphi_y(x) = \langle x, y\rangle.
+]
+Then $\varphi_y$ is a bounded linear functional and
+[
+\lVert \varphi_y\rVert = \lVert y\rVert.
+]</p>
+
+<p>Conversely, for every bounded linear functional $\varphi \in H^*$ there exists a unique $y \in H$ such that
+[
+\varphi(x) = \langle x, y\rangle \quad \text{for all } x \in H.
+]
+Hence the map
+[
+H \ni y \longmapsto \varphi_y \in H^*
+]
+is an isometric isomorphism.</p>
+
+<h3 id="pf-4">pf)</h3>
+<p>For $y \in H$ we clearly have linearity and, by Cauchy–Schwarz,
+[
+\lvert \varphi_y(x)\rvert
+= \lvert \langle x,y\rangle\rvert
+\le \lVert x\rVert\, \lVert y\rVert,
+]
+so $\varphi_y$ is bounded and $\lVert \varphi_y\rVert \le \lVert y\rVert$.<br />
+Taking $x = y/\lVert y\rVert$ (for $y \ne 0$) gives equality, so $\lVert \varphi_y\rVert = \lVert y\rVert$.</p>
+
+<p>Now let $\varphi \in H^*$ be nonzero. Its kernel
+[
+E = \ker \varphi = \lbrace x \in H : \varphi(x) = 0\rbrace
+]
+is a closed subspace of $H$. Choose $z \in E^\perp$ with $\lVert z\rVert = 1$ (possible since $\varphi \ne 0$ implies $E \ne H$).</p>
+
+<p>For arbitrary $x \in H$ write the orthogonal decomposition
+[
+x = x_E + \lambda z,
+\quad x_E \in E, \ \lambda \in \mathbb{F}.
+]
+Then
+[
+\varphi(x) = \varphi(x_E) + \lambda \varphi(z)
+= \lambda \varphi(z).
+]</p>
+
+<p>Note that
+[
+\lambda = \langle x, z\rangle,
+]
+because $x - \langle x,z\rangle z \perp z$ and lies in $E$.<br />
+Hence
+[
+\varphi(x) = \varphi(z)\, \langle x, z\rangle
+= \langle x, \overline{\varphi(z)}\, z\rangle
+]
+(in the real case simply $\varphi(z) z$).</p>
+
+<p>Thus if we define
+[
+y = \overline{\varphi(z)}\, z,
+]
+we obtain
+[
+\varphi(x) = \langle x, y\rangle \quad \text{for all } x \in H.
+]</p>
+
+<p>Uniqueness: if $\langle x, y_1\rangle = \langle x, y_2\rangle$ for all $x$, then
+[
+\langle x, y_1 - y_2\rangle = 0 \quad \forall x.
+]
+Taking $x = y_1 - y_2$ gives $\lVert y_1 - y_2\rVert^2 = 0$, so $y_1 = y_2$.</p>
+
+<p>Therefore every bounded linear functional arises uniquely from an inner product with some $y \in H$, and the correspondence $y \mapsto \varphi_y$ is an isometric isomorphism $H \cong H^*$.</p>
+
+<hr />
+<hr />
+
+<h1 id="12c-orthonormal-bases-in-a-hilbert-space-">(12c) Orthonormal Bases in a Hilbert Space <!-- % 정규직교기저 --></h1>
+
+<h2 id="definition-12-2">Definition 12-2.</h2>
+<p>Let $H$ be a Hilbert space.<br />
+A family $\mathcal{A} = \lbrace u_\alpha : \alpha \in A\rbrace$ is called <strong>orthonormal</strong> in $H$ if</p>
+
+<ol>
+  <li>$\langle u_\alpha, u_\beta\rangle = 0$ for $\alpha \ne \beta$,</li>
+  <li>$\lVert u_\alpha\rVert = 1$ for all $\alpha$.</li>
+</ol>
+
+<p>We say that $\mathcal{A}$ is an <strong>orthonormal basis</strong> (or complete orthonormal system) if the following equivalent conditions hold:</p>
+
+<h3 id="i-parseval-identity">(i) Parseval identity</h3>
+<p>For all $x \in H$,
+[
+\sum_{\alpha \in A} \lvert \langle x, u_\alpha\rangle\rvert^2 = \lVert x\rVert^2.
+]</p>
+
+<h3 id="ii-reproducing-formula">(ii) Reproducing formula</h3>
+<p>For all $x,y \in H$,
+[
+\sum_{\alpha \in A} \langle x, u_\alpha\rangle \langle u_\alpha, y\rangle
+= \langle x, y\rangle.
+]</p>
+
+<h3 id="iii-maximality">(iii) Maximality</h3>
+<p>$\mathcal{A}$ is maximal among orthonormal families;<br />
+no further nonzero vector can be added without losing orthonormality.</p>
+
+<h3 id="iv-density">(iv) Density</h3>
+<p>Let
+[
+P_{\mathcal{A}} = \text{span}_{\text{fin}} \lbrace u_\alpha : \alpha\in A\rbrace
+]
+be the set of all finite linear combinations of $u_\alpha$.<br />
+Then $P_{\mathcal{A}}$ is dense in $H$.</p>
+
+<hr />
+
+<h2 id="bessel-inequality">Bessel Inequality</h2>
+<p>Let $F \subset A$ be a finite subset. For any $x \in H$,
+[
+\left\lVert x - \sum_{\alpha \in F} \langle x, u_\alpha\rangle u_\alpha \right\rVert^2
+\le \lVert x - y\rVert^2
+\quad\text{for all } y \in P_F.
+]</p>
+
+<p>In particular:
+[
+\sum_{\alpha \in F} \lvert \langle x, u_\alpha\rangle\rvert^2
+\le \lVert x\rVert^2.
+]</p>
+
+<p>Equality holds when
+[
+y = \sum_{\alpha \in F} \langle x, u_\alpha\rangle u_\alpha.
+]</p>
+
+<hr />
+
+<h2 id="coefficient-map">Coefficient Map</h2>
+<p>Given an orthonormal basis $\mathcal{A}$, define the coefficient map
+[
+x \longmapsto \widehat{x}(\alpha) := \langle x, u_\alpha\rangle.
+]</p>
+
+<p>This map is an isometry of $H$ into $\ell^2(A)$ via Parseval identity.</p>
+
+<hr />
+<hr />
+
+<h1 id="12d-plancherel-transform-">(12d) Plancherel Transform <!-- % 플랑셰렐 변환 --></h1>
+
+<h2 id="definition-12-3-fourier-transform-on-mathbbr">Definition 12-3. (Fourier Transform on $\mathbb{R}$)</h2>
+<p>For $f \in L^1(\mathbb{R})$ define its Fourier transform by
+[
+\widehat{f}(\xi)
+= \frac{1}{2\pi}\int_{\mathbb{R}} f(x)\, e^{-i \xi x}\, dx.
+]</p>
+
+<p>Parseval/Plancherel theory extends this to $L^2(\mathbb{R})$.</p>
+
+<hr />
+
+<h2 id="fourier-series-representation">Fourier Series Representation</h2>
+<p>Let $f \in L^1(\mathbb{R})$ be $2\pi$–periodic.<br />
+Define the Fourier series
+[
+F(t) = \sum_{n=-\infty}^{\infty} f(t-2n\pi) = \sum_{n=-\infty}^{\infty} \widehat{f}(n)\, e^{i n t},
+\qquad F \in L^1(\lbrack -\pi,\pi\rbrack).
+]</p>
+
+<p>The coefficients satisfy
+[
+\widehat{f}(n)
+= \frac{1}{2\pi}\int_{-\pi}^{\pi} f(t)\, e^{-i n t}\, dt.
+]</p>
+
+<hr />
+
+<h2 id="plancherel-formula-compact-support-case">Plancherel Formula (Compact Support Case)</h2>
+<p>If $f \in C_c(\mathbb{R})$, then $f \in L^1(\mathbb{R}) \cap L^2(\mathbb{R})$ and
+[
+\int_{\mathbb{R}} \lvert f(x)\rvert^2\, dx
+= \frac{1}{2\pi} \int_{\mathbb{R}} \lvert \widehat{f}(\xi)\rvert^2\, d\xi.
+]</p>
+
+<h3 id="sketch-of-argument">Sketch of Argument</h3>
+<p>If $\operatorname{supp} f \subset \lbrack -\pi,\pi\rbrack$, then by Fourier series computation,
+[
+\frac{1}{2\pi}\int_{-\pi}^{\pi} \lvert f(t)\rvert^2\, dt
+= \sum_{n=-\infty}^{\infty} \left\lvert \frac{1}{2\pi} \widehat{f}(n) \right\rvert^2.
+]</p>
+
+<p>Let $g(x) = f(x)\, e^{-i x \xi}$.<br />
+Applying orthogonality,
+[
+\int_{-\pi}^{\pi} \lvert f(x)\rvert^2\, dx
+= \frac{1}{2\pi} \sum_{n=-\infty}^{\infty}
+  \left\lvert \int_{\mathbb{R}} f(x)\, e^{-i (n+\xi)x}\, dx \right\rvert^2.
+]</p>
+
+<p>Taking the limit as the period grows and using Riemann sum approximation gives
+[
+\int_{\mathbb{R}} \lvert f(x)\rvert^2 \, dx
+= \frac{1}{2\pi}\int_{-\infty}^{\infty} \lvert \widehat{f}(\xi)\rvert^2\, d\xi.
+]</p>
+
+<p>Thus the Fourier transform extends to an isometry on $L^2(\mathbb{R})$.</p>
+
+<hr />
+
+<p>📚 <em>Reference:</em> <a href="https://www.math.snu.ac.kr/~kye/lecture_V/V_real/index.html">Real Analysis Lecture by Prof. Seung-Hyeok Kye (SNU)</a></p>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/dayeonjung5294" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:dayeonjung5294@gmail.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2025</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+  <script src="/assets/js/simple-jekyll-search.min.js"></script>
+  <script src="/assets/js/search.js"></script>
+  
+</body>
+
+</html>

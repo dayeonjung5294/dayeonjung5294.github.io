@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Real Analysis Lecture 0: Introduction and Motivation for Measure</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Real Analysis Lecture 0: Introduction and Motivation for Measure | Dayeon Jung</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Real Analysis Lecture 0: Introduction and Motivation for Measure" />
+<meta name="author" content="Dayeon Jung" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures." />
+<meta property="og:description" content="Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures." />
+<link rel="canonical" href="http://localhost:4000/real_analysis/2025/09/06/real_analysis-lecture0.html" />
+<meta property="og:url" content="http://localhost:4000/real_analysis/2025/09/06/real_analysis-lecture0.html" />
+<meta property="og:site_name" content="Dayeon Jung" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-09-06T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Real Analysis Lecture 0: Introduction and Motivation for Measure" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dayeon Jung"},"dateModified":"2025-09-06T00:00:00+09:00","datePublished":"2025-09-06T00:00:00+09:00","description":"Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures.","headline":"Real Analysis Lecture 0: Introduction and Motivation for Measure","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/real_analysis/2025/09/06/real_analysis-lecture0.html"},"url":"http://localhost:4000/real_analysis/2025/09/06/real_analysis-lecture0.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['\[', '\]'], ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/" alt="Dayeon Jung" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">Dayeon Jung</a>
+      </h2>
+      </div><p class="tagline">Statistician & Data Scientist</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/dayeonjung5294" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:dayeonjung5294@gmail.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2025</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/real_analysis/2025/09/06/real_analysis-lecture0.html">
+    <h2 class="post-title">Real Analysis Lecture 0: Introduction and Motivation for Measure</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Sep 6, 2025</div><ul class="post-categories"><li>Real_analysis</li></ul></div>
+  <div class="post">
+    <blockquote>
+  <p><em>Disclaimer:</em> This post is a personal study note based on the Real Analysis course I attended.<br />
+The explanations and formulations are written in my own words for educational purposes only,<br />
+and do not reproduce or distribute any copyrighted material from the original lectures.</p>
+</blockquote>
+
+<h1 id="00a-what-is-an-integral">(00a) What is an Integral?</h1>
+
+<h2 id="1-quadrature-">1. Quadrature <!-- % 구적법 --></h2>
+<p>The process of approximating area under a curve by partitioning an interval and summing up rectangular areas. (foundation of the Riemann integral)</p>
+
+<p>[
+\lim_{n \to \infty} \sum_{k=1}^n f(\frac{k}{n}) \cdot \frac{1}{n}
+]</p>
+
+<hr />
+
+<h2 id="2-riemann-integral-">2. Riemann Integral <!-- % 리만 적분 --></h2>
+
+<p>[
+\lim_{n \to \infty} \sum_{k=1}^n f(s_k) (x_k - x_{k-1}) \rightarrow A
+]</p>
+
+<p>where  $x_{k-1} \le s_k \le x_k$ .</p>
+
+<p>A function is Riemann integrable if and only if the set of all its discontinuities has measure zero</p>
+
+<h3 id="goal">Goal</h3>
+<p>For a set $ E \subset \mathbb{R} $, we aim to define a function<br />
+[
+\mu : 2^{\mathbb{R}} \to \lbrack 0, \infty \rbrack
+]</p>
+
+<p>that assigns a meaningful <strong>measure</strong> (length, area, volume) to $E$.</p>
+
+<h3 id="length-of-intervals">Length of Intervals</h3>
+<ul>
+  <li>For an open interval $(a,b)$,
+[
+l((a,b)) = b - a
+]</li>
+  <li>For disjoint intervals $(a,b)$ and $(c,d)$,
+[
+l((a,b) \cup (c,d)) = (b - a) + (d - c)
+]</li>
+  <li>In general,
+[
+l\left(\bigcup_{n=1}^\infty (a_n,b_n)\right) = \sum_{n=1}^\infty (b_n - a_n)
+]</li>
+</ul>
+
+<h3 id="open-set-representation">Open Set Representation</h3>
+<p>Let $ U \subset \mathbb{R} $ be open.<br />
+For each $ x \in U $:
+[
+a_x = \inf \lbrace a \mid (a,x) \subset U \rbrace, \quad
+b_x = \sup \lbrace b \mid (x,b) \subset U \rbrace
+]
+Then each $x$ belongs to the interval $(a_x,b_x)$, and
+[
+U = \bigcup_{x \in U} (a_x,b_x)
+]
+Thus, every open set can be expressed as a countable union of disjoint intervals.</p>
+
+<h3 id="measure-definition">Measure Definition</h3>
+<p>Define the <strong>measure</strong> as
+[
+\mu(E) := \inf \lbrace \mu(U) \mid U \text{ open},\, E \subset U \rbrace
+]</p>
+
+<hr />
+
+<h2 id="definition--riemannstieltjes-integral-for-reference-">Definition — Riemann–Stieltjes Integral <em>(for reference)</em> <!-- % 리만-스틸체스 적분 --></h2>
+<p>Let $ f: [a,b] \to \mathbb{R} $ be bounded <span style="color:red">$ (\alpha: [a,b] \to \mathbb{R} $ be a monotone increasing function.)</span></p>
+
+<p>Let $ P = {x_0, x_1, \dots, x_n} \in \mathcal{P}[a, b] $.</p>
+
+<h3 id="upper-and-lower-sums">Upper and Lower Sums</h3>
+<p>[
+U(P,f,{\color{red}{\alpha}}) = \sum_{i=1}^{n} M_i ({\color{red}{\alpha}}(x_i) - {\color{red}{\alpha}}(x_{i-1})), \quad 
+M_i = \sup_{x \in [x_{i-1}, x_i]} f(x)
+]
+[
+L(P,f,{\color{red}{\alpha}}) = \sum_{i=1}^{n} m_i ({\color{red}{\alpha}}(x_i) - {\color{red}{\alpha}}(x_{i-1})), \quad 
+m_i = \inf_{x \in [x_{i-1}, x_i]} f(x)
+]</p>
+
+<h3 id="integrability-condition">Integrability Condition</h3>
+<p>Let 
+[
+\overline{\int_a^b} f {\color{red}{d\alpha}} = \inf \lbrace U_a^b(f, p, {\color{red}{\alpha}}): p \in \mathcal{P} \lbrack a,b \rbrack  \rbrace
+]
+[
+\underline{\int_a^b} f {\color{red}{d\alpha}} = \sup \lbrace U_a^b(f, p, {\color{red}{\alpha}}): p \in \mathcal{P} \lbrack a,b \rbrack  \rbrace
+]</p>
+
+<p>We say $ f $ is <strong>Riemann–Stieltjes integrable</strong> <span style="color:red">(with respect to $ \alpha $)</span> ($f \in \mathcal{R}(\alpha)$) if
+[
+\overline{\int_a^b} f {\color{red}{d\alpha}}  = \underline{\int_a^b} f {\color{red}{d\alpha}} = \int_a^b f {\color{red}{d\alpha}} 
+]
+[
+\Leftrightarrow  \forall \varepsilon &gt; 0, \ \exists P \ \textit{s.t} \; \; U(f,P, {\color{red}{\alpha}}) - L(f,P, {\color{red}{\alpha}}) &lt; \varepsilon
+]
+[
+\Leftrightarrow  \forall \varepsilon &gt; 0, \ \exists P_0 \ \textit{s.t} \; \; P_o \subseteq P \Rightarrow U(f,P, {\color{red}{\alpha}}) - L(f,P, {\color{red}{\alpha}}) &lt; \varepsilon
+]</p>
+
+<hr />
+
+<p>📚 <em>Reference:</em> <a href="https://www.math.snu.ac.kr/~kye/lecture_V/V_real/index.html">Real Analysis Lecture by Prof. Seung-Hyeok Kye (SNU)</a></p>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/dayeonjung5294" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:dayeonjung5294@gmail.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2025</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+  <script src="/assets/js/simple-jekyll-search.min.js"></script>
+  <script src="/assets/js/search.js"></script>
+  
+</body>
+
+</html>

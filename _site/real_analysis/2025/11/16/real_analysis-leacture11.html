@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Real Analysis Lecture 11: Dual Space</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Real Analysis Lecture 11: Dual Space | Dayeon Jung</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Real Analysis Lecture 11: Dual Space" />
+<meta name="author" content="Dayeon Jung" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures." />
+<meta property="og:description" content="Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures." />
+<link rel="canonical" href="http://localhost:4000/real_analysis/2025/11/16/real_analysis-leacture11.html" />
+<meta property="og:url" content="http://localhost:4000/real_analysis/2025/11/16/real_analysis-leacture11.html" />
+<meta property="og:site_name" content="Dayeon Jung" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-11-16T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Real Analysis Lecture 11: Dual Space" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dayeon Jung"},"dateModified":"2025-11-16T00:00:00+09:00","datePublished":"2025-11-16T00:00:00+09:00","description":"Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures.","headline":"Real Analysis Lecture 11: Dual Space","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/real_analysis/2025/11/16/real_analysis-leacture11.html"},"url":"http://localhost:4000/real_analysis/2025/11/16/real_analysis-leacture11.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['\[', '\]'], ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/" alt="Dayeon Jung" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">Dayeon Jung</a>
+      </h2>
+      </div><p class="tagline">Statistician & Data Scientist</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/dayeonjung5294" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:dayeonjung5294@gmail.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2025</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/real_analysis/2025/11/16/real_analysis-leacture11.html">
+    <h2 class="post-title">Real Analysis Lecture 11: Dual Space</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Nov 16, 2025</div><ul class="post-categories"><li>Real_analysis</li></ul></div>
+  <div class="post">
+    <blockquote>
+  <p><em>Disclaimer:</em> This post is a personal study note based on the Real Analysis course I attended.<br />
+The explanations and formulations are written in my own words for educational purposes only,<br />
+and do not reproduce or distribute any copyrighted material from the original lectures.</p>
+</blockquote>
+
+<h1 id="11a-bounded-linear-maps-">(11a) Bounded Linear Maps <!-- % 유계 선형 사상 --></h1>
+
+<h2 id="definition">Definition</h2>
+<p>Let $X, Y$ be normed vector spaces and let $T: X \to Y$ be linear. The following are equivalent:</p>
+
+<ol>
+  <li>$T$ is continuous at $0$.</li>
+  <li>$\sup\limits_{\lVert x\rVert \le 1} \lVert T(x)\rVert &lt; \infty$.</li>
+  <li>$T$ is uniformly continuous on $X$.</li>
+</ol>
+
+<p>We denote by $\mathcal{B}(X, Y)$ the normed space of all bounded linear maps.</p>
+
+<p>If $Y$ is complete, then the operator space $\mathcal{B}(X, Y)$ is also complete.</p>
+
+<p>The <strong>dual space</strong> of $X$ is
+[
+X^*, 
+]
+the set of all bounded linear functionals on $X$.</p>
+
+<p>If $\mathbb{F} = \mathbb{R}$ or $\mathbb{C}$ denotes the scalar field, then
+[
+X^* = \mathcal{B}(X, \mathbb{F}).
+]</p>
+
+<hr />
+<hr />
+
+<h1 id="11b-dual-space-examples-">(11b) Dual Space Examples <!-- % 쌍대공간 예시 --></h1>
+
+<h2 id="1-ellplbrack-12rbrack-for-1-le-p-le-infty">1. $\ell^p(\lbrack 1,2\rbrack)$ for $1 \le p \le \infty$</h2>
+<p>For the vector $(x, y)$:</p>
+
+<ul>
+  <li>
+    <p>If $1 \le p &lt; \infty$:
+[
+\lVert (x, y)\rVert_p = \lbrace \lvert x\rvert^p + \lvert y\rvert^p \rbrace^{1/p}.
+]</p>
+  </li>
+  <li>
+    <p>If $p = \infty$:
+[
+\lVert (x, y)\rVert_\infty = \max\lbrace \lvert x\rvert , \lvert y\rvert \rbrace.
+]</p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="2-varphi_abxy--ax--by">2. $\varphi_{a,b}(x,y) = ax + by$</h2>
+
+<p>[
+\sup\limits_{\lVert (x,y)\rVert_p \le 1} \lbrace \lvert ax + by\rvert \rbrace = 
+\lVert \varphi_{a,b}\rVert = \lVert (a,b)\rVert_q,  1 &lt; p \le \infty, \; \tfrac{1}{p} + \tfrac{1}{q} = 1
+]</p>
+
+<hr />
+<h2 id="3-lpmu-dual-space">3. $L^p(\mu)$ dual space</h2>
+<p>For $1 \le p &lt; \infty$, the dual is
+[
+(L^p)^* = L^q, \qquad \tfrac{1}{p} + \tfrac{1}{q} = 1.
+]</p>
+
+<p>Given $g \in L^q$, define the functional
+[
+\varphi_g \;:\; f \mapsto \int f g \, d\mu.
+]</p>
+
+<p>Then:
+[
+\lvert \varphi_g(f) \rvert =
+\lvert \int f g\, d\mu \rvert \le \lVert f\rVert_p \lVert g\rVert_q.
+]</p>
+
+<p>Thus every functional is bounded $\lVert \varphi_g \rVert \le \lVert g\rVert_q$.</p>
+
+<h3 id="to-show-lvert-varphi_g-rvert--lvert-grvert_q">To show $\lVert \varphi_g \rVert = \lVert g\rVert_q$</h3>
+<p>We choose $f$ to approximate the sign of $g$:</p>
+
+<ol>
+  <li>
+    <p>If $g \ne 0$ and $1 &lt; p &lt; \infty$:
+[
+f = \operatorname{sgn}(g)\, \lvert g\rvert^{q-1},<br />
+\quad \text{scaled so that } \int \lvert f\rvert^p = 1.
+]</p>
+  </li>
+  <li>
+    <p>If $q=1$ and $p=\infty$:
+[
+f = \operatorname{sgn}(g) = \frac{\lvert g(x) \rvert}{g(x)} I(g(x) \ne 0)
+]</p>
+  </li>
+  <li>
+    <p>If $p=1$ and $q=\infty$:
+[
+\int f g \ge \lVert f \rVert_1 \cdot (\lVert g \rVert_\infty - \epsilon)
+]</p>
+  </li>
+</ol>
+
+<hr />
+<hr />
+
+<h1 id="11c-hahnbanach-theorem-">(11c) Hahn–Banach Theorem <!-- % 한–바나흐 정리 --></h1>
+
+<h2 id="theorem-11-1-hahnbanach">Theorem 11-1. (Hahn–Banach)</h2>
+<p>Let $X$ be a normed space, $Y$ a subspace of $X$, and let $\varphi: Y \to \mathbb{C}$ be a bounded linear functional.</p>
+
+<p>Then there exists an bounded linear functional
+[
+\tilde{\varphi}: X \to \mathbb{C}
+]
+such that</p>
+
+<ol>
+  <li>$\tilde{\varphi}\lvert_Y = \varphi$,</li>
+  <li>$\lVert \tilde{\varphi} \rVert = \lVert \varphi\rVert$.</li>
+</ol>
+
+<h3 id="pf">pf)</h3>
+<p>For any $x_0 \notin Y$ with $\lVert \varphi \rVert = 1$, let $X = \lbrace ax_0 + y : a \in \mathbb{R}, y \in Y \rbrace$, $\psi_1: X \to \mathbb{C}$.</p>
+
+<p>Since $\psi_1 ( \alpha x_0 + y) = \alpha \psi_1(x_0) + \varphi(y)$ and $\lVert \psi_1 \rVert = 1$,</p>
+
+<p>[
+\lvert \psi_1 (x_0) - \varphi(y)\rvert
+\le \lVert y - x_0\rVert.
+]</p>
+
+<p>Thus
+[
+\lvert \psi_\alpha (x_0) \rvert 
+\le \lvert \varphi(y)\rvert + \lVert y - x_0\rVert.
+]</p>
+
+<p>Taking the infimum over all $y \in Y$ gives
+[
+\lvert \psi_\alpha (x_0) \rvert 
+\le \inf_{y\in Y} \lbrace \lvert \varphi(y)\rvert + \lVert y - x_0\rVert\rbrace.
+]</p>
+
+<hr />
+<hr />
+
+<h1 id="11d-open-mapping-theorem-">(11d) Open Mapping Theorem <!-- % 열린사상 정리 --></h1>
+
+<h2 id="theorem-11-2-baire-category-theorem">Theorem 11-2. (Baire Category Theorem)</h2>
+<p>Let $X$ be a complete metric space and $\lbrace C_n\rbrace_{n=1}^{\infty}$ a sequence of closed sets such that<br />
+[
+X = \bigcup_{n=1}^{\infty} C_n.
+]
+Then at least one $C_n$ has nonempty interior.</p>
+
+<h3 id="pf-1">pf)</h3>
+<p>Assume to the contrary that every $C_n$ has empty interior.</p>
+
+<p>Take a ball $N(x_1, r_1)$ with $\overline{N(x_1, r_1)} \cap C_1 = \varnothing$.<br />
+Since $C_1$ has empty interior, we choose
+[
+\overline{N(x_2, r_2)} \subset N(x_1, r_1) \setminus (C_1 \cup C_2).
+]</p>
+
+<p>Inductively:
+[
+\overline{N(x_{n}, r_{n})} \subset N(x_n-1, r_n-1) \setminus (C_1 \cup \cdots \cup C_n)
+]</p>
+
+<p>Since $X$ is complete, $x_n \to x$.<br />
+Then $x \in \overline{N(x_n, r_n)}$ for all $n$, so
+[
+x \notin \bigcup_{n=1}^{\infty} C_n,
+]
+contradicting $X = \bigcup C_n$.</p>
+
+<hr />
+
+<h2 id="theorem-11-3-open-mapping-theorem">Theorem 11-3. (Open Mapping Theorem)</h2>
+<p>Let $X, Y$ be Banach spaces and let  $T: X \to Y$ be a bounded onto linear map.
+[
+\Rightarrow \exists\; \delta &gt; 0 \text{ s.t. } T(X_1) \supset Y_\delta. \;\;
+(X_r = \lbrace x \in X: \lVert x \rVert &lt; r \rbrace)
+]</p>
+
+<h3 id="pf-2">pf)</h3>
+
+<h3 id="1-to-show-y_delta-subset-overlinetx_1">1. To Show $Y_\delta \subset \overline{T(X_1)}$:</h3>
+
+<p>Let $X = \bigcup_{n=1}^\infty X_n$ and $Y = \bigcup_{n=1}^\infty \overline{T(X_n)}$.</p>
+
+<p>By <strong>Baire’s theorem</strong>, one $Y_n$ must have nonempty interior.</p>
+
+<p>Thus $\exists r&gt;0$ and $y_0 \in Y$ such that
+[
+N(y_0,r) \subset Y_n = \overline{T(X_n)}.
+]</p>
+
+<p>Hence for all $y$ with $\lVert y\rVert &lt; r$,
+[
+y \in \overline{T(X_n)} - y_0.
+]
+[
+\Rightarrow Y_r \subset \overline{T( X_{n + \lVert x_o \rVert} )} \text{ for } f(x_0)=y_0.
+]</p>
+
+<p>Choose $\delta = \frac{r}{n + \lVert x_0\rVert}$, then
+[
+Y_\delta \subset \overline{T(X_1)}.
+]</p>
+
+<h3 id="2-to-show-y_delta-subset-tx_1">2. To Show $Y_\delta \subset T(X_1)$:</h3>
+
+<p>For all $s &gt; 0$, $Y_s \subset \overline{T(X_{\frac{s}{\delta}})}$.</p>
+
+<p>For $\varepsilon\in (0,1)$ and $y \in Y_1$,
+[
+\exists \; x_1 \in X_{\frac{1}{\delta}} \text{ s.t. } \lVert y - T(x_1)\rVert &lt; \varepsilon.
+]</p>
+
+<p>Since $y - T(x_1) \in Y_\varepsilon$, 
+[
+\exists \; x_2 \in X_{\frac{\varepsilon}{\delta}} \text{ s.t. } \lVert y - T(x_1) - T(x_2)\rVert &lt; \varepsilon^2.
+]</p>
+
+<p>Inductively,
+[
+\exists \; x_n \in X_{\frac{\varepsilon^{n-1}}{\delta}} \text{ s.t. } \lVert y - T(x_1) - T(x_2) - \ldots - T(x_n) \rVert &lt; \varepsilon^n.
+]</p>
+
+<p>Because $X$ is Banach, $x = \sum_{k=1}^{\infty} x_k$ converges in $X$, and
+[
+y = \sum_{k=1}^{\infty} T(x_k) = T(x) \in T(X_{\frac{1}{\delta(1-\varepsilon)}}).
+]</p>
+
+<p>Thus:
+[
+Y_1 \subset T(X_{\frac{1}{\delta(1-\varepsilon)}}), 
+\;\Rightarrow\;
+Y_\delta \subset T(X_1).
+]</p>
+
+<hr />
+
+<p>📚 <em>Reference:</em> <a href="https://www.math.snu.ac.kr/~kye/lecture_V/V_real/index.html">Real Analysis Lecture by Prof. Seung-Hyeok Kye (SNU)</a></p>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/dayeonjung5294" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:dayeonjung5294@gmail.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2025</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+  <script src="/assets/js/simple-jekyll-search.min.js"></script>
+  <script src="/assets/js/search.js"></script>
+  
+</body>
+
+</html>

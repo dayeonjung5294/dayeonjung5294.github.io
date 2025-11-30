@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Real Analysis Lecture 4: Lebesgue Integration and Differentiation</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Real Analysis Lecture 4: Lebesgue Integration and Differentiation | Dayeon Jung</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Real Analysis Lecture 4: Lebesgue Integration and Differentiation" />
+<meta name="author" content="Dayeon Jung" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures." />
+<meta property="og:description" content="Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures." />
+<link rel="canonical" href="http://localhost:4000/real_analysis/2025/09/28/real_analysis-lecture4.html" />
+<meta property="og:url" content="http://localhost:4000/real_analysis/2025/09/28/real_analysis-lecture4.html" />
+<meta property="og:site_name" content="Dayeon Jung" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-09-28T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Real Analysis Lecture 4: Lebesgue Integration and Differentiation" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dayeon Jung"},"dateModified":"2025-09-28T00:00:00+09:00","datePublished":"2025-09-28T00:00:00+09:00","description":"Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures.","headline":"Real Analysis Lecture 4: Lebesgue Integration and Differentiation","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/real_analysis/2025/09/28/real_analysis-lecture4.html"},"url":"http://localhost:4000/real_analysis/2025/09/28/real_analysis-lecture4.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['\[', '\]'], ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/" alt="Dayeon Jung" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">Dayeon Jung</a>
+      </h2>
+      </div><p class="tagline">Statistician & Data Scientist</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/dayeonjung5294" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:dayeonjung5294@gmail.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2025</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/real_analysis/2025/09/28/real_analysis-lecture4.html">
+    <h2 class="post-title">Real Analysis Lecture 4: Lebesgue Integration and Differentiation</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Sep 28, 2025</div><ul class="post-categories"><li>Real_analysis</li></ul></div>
+  <div class="post">
+    <blockquote>
+  <p><em>Disclaimer:</em> This post is a personal study note based on the Real Analysis course I attended.<br />
+The explanations and formulations are written in my own words for educational purposes only,<br />
+and do not reproduce or distribute any copyrighted material from the original lectures.</p>
+</blockquote>
+
+<h1 id="04a-differentiation-of-monotone-increasing-functions-">(04a) Differentiation of Monotone Increasing Functions <!-- % 단조증가함수의 미분 --></h1>
+
+<h2 id="theorem-4-1-lebesgue">Theorem 4-1 (Lebesgue)</h2>
+<p>If $f$ is monotone increasing on $I \subset \mathbb{R}$, then $f$ is <strong>differentiable almost everywhere (a.e.)</strong> on $I$.</p>
+
+<h3 id="pf">pf)</h3>
+
+<p>For $f : I \to \mathbb{R}$, define
+[
+D^+ f(x) = \limsup_{h \to 0^+} \frac{f(x+h) - f(x)}{h}, \quad
+D_- f(x) = \liminf_{h \to 0^+} \frac{f(x) - f(x-h)}{h}.
+]</p>
+
+<p>Let<br />
+[
+A = \lbrace x \in I : D_- f(x) &lt; D^+ f(x) \rbrace.
+]
+For $r &lt; s \in \mathbb{R}$, put<br />
+[
+A_{r,s} = \lbrace x \in I : D_- f(x) &lt; r &lt; s &lt; D^+ f(x) \rbrace.
+]
+We want to show that $\mu(A_{r,s}) = \alpha$.</p>
+
+<h3 id="step-i">Step (i)</h3>
+
+<p>Given $\varepsilon &gt; 0$, take an open set $U$ such that<br />
+[
+A_{r,s} \subset U, \quad \mu(U) &lt; \alpha + \varepsilon.
+]</p>
+
+<p>For $x \in A_{r,s}$, choose $h_1^x, h_2^x, \dots \to 0$ such that $[x-h_i^x, x] \subset U$.</p>
+
+<p>Then $D_- f(x) &lt; r$ implies $f(x) - f(x - h_i^x) &lt; r h_i^x$.</p>
+
+<p>Apply <strong>Vitali’s Covering Lemma</strong> to<br />
+[
+\bigcup_{x \in A_{r,s}} \lbrace \lbrack x - h_i^x, x \rbrack, i = 1,2,\dots \rbrace,
+]
+to obtain finitely many disjoint intervals<br />
+[
+I_A := \lbrack x_1 - h_1, x_1 \rbrack \cup \lbrack x_2 - h_2, x_2 \rbrack \cup \dots \cup \lbrack x_n - h_n, x_n \rbrack
+]
+such that $\mu(A_{r,s} \backslash I_A) &lt; \varepsilon$.</p>
+
+<p>Then
+$
+\sum_{i=1}^n [f(x_i) - f(x_i - h_i)] &lt; r \sum_{i=1}^n h_i
+&lt; r \mu(U) &lt; r (\alpha + \varepsilon).
+$</p>
+
+<h3 id="step-ii">Step (ii)</h3>
+
+<p>Let $B = A_{r,s} \cap I_A$. Then $\mu(B) &gt; \alpha - \varepsilon$.</p>
+
+<p>For $y \in B$, take $k_1^y, k_2^y, \dots \to 0$ such that  $[y, y+k^y] \subset I_A$.</p>
+
+<p>Then $D^+ f(x) &gt; s$ implies 
+$
+f(y + k_j^y) - f(y) &gt; s k_j^y.
+$</p>
+
+<p>Apply Vitali again to obtain finitely many disjoint intervals <br />
+[
+I_B := \lbrack y_1, y_1 + k_1 \rbrack \cup \lbrack y_2, y_2 + k_2 \rbrack \cup \dots \cup \lbrack y_m, y_m + k_m \rbrack
+]
+such that  $\mu(B \backslash I_B) &lt; \varepsilon$.</p>
+
+<p>Then
+$
+\sum_{j=1}^m [f(y_j + k_j) - f(y_j)] &gt; s \sum_{j=1}^m k_j.
+$</p>
+
+<p>Since $\mu(B \cap I_B) &gt; \alpha - 2\varepsilon$,
+$
+\sum_{j=1}^m [f(y_j + k_j) - f(y_j)] &gt; s (\alpha - 2\varepsilon).
+$</p>
+
+<h3 id="step-iii">Step (iii)</h3>
+
+<p>By Step (i) and (ii), since
+[
+\sum_{j=1}^m \lbrack f(y_j + k_j) - f(y_j) \rbrack &lt; \sum_{i=1}^n \lbrack f(x_i) - f(x_i - h_i) \rbrack,
+]</p>
+
+<p>$s(\alpha - 2\varepsilon) &lt; r(\alpha + \varepsilon)$,  which implies $\alpha = 0 \quad a.e.$</p>
+
+<p>Therefore $D^- f(x) = D^+ f(x)$ for almost every $x \in I$,<br />
+and thus $f$ is differentiable a.e.</p>
+
+<p><span style="color:red">(Do it yourself for all below situation)</span> 
+[
+D^- f(x) = \limsup_{h \to 0^+} \frac{f(x) - f(x-h)}{h},
+\quad
+D_+ f(x) = \liminf_{h \to 0^+} \frac{f(x+h) - f(x)}{h}.
+]</p>
+
+<hr />
+<hr />
+
+<h1 id="04b-differentiation-of-integrals-">(04b) Differentiation of Integrals <!-- % 적분의 미분 --></h1>
+
+<h2 id="theorem-4-2">Theorem 4-2</h2>
+<p>Let $f : [a,b] \to \mathbb{R}$ be monotone increasing.<br />
+Then $f’$ is measurable and
+[
+\int_a^b f’(x)\,dx \le f(b) - f(a).
+]
+<!-- % 단조함수의 미분가능성과 적분 부등식 --></p>
+
+<h3 id="pf-1">pf)</h3>
+<p>Let
+[
+g_n(x) = \frac{f(x+h_n) - f(x)}{h_n}, \quad h_n \to 0.
+]
+Since $f$ is measurable, $g_n$ is measurable, and $g_n \to f’$ implies $f’$ is measurable.</p>
+
+<p>By <strong>Fatou’s Lemma</strong>, since $g_n \ge 0$,
+[
+\int_a^b f’ \le \liminf_n \int_a^b g_n
+= \liminf_n \lbrace \frac{1}{h_n} \int_b^{b+h_n} f - \frac{1}{h_n} \int_a^{a+h_n} f \rbrace
+\le f(b) - f(a).
+]</p>
+
+<hr />
+
+<h2 id="theorem-4-3">Theorem 4-3</h2>
+<p>Let $f : E \to \mathbb{R}$ be integrable ($f \in L^1(E)$).<br />
+Then $\forall \; \varepsilon &gt; 0$, $ \exists \; \delta &gt; 0$ such that<br />
+[
+A \subset E, \ \mu(A) &lt; \delta \Rightarrow \int_A \lvert f \rvert &lt; \varepsilon.
+]
+<!-- % 적분가능함수의 절대연속성 --></p>
+
+<h3 id="pf-2">pf)</h3>
+<p>Let $f_n(x) = \min \lbrace f(x), n \rbrace$.</p>
+
+<p>Then $f_n$ is bounded and 
+$
+\lvert f_n(x) \rvert \nearrow \lvert f(x) \rvert \quad \text{as } n \to \infty.
+$</p>
+
+<p>Hence, by the Monotone Convergence Theorem,
+[
+\int_E (|f|-|f_n|)\,d\mu \;\downarrow\; 0 .
+]</p>
+
+<p>Fix $N$ so large that
+[
+\int_E (|f|-|f_N|)\,d\mu &lt; \frac{\varepsilon}{2}.
+]</p>
+
+<p>Set $\delta:=\dfrac{\varepsilon}{2N}$. For any measurable $A\subset E$ with $\mu(A)&lt;\delta$,
+[
+\int_A |f|\,d\mu
+= \int_A |f_N|\,d\mu + \int_A (|f|-|f_N|)\,d\mu
+\le \int_A N\,d\mu + \int_E (|f|-|f_N|)\,d\mu
+\le N\,\mu(A) + \frac{\varepsilon}{2}
+&lt; N\cdot\frac{\varepsilon}{2N} + \frac{\varepsilon}{2}
+= \varepsilon .
+]</p>
+
+<hr />
+
+<h2 id="theorem-4-4">Theorem 4-4</h2>
+<p>Let $f : [a,b] \to \mathbb{R}$ be integrable, and define
+[
+F(x) = f(a) + \int_a^x f(t)\,dt.
+]
+Then $F’(x) = f(x)$ <strong>almost everywhere (a.e.)</strong>.
+<!-- % 적분함수의 미분 정리 --></p>
+
+<h3 id="pf-3">pf)</h3>
+<p>Let $f \ge 0$ and $h_n \to 0$. Define
+[
+f_n(x) = \frac{F(x+h_n) - F(x)}{h_n}
+= \frac{1}{h_n} \int_x^{x+h_n} f(t)\,dt.
+]
+By the <strong>Lebesgue Differentiation Theorem</strong>, $f_n \to F’$ a.e.</p>
+
+<h3 id="step-i-1">Step (i)</h3>
+<p>Let $0 &lt; f \le M$. (Bounded)</p>
+
+<p>[
+\int_a^x f_n
+= \frac{1}{h_n} \int_x^{x+h_n} f - \frac{1}{h_n} \int_a^{a+h_n} f \;
+\rightarrow \; F(x) - F(a) = \int_a^x f_n
+]</p>
+
+<p>Since $\int_a^b f_n \to \int_a^b f$ when bounded, $\int_a^x(F’ - f) = 0$</p>
+
+<p>This satisfies for all $x$,
+[
+F’(x) = f(x) \text{ a.e.}
+]</p>
+
+<h3 id="step-ii-1">Step (ii)</h3>
+<p>Let $f_n(x) = \min \lbrace f(x), n \rbrace$.</p>
+
+<p>Then
+[
+F(x) - F(a) = \int_a^x (f - f_n) + \int_a^x f_n.
+]
+Since $(f - f_n) \ge 0$ and $f_n$ is bounded, $F’(x) \ge f_n(x)$.<br />
+Taking $n \to \infty$ gives $F’ \ge f$, and since we already know
+$
+\int_a^b F’ \le \int_a^b f = F(b) - F(a),
+$</p>
+
+<p>we conclude 
+[
+\int_a^b F’ = \int_a^b f = F(b) - F(a) 
+\;\Rightarrow\;
+\int_a^b (F’ - f) = 0.<br />
+]</p>
+
+<p>Since the integral of a non-negative function is zero,
+[
+F’(x) = f(x) \text{ a.e.}
+]</p>
+
+<hr />
+
+<h2 id="fubini-theorem">Fubini Theorem</h2>
+<p>If $f_n : [a,b] \to \mathbb{R}$ is increasing for all $n$ and  $\sum f_n = s$ converges pointwise,<br />
+then [S’ = \sum f_n’ \text{ a.e.}]
+<!-- % 증가함수열의 도함수 합 공식 --></p>
+
+<hr />
+<hr />
+
+<h1 id="04c-absolutely-continuous-functions-">(04c) Absolutely Continuous Functions <!-- % 절대연속함수 --></h1>
+
+<h2 id="definition-bounded-variation">Definition (Bounded Variation)</h2>
+<p>A function $f : [a,b] \to \mathbb{R}$ is of <strong>bounded variation</strong><br />
+if for a partition $P = \lbrace x_0, x_1, \dots, x_n \rbrace$,
+[
+V_a^b(f,P) = \sum_{i=1}^n \lvert f(x_i) - f(x_{i-1}) \rvert \le V
+]
+for all $P$.<br />
+<!-- % 유계변동함수 정의 --></p>
+
+<hr />
+
+<h2 id="definition-absolutely-continuous">Definition (Absolutely Continuous)</h2>
+<p>$F$ is <strong>absolutely continuous</strong> if</p>
+
+<p>$\forall \varepsilon &gt; 0$, $\exists \delta &gt; 0$ s.t. for any finite disjoint intervals $\lbrack x_i, y_i \rbrack$ with<br />
+$\mu \left([x_1,y_1] \cup [x_2,y_2] \cup \ldots \cup [x_n,y_n] \right) &lt; \delta$, we have
+[
+\sum_{i=1}^n \lvert F(y_i) - F(x_i) \rvert &lt; \varepsilon.
+]</p>
+
+<hr />
+
+<h2 id="properties">Properties</h2>
+
+<ul>
+  <li>Every <strong>monotone increasing function</strong> is of <strong>bounded variation</strong>.</li>
+  <li>The <strong>difference of two monotone functions</strong> can represent any function of <strong>bounded variation</strong>.</li>
+  <li>If $F$ is absolutely continuous, then $F$ is uniformly continuous.</li>
+</ul>
+
+<p>[
+\forall \varepsilon &gt; 0, \exists \delta &gt; 0
+\ \text{s.t. } \mu(\lbrack x,y \rbrack) &lt; \delta \Rightarrow \lvert F(y) - F(x) \rvert &lt; \varepsilon.
+]</p>
+
+<ul>
+  <li>Every <strong>absolutely continuous function</strong> is of <strong>bounded variation</strong>.</li>
+</ul>
+
+<hr />
+<hr />
+
+<h1 id="04d-integration-of-differentials-">(04d) Integration of Differentials <!-- % 미분의 적분 --></h1>
+
+<h2 id="lemma-4-1">Lemma 4-1</h2>
+<p>If $f : [a,b] \to \mathbb{R}$ is <strong>absolutely continuous</strong> and $f’(x) = 0$ a.e.,<br />
+then $f$ is <strong>constant</strong>.<br />
+<!-- % 절대연속함수의 도함수가 0이면 상수함수 --></p>
+
+<h3 id="pf-4">pf)</h3>
+<p>Let $c \in [a,b]$, $\varepsilon &gt; 0$, and $\alpha &gt; 0$.<br />
+Define
+[
+E = \lbrace x \in \lbrack a,c \rbrack : f’(x) = 0 \rbrace.
+]
+For each $x \in E$, choose $h_x &gt; 0$ such that<br />
+[
+\lbrack x, x + h_x \rbrack \subset \lbrack a,c \rbrack, \quad \lvert f(x+h_x) - f(x) \rvert &lt; \alpha h_x &lt; \alpha(c-a).
+]</p>
+
+<p>By <strong>Vitali’s covering lemma</strong>, choose finitely many disjoint intervals<br />
+[
+\lbrack x_1, x_1 + h_1 \rbrack, \lbrack x_2, x_2 + h_2 \rbrack, \dots, \lbrack x_n, x_n + h_n \rbrack
+]
+s.t.
+[
+\mu\big(\lbrack a,c \rbrack \setminus \bigcup_i \lbrack x_i, x_i + h_i \rbrack\big) &lt; \delta.
+]</p>
+
+<p>By absolute continuity,
+[
+\sum_i \lvert f(x_i + h_i) - f(x_i) \rvert &lt; \varepsilon.
+]
+Then
+[
+\lvert f(c) - f(a) \rvert &lt; \varepsilon + \alpha (c - a).
+]
+Since $\varepsilon, \alpha$ are arbitrary, $f(c) = f(a)$, hence $f$ is constant.</p>
+
+<hr />
+
+<h2 id="theorem-4-5">Theorem 4-5</h2>
+<p>A function $f : [a,b] \to \mathbb{R}$ is <strong>absolutely continuous</strong> if and only if</p>
+<ul>
+  <li>(i) $ f \text{ is differentiable a.e.}$</li>
+  <li>(ii) $ f’ \in L^1([a,b])$</li>
+  <li>(iii) $ \int_a^x f’(t)\,dt = f(x) - f(a) , \quad \forall x \in [a,b]$</li>
+</ul>
+
+<h3 id="pf-5">pf)</h3>
+
+<h4>(⇐)</h4>
+<p>If $f$ satisfies the three conditions, then $\forall \varepsilon &gt; 0$, $\exists \delta &gt; 0$ s.t. for any disjoint intervals  $\lbrack x_i, y_i \rbrack$ with $\sum_i (y_i - x_i) &lt; \delta$,<br />
+[
+\sum_i \lvert f(y_i) - f(x_i) \rvert
+= \sum_i \left\lvert \int_{x_i}^{y_i} f’(t)\,dt \right\rvert
+\le \int_{\cup_i [x_i,y_i]} \lvert f’(t) \rvert \,dt &lt; \varepsilon.
+]
+Hence $f$ is absolutely continuous.</p>
+
+<h4 id="-1">(⇒)</h4>
+
+<p><strong>(i)</strong>
+If $f$ is absolutely continuous, then it is of bounded variation,<br />
+and thus it can be expressed as the difference of two increasing functions $f_1, f_2$ that are differentiable a.e.</p>
+
+<p><strong>(ii)</strong>
+Let $f = f_1 - f_2$.<br />
+Then both $f_1’, f_2’ \in L^1([a,b])$, and
+[
+\int_a^b \lvert f’ \rvert \le \int_a^b \lvert f_1’ \rvert + \int_a^b \lvert f_2’ \rvert
+\le \lvert f_1(b) - f_1(a) \rvert + \lvert f_2(b) - f_2(a) \rvert &lt; \infty.
+]
+Thus $f’ \in L^1([a,b])$.</p>
+
+<p><strong>(iii)</strong>
+Let $g(x) = f(a) + \int_a^x f’(t)\,dt.$</p>
+
+<p>Then $g$ is absolutely continuous and $g’ = f’$ a.e. Hence $(f - g)’ = 0$ a.e.,</p>
+
+<p>By the <strong>Lemma 4-1</strong>, $f - g$ is constant.<br />
+Then we get
+[
+f(x) = g(x) = f(a) + \int_a^x f’(t)\,dt.
+]</p>
+
+<hr />
+
+<p>📚 <em>Reference:</em> <a href="https://www.math.snu.ac.kr/~kye/lecture_V/V_real/index.html">Real Analysis Lecture by Prof. Seung-Hyeok Kye (SNU)</a></p>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/dayeonjung5294" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:dayeonjung5294@gmail.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2025</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+  <script src="/assets/js/simple-jekyll-search.min.js"></script>
+  <script src="/assets/js/search.js"></script>
+  
+</body>
+
+</html>

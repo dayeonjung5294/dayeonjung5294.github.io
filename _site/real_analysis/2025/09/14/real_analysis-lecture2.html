@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Real Analysis Lecture 2: Measurable Functions and Integral</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Real Analysis Lecture 2: Measurable Functions and Integral | Dayeon Jung</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Real Analysis Lecture 2: Measurable Functions and Integral" />
+<meta name="author" content="Dayeon Jung" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures." />
+<meta property="og:description" content="Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures." />
+<link rel="canonical" href="http://localhost:4000/real_analysis/2025/09/14/real_analysis-lecture2.html" />
+<meta property="og:url" content="http://localhost:4000/real_analysis/2025/09/14/real_analysis-lecture2.html" />
+<meta property="og:site_name" content="Dayeon Jung" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-09-14T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Real Analysis Lecture 2: Measurable Functions and Integral" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dayeon Jung"},"dateModified":"2025-09-14T00:00:00+09:00","datePublished":"2025-09-14T00:00:00+09:00","description":"Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures.","headline":"Real Analysis Lecture 2: Measurable Functions and Integral","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/real_analysis/2025/09/14/real_analysis-lecture2.html"},"url":"http://localhost:4000/real_analysis/2025/09/14/real_analysis-lecture2.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['\[', '\]'], ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/" alt="Dayeon Jung" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">Dayeon Jung</a>
+      </h2>
+      </div><p class="tagline">Statistician & Data Scientist</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/dayeonjung5294" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:dayeonjung5294@gmail.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2025</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/real_analysis/2025/09/14/real_analysis-lecture2.html">
+    <h2 class="post-title">Real Analysis Lecture 2: Measurable Functions and Integral</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Sep 14, 2025</div><ul class="post-categories"><li>Real_analysis</li></ul></div>
+  <div class="post">
+    <blockquote>
+  <p><em>Disclaimer:</em> This post is a personal study note based on the Real Analysis course I attended.<br />
+The explanations and formulations are written in my own words for educational purposes only,<br />
+and do not reproduce or distribute any copyrighted material from the original lectures.</p>
+</blockquote>
+
+<h1 id="02a-measurable-functions">(02a) Measurable Functions</h1>
+
+<ul>
+  <li>
+    <p><strong>Riemann Sum:</strong><br />
+$\sum_{i=1}^n f(\alpha_i)(x_i - x_{i-1}), \quad x_{i-1} \le \alpha_i \le x_{i}$</p>
+  </li>
+  <li>
+    <p><strong>Step Function:</strong><br />
+A linear combination of characteristic functions on intervals.<br />
+($c \chi_I$: a characteristic function on interval $I$)</p>
+  </li>
+  <li>
+    <p><strong>Characteristic Function:</strong><br />
+Has value on interval $I$ and 0 otherwise</p>
+  </li>
+  <li>
+    <p><strong>Legesque Integral:</strong>
+Replace “interval” with <strong>measurable set</strong></p>
+  </li>
+</ul>
+
+<!-- % f: measurable의 정의 -->
+<p>Let $E \subseteq \mathbb{R}$ be measurable.<br />
+A function $f : E \to \mathbb{R}^* = \mathbb{R} \cup \lbrace \pm \infty \rbrace$ is <strong>measurable</strong></p>
+
+<p>$\Leftrightarrow \forall a \in \mathbb{R}$, the set $\lbrace x \in E \mid f(x) &gt; a \rbrace \in \mathcal{M}$</p>
+
+<p>In this section, we discuss four cases of <strong>integral of a measurable function</strong>:</p>
+
+<ol>
+  <li>
+    <p><strong>$\lbrack$ Case 1 $\rbrack$ Simple Function</strong></p>
+  </li>
+  <li>
+    <p><strong>$\lbrack$ Case 2 $\rbrack$ Nonnegative Measurable Function ($f \ge 0$)</strong></p>
+  </li>
+  <li>
+    <p><strong>$\lbrack$ Case 3 $\rbrack$ Real-Valued Measurable Function</strong></p>
+  </li>
+  <li>
+    <p><strong>$\lbrack$ Case 4 $\rbrack$ Complex-Valued Measurable Function</strong></p>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="lbrack-case-1-rbrack-f-is-simple-function">$\lbrack$ Case 1 $\rbrack$ $f$ is Simple Function</h2>
+
+<p>$f : E \to \mathbb{R}$ is <strong>simple</strong> if</p>
+<ul>
+  <li>$f = \sum_{i=1}^{n} c_i \chi_{E_i}$ is measurable, and</li>
+  <li>its range is finite.</li>
+</ul>
+
+<h3 id="def">Def.</h3>
+<p>[
+\int_E f = \sum_{i=1}^{n} c_i \mu(E_i).
+]
+<!-- % 단순함수의 적분 정의 --></p>
+
+<hr />
+
+<h3 id="basic-properties-of-integral">Basic Properties of Integral</h3>
+
+<p>If $f, g$ are and measurable, then:</p>
+
+<ul>
+  <li>
+    <p>$f \le g \Rightarrow \int_E f \le \int_E g$</p>
+  </li>
+  <li>
+    <p>$\int_E (f + g) = \int_E f + \int_E g$</p>
+  </li>
+  <li>
+    <p>$\int_E (c f) = c \int_E f$</p>
+  </li>
+  <li>
+    <p>$\int_a^b f = \int_a^c f + \int_c^b f $</p>
+  </li>
+</ul>
+
+<h3 id="pf-for-simple-function-f">pf) for Simple Function $f$</h3>
+<p>Let $f, g$ be <strong>simple measurable functions</strong> on a measurable set $E \subset \mathbb{R}$:
+[
+f = \sum_{i=1}^{n} a_i \chi_{A_i}, 
+\qquad 
+g = \sum_{j=1}^{m} b_j \chi_{B_j}.
+]
+Then by definition,
+[
+\int_E f = \sum_{i=1}^{n} a_i \mu(A_i),
+\quad 
+\int_E g = \sum_{j=1}^{m} b_j \mu(B_j).
+]</p>
+
+<h4 id="1-monotonicity">(1) Monotonicity</h4>
+<p>If $f \le g$ on $E$, then for all $x$, $f(x) \le g(x)$.<br />
+Construct a <strong>common measurable partition</strong>
+[
+C_{ij} = A_i \cap B_j, \quad (i=1,\dots,n,\; j=1,\dots,m).
+]
+On each $C_{ij}$, $f = a_i$, $g = b_j$, and $a_i \le b_j$.<br />
+Then
+[
+\int_E f = \sum_{i,j} a_i \mu(C_{ij}),
+\quad
+\int_E g = \sum_{i,j} b_j \mu(C_{ij}).
+]
+Since $a_i \le b_j$ and $\mu(C_{ij}) \ge 0$ for all $(i,j)$,
+[
+\int_E f \le \int_E g.
+]
+<!-- % 공통분할에서 항별비교로 단조성 증명 --></p>
+
+<h4 id="2-additivity">(2) Additivity</h4>
+<p>For $f$ and $g$ as above, on the same partition $C_{ij} = A_i \cap B_j$ we have<br />
+[
+(f + g)(x) = a_i + b_j \quad \text{for } x \in C_{ij}.
+]
+Hence,
+[
+\int_E (f + g)
+= \sum_{i,j} (a_i + b_j) \mu(C_{ij})
+= \sum_{i,j} a_i \mu(C_{ij}) + \sum_{i,j} b_j \mu(C_{ij})
+= \int_E f + \int_E g.
+]
+<!-- % 단순함수의 합은 공통분할 위에서 항별합으로 표현 가능 --></p>
+
+<h4 id="3-homogeneity">(3) Homogeneity</h4>
+<p>For $c \in \mathbb{R}$,
+[
+(cf)(x) = c a_i \quad \text{on } A_i.
+]
+Then by the definition of the integral,
+[
+\int_E (cf)
+= \sum_{i=1}^{n} (c a_i) \mu(A_i)
+= c \sum_{i=1}^{n} a_i \mu(A_i)
+= c \int_E f.
+]
+<!-- % 정의에 직접 대입하면 성립 --></p>
+
+<h4 id="4-additivity-over-intervals">(4) Additivity over Intervals</h4>
+<p>Let $E = \lbrack a, b \rbrack$ and $c \in (a, b)$.<br />
+Define $E_1 = \lbrack a, c \rbrack$ and $E_2 = \lbrace c, b \rbrack$.<br />
+Since $E = E_1 \cup E_2$ and $E_1 \cap E_2 = \emptyset$,
+[
+\int_{a}^{b} f = \sum_{i=1}^{n} a_i \mu(A_i \cap E)
+= \sum_{i=1}^{n} a_i \big( \mu(A_i \cap E_1) + \mu(A_i \cap E_2) \big)
+= \int_{a}^{c} f + \int_{c}^{b} f.
+]
+<!-- % 단순함수 정의에서 교집합 분할로부터 즉시 성립 --></p>
+
+<hr />
+
+<h3 id="continuous-function">Continuous Function</h3>
+
+<p>$f$ is continuous function iff
+$\forall \varepsilon &gt; 0, \; \exists \delta &gt; 0 \; $ s.t. 
+$\; |x-c| &lt; \delta \Rightarrow |f(x) - f(c)| &lt; \varepsilon$</p>
+
+<p>If $M \subset \mathcal{R}$ is open, $f^{-1}(M)$ is open</p>
+
+<h3 id="theorem">Theorem</h3>
+<ol>
+  <li>
+    <p>If $f$ is continuous, then $f$ is measurable</p>
+  </li>
+  <li>
+    <p>If $f$ is measurable and $g$ is continuous, then $g \circ f$ is measurable.</p>
+  </li>
+  <li>
+    <p>If $f, g$ are measurable, then $f + g$, $\alpha f$, and $f \cdot g$ are measurable.</p>
+  </li>
+</ol>
+
+<h3 id="pf-f--g-is-measurable">pf) $f + g$ is measurable</h3>
+
+<p>For measurable $f, g$, consider the set
+[
+\lbrace x : f(x) + g(x) &lt; a \rbrace
+= \bigcup_{r \in \mathbb{Q}} \Big( \lbrace x : f(x) &lt; r \rbrace \cap \lbrace x : g(x) &lt; a - r \rbrace \Big).
+]</p>
+
+<p><strong>(⊆)</strong><br />
+Since $f(x) &lt; a - g(x)$ and $\mathbb{Q}$ is <strong>dense</strong> in $\mathbb{R}$,<br />
+there exists a rational number $r \in \mathbb{Q}$ such that<br />
+[
+f(x) &lt; r &lt; a - g(x).
+]
+Then $f(x) &lt; r$ and $g(x) &lt; a - r$,<br />
+hence
+[
+x \in \lbrace f &lt; r \rbrace \cap \lbrace g &lt; a - r \rbrace
+]
+for that $r$,<br />
+so $x$ belongs to the union on the right-hand side.</p>
+
+<p><strong>(⊇)</strong><br />
+Conversely, if $x \in \lbrace f &lt; r \rbrace \cap \lbrace g &lt; a - r \rbrace$ for some $r \in \mathbb{Q}$, then<br />
+[
+f(x) + g(x) &lt; r + (a - r) = a,
+]
+so $x \in \lbrace f + g &lt; a \rbrace$.</p>
+
+<p>Since $f, g$ are measurable, each term on the right-hand side is measurable, and countable unions of measurable sets are measurable.<br />
+Hence $f + g$ is measurable.</p>
+
+<h3 id="pf-f-cdot-g-is-measurable">pf) $f \cdot g$ is measurable</h3>
+
+<p>Since $f, g$ are measurable and $f \cdot g = \tfrac{1}{2} \lbrack (f + g)^2 - f^2 - g^2 \rbrack$,</p>
+
+<p>it suffices to show that $f \in \mathcal{M} \Rightarrow f^2 \in \mathcal{M}$</p>
+
+<p>$\forall \alpha &gt; 0$, $f(x)^2 &lt; \alpha \quad \Leftrightarrow \quad - \sqrt{\alpha} &lt; f(x) &lt; \sqrt{\alpha}$</p>
+
+<p>Therefore,
+[
+\lbrace x : f(x)^2 &lt; \alpha \rbrace
+= \lbrace x : f(x) &lt; \sqrt{\alpha} \rbrace
+\cap
+\lbrace x : f(x) &gt; -\sqrt{\alpha} \rbrace.
+]</p>
+
+<p>Since $f$ is measurable,
+both sets $\lbrace f &lt; \sqrt{\alpha} \rbrace$ and $\lbrace f &gt; -\sqrt{\alpha} \rbrace$
+are measurable.
+Note that
+[
+\lbrace f &gt; -\sqrt{\alpha} \rbrace
+= E \setminus \lbrace f \le -\sqrt{\alpha} \rbrace,
+]
+and complements of measurable sets are measurable.
+Hence their intersection,
+[
+\lbrace f^2 &lt; \alpha \rbrace
+= \lbrace f &lt; \sqrt{\alpha} \rbrace
+\cap
+\lbrace f &gt; -\sqrt{\alpha} \rbrace,
+]
+is measurable.</p>
+
+<hr />
+
+<h3 id="theorem-1">Theorem</h3>
+
+<p>If $f_n$ are measurable, then
+$\sup f_n$, $\inf f_n$, $\limsup f_n$, and $\liminf f_n$ are measurable.</p>
+
+<h3 id="pf">pf)</h3>
+
+<p>[
+\lbrace x : \sup f_n(x) &lt; a \rbrace 
+= \bigcup_{N=1}^{\infty} \bigcap_{n\ge N} \lbrace x : f_n(x) &lt; a \rbrace,
+]
+which is measurable since it is formed by countable unions and intersections
+of measurable sets.</p>
+
+<hr />
+
+<h2 id="lbrack-case-2-rbrack-measurable-function-f-ge-0">$\lbrack$ Case 2 $\rbrack$ Measurable Function $f \ge 0$</h2>
+
+<p>$f : E \to \mathbb{R}$ be measurable and nonnegative.</p>
+
+<h3 id="def-1">Def.</h3>
+<p>[
+\int_E f = \sup \left\lbrace \int_E s : s \text{ is simple},\; 0 \le s \le f \right\rbrace.
+]</p>
+
+<hr />
+
+<h3 id="theorem-2">Theorem</h3>
+<p>If $f \ge 0$ and measurable,<br />
+$\exists$ an <strong>increasing sequence</strong> &lt;$S_n$&gt; of simple functions $\lbrace s_n \rbrace$ such that $s_n(x) \uparrow f(x)$</p>
+
+<hr />
+
+<h3 id="basic-properties-of-integra-on-f-ge-0">Basic Properties of integra on $f \ge 0$</h3>
+
+<p>Let $A = \bigcup_{n=1}^{\infty} A_n$, where each $A_n$ is measurable and $f \ge 0$ on $A$.</p>
+
+<p>[
+\int_A f = \sum_{n=1}^{\infty} \int_{A_n} f.
+]</p>
+
+<h3 id="pf-1">pf)</h3>
+
+<ol>
+  <li>
+    <p><strong>Case 1: $f$ is simple.</strong><br />
+For a simple function $f = \sum c_i \chi_{E_i}$,
+[
+\int_A f 
+= \sum_i c_i \mu(E_i \cap A)
+= \sum_i c_i \mu \left(\bigcup_{n=1}^{\infty} (E_i \cap A_n)\right)
+]
+[
+= \sum_i c_i \sum_{n=1}^{\infty} \mu(E_i \cap A_n)
+= \sum_n \int_{A_n} f,
+]
+by countable additivity of measure.</p>
+  </li>
+  <li>
+    <p><strong>Case 2: $f \ge 0$.</strong><br />
+<strong>($\Rightarrow$)</strong> $\forall s$ simple function s.t. $0 \le s \le f$,
+[
+\int_A s = \sum \int_{A_n} s \le \sum \int_{A_n} f
+]</p>
+
+    <p>by definition of $\int_A f = \sup \lbrace \int_A s \rbrace$,
+[
+\int_A f \le \sum \int_{A_n} f
+]</p>
+
+    <p><strong>($\Leftarrow$)</strong> Given $\varepsilon \ge 0$ and given $n$,</p>
+
+    <p>take a simple function $s_i$ defined on $A_i$ s.t.
+[
+\int_{A_i} f &lt; \int_{A_i} s_i + \frac{\varepsilon}{n}
+]</p>
+
+    <p>Define
+[
+s(x) =
+\begin{cases}
+s_i(x), x \in A_i, i = 1, 2, \ldots, n \quad <br />
+0, \text{otherwise}.
+\end{cases}
+]</p>
+
+    <p>Then $0 \le s \le f$, and $\int_{A_i} f &lt; \int_{A_i} s &lt; \frac{\varepsilon}{n}$.</p>
+
+    <p>[
+\sum_{i=1}^n \int_{A_i} f 
+&lt; \sum_{i=1}^n \int_{A_i} s + \varepsilon
+= \int_{\bigcup_{i=1}^n A_i} s + \varepsilon
+\le \int_A s + \varepsilon
+\le \int_A f + \varepsilon.
+]</p>
+
+    <p>Since the above equation holds for all $n$ and $\varepsilon$,
+[ \sum_{n=1}^{\infty} \int_{A_n} f \le \int_A f ]. $\square$</p>
+  </li>
+</ol>
+
+<hr />
+<hr />
+
+<h1 id="02b-definition-of-lebesgue-integral">(02b) Definition of Lebesgue Integral</h1>
+
+<h2 id="lbrack-case-3-rbrack-f-is-real-value">$\lbrack$ Case 3 $\rbrack$ $f$ is Real Value</h2>
+
+<p>$f : E \to \mathbb{R}^*$ be measurable and $f = f^+ - f^-$, where
+[
+f_+ = \max \lbrace f, 0 \rbrace, \quad f_- = \min \lbrace f, 0 \rbrace
+]</p>
+
+<h3 id="def-2">Def.</h3>
+<p>[
+\int_E f = \int_E f^+ - \int_E f^-.
+]</p>
+
+<p>We say $f$ is <strong>integrable</strong> if both $\int_E f^+ &lt; \infty$ and $\int_E f^- &lt; \infty$.</p>
+
+<hr />
+
+<h3 id="comparison--lebesgue-vs-riemann">Comparison — Lebesgue vs Riemann</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Lebesgue</th>
+      <th>Riemann</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>measurable</td>
+      <td>Riemann integrable</td>
+    </tr>
+    <tr>
+      <td>integrable (absolutely summable)</td>
+      <td>improper integral converges</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p><em>Note:</em> Every Lebesgue integrable function is absolutely summable (integrable),<br />
+but not for improper Riemann integral converges 
+(partial sum converges to a finite value).</p>
+</blockquote>
+
+<hr />
+
+<h3 id="theorem-3">Theorem</h3>
+
+<p>Let $f : E \to \mathbb{R}^*$ be measurable.</p>
+
+<p><strong>Thm 1</strong> $f$ is integrable $\; \Leftrightarrow \; \lvert f \rvert$ is integrable</p>
+
+<p><strong>pf)</strong></p>
+
+<p>Let $A = \lbrace x \in E : f(x) \ge 0 \rbrace$ and $B = \lbrace x \in E : f(x) &lt; 0 \rbrace$.<br />
+Then $E = A \cup B$, and<br />
+[
+\int_E |f| = \int_A |f| + \int_B |f| = \int_A f_+ + \int_B f_-.
+]
+Since both $\int_A f_+$ and $\int_B f_-$ are finite, $\int_E |f| &lt; \infty$.</p>
+
+<p><strong>Thm 2</strong> If $f$ is integrable, then $\lvert \int_E f \rvert \le \int_E \lvert f \rvert$</p>
+
+<p><strong>pf)</strong></p>
+
+<p>[
+\int_E f = \int_E f_+ - \int_E f_- \le \int_E f_+ \le \int_E \lvert f \rvert
+]
+[
+- \int_E f = \int_E f_- - \int_E f_+ \le \int_E f_- \le \int_E \lvert f \rvert
+]</p>
+
+<p>Since $\int_E |f| &lt; \infty$, $\int_E f &lt; \infty$ and $-\int_E f &lt; \infty$.
+[\Rightarrow \lvert \int_E f \rvert &lt; \infty].</p>
+
+<hr />
+<hr />
+
+<h1 id="02c-integral-of-complex-valued-function">(02c) Integral of Complex-Valued Function</h1>
+
+<h2 id="lbrack-case-4-rbrack-f-is-complex-value">$\lbrack$ Case 4 $\rbrack$ $f$ is Complex Value</h2>
+
+<p>$f : E \to \mathbb{C}$, where $f = u + iv$.</p>
+
+<ul>
+  <li>$f$ is <strong>measurable</strong> if $u$ and $v$ are measurable.</li>
+  <li>$f$ is <strong>integrable</strong> if $\lvert f \rvert = \sqrt{u^2 + v^2}$ is integrable.</li>
+  <li>Denote by $L^1(E)$ the set of all integrable function $f : E \to \mathbb{C}$.</li>
+</ul>
+
+<h3 id="def-3">Def.</h3>
+<p>[
+\int_E f = \int_E u + i \int_E v.
+]</p>
+
+<hr />
+
+<h3 id="theorem-4">Theorem</h3>
+
+<p>$f : E \to \mathbb{C}$ is integrable, then $\lvert \int_E f \rvert \le \int_E \lvert f \rvert$</p>
+
+<blockquote>
+  <p><em>Note:</em> <span style="color:red">Refer to how the <strong>Cauchy–Schwarz inequality</strong> is proved in a <strong>complex vector space over a measure space</strong> when writing this proof.</span></p>
+</blockquote>
+
+<hr />
+
+<h3 id="definition--almost-everywhere-ae">Definition — Almost Everywhere (a.e.)</h3>
+<!-- % 거의 모든 점에서 (a.e.) 정의 -->
+
+<p>Let $P(x)$ be a property about $x$.<br />
+We say that <strong>$P$ holds almost everywhere (a.e.)</strong> if<br />
+[
+\mu(\lbrace x \mid P(x) \text{ does not hold at } x \rbrace) = 0.
+]</p>
+
+<h3 id="theorem-1">Theorem 1.</h3>
+<p>If $f \ge 0$ and $\int_E f = 0$, then $f = 0$ a.e.</p>
+
+<p><strong>pf)</strong><br />
+Let $E_n = \lbrace x : f(x) &gt; 1/n \rbrace$.</p>
+
+<p>Then $0 \le \frac{1}{n}\mu(E_n) \le \int_{E_n} f \le \int_E f = 0$,</p>
+
+<p>which implies $\mu(E_n) = 0$ for all $n$.</p>
+
+<p>Hence,
+[
+\mu(\lbrace x : f(x) &gt; 0 \rbrace)
+= \mu \left( \bigcup_{n=1}^{\infty} E_n \right)
+= 0 \; \square
+]</p>
+
+<h3 id="theorem-2">Theorem 2.</h3>
+
+<p>If $f \in L^1(E)$ and $\int_D f = 0$ for every measurable set $D \subseteq E$, then $f = 0$ a.e.</p>
+
+<p><strong>pf)</strong></p>
+
+<p>If $f = \operatorname{Re}(f) + i \operatorname{Im}(f)$,<br />
+then
+[
+\int_E f = \int_E \operatorname{Re}(f) + i \int_E \operatorname{Im}(f)
+]</p>
+
+<p>Let $D = \lbrace x \in E \mid Ref(x) \ge 0 \rbrace \; \Rightarrow \; (Ref)_+ = 0$ a.e. on $D$</p>
+
+<p>Then $\operatorname{Re}(f)$ and $\operatorname{Im}(f)$ are $0$ a.e., and $f = 0$ a.e.</p>
+
+<h3 id="theorem-3">Theorem 3.</h3>
+
+<p>If $f : \lbrack a, b \rbrack \to \mathbb{R}^*$ is measurable and $\int_{\lbrack a, x \rbrack} f = 0$ for all $x$,<br />
+then $f = 0$ a.e.</p>
+
+<p><strong>pf)</strong></p>
+
+<blockquote>
+  <p><em>Note:</em> <span style="color:red">Do it yourself</span></p>
+</blockquote>
+
+<hr />
+<hr />
+
+<h1 id="02d-example-of-non-measurable-set">(02d) Example of Non-Measurable Set</h1>
+
+<p>Let $x, y \in \lbrack 0, 1 )$, and define<br />
+[
+x \sim y \quad \Longleftrightarrow \quad x - y \in \mathbb{Q}.
+]</p>
+
+<ul>
+  <li>$\sim$ is an <strong>equivalence relation</strong> on $\lbrack 0, 1 \rbrack$.</li>
+</ul>
+
+<hr />
+
+<h3 id="construction">Construction</h3>
+
+<p>Let $P$ denote a set obtained by choosing <strong>exactly one representative</strong> from each equivalence class of $\sim$ within $\lbrack 0, 1 \rbrack$.<br />
+In other words, when the interval $\lbrack 0, 1 \rbrack$ is partitioned into equivalence classes under $\sim$,<br />
+we pick one element from each class and collect them together to form $P$.</p>
+
+<p>For each rational number $r \in \mathbb{Q} \cap \lbrack 0, 1 )$, define<br />
+[
+P_r = \lbrack P_{r1} \;\cup\; P_{r2} \rbrack 
+= \lbrack r + P \cap \lbrack 0, 1-r) \rbrack \;\cup\; \lbrack (r - 1) + P \cap \lbrack 1-r, 1 ) \rbrack.
+]</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$P$</td>
+      <td>············· r ························· 1-r ···················</td>
+    </tr>
+    <tr>
+      <td>$P_{r1}$</td>
+      <td>·················■■■■■■■■■■■</td>
+    </tr>
+    <tr>
+      <td>$P_{r2}$</td>
+      <td>■■■·······································································</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Then
+[
+\bigcup_{r \in \mathbb{Q} \cap \lbrack 0, 1 )} P_r = \lbrack 0, 1 ).
+]</p>
+
+<hr />
+
+<h3 id="contradiction-argument">Contradiction Argument</h3>
+<p>Assume $P$ is measurable.<br />
+Since translation preserves measure, $\mu(P_r) = \mu(P)$ for all $r$.<br />
+Hence,
+[
+1 = \mu \, \left(\lbrack 0, 1 ) \right)
+= \sum_{r \in \mathbb{Q} \cap \lbrack 0, 1 \rbrack} \mu(P_r).
+]
+However, the set of rationals in $\lbrack 0, 1 )$ is <strong>countable</strong>,<br />
+so if $\mu(P) &gt; 0$, the right-hand side diverges (countable sum),<br />
+and if $\mu(P) = 0$, it sums to $0$.</p>
+
+<p>In either case, contradiction.<br />
+Therefore, $P$ is <strong>non-measurable</strong>.<br />
+$\square$
+<!-- % 평행이동 불변성과 가산 합 성질이 모순을 일으킴 --></p>
+
+<hr />
+
+<p>📚 <em>Reference:</em> <a href="https://www.math.snu.ac.kr/~kye/lecture_V/V_real/index.html">Real Analysis Lecture by Prof. Seung-Hyeok Kye (SNU)</a></p>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/dayeonjung5294" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:dayeonjung5294@gmail.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2025</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+  <script src="/assets/js/simple-jekyll-search.min.js"></script>
+  <script src="/assets/js/search.js"></script>
+  
+</body>
+
+</html>

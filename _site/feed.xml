@@ -1,0 +1,3374 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-11-30T00:19:03+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Dayeon Jung</title><subtitle>Hi, I’m Dayeon Jung — a Statistician and Data Scientist.   I’m passionate about developing statistical methods for high-dimensional data and real-world applications.
+</subtitle><author><name>Dayeon Jung</name></author><entry><title type="html">Real Analysis Lecture 12: Banach Spaces and Hilbert Spaces</title><link href="http://localhost:4000/real_analysis/2025/11/23/real_analysis-leacture12.html" rel="alternate" type="text/html" title="Real Analysis Lecture 12: Banach Spaces and Hilbert Spaces" /><published>2025-11-23T00:00:00+09:00</published><updated>2025-11-23T00:00:00+09:00</updated><id>http://localhost:4000/real_analysis/2025/11/23/real_analysis-leacture12</id><content type="html" xml:base="http://localhost:4000/real_analysis/2025/11/23/real_analysis-leacture12.html"><![CDATA[<blockquote>
+  <p><em>Disclaimer:</em> This post is a personal study note based on the Real Analysis course I attended.<br />
+The explanations and formulations are written in my own words for educational purposes only,<br />
+and do not reproduce or distribute any copyrighted material from the original lectures.</p>
+</blockquote>
+
+<h1 id="12a-uniform-boundedness-principle-">(12a) Uniform Boundedness Principle <!-- % 고른 유계 원칙 --></h1>
+
+<h2 id="theorem-12-1-closed-graph-theorem">Theorem 12-1. (Closed Graph Theorem)</h2>
+<p>Let $X, Y$ be Banach spaces and let $T: X \to Y$ be linear.</p>
+
+<p>Suppose that whenever $x_n \in X$ satisfies
+[
+x_n \to x,<br />
+\qquad T(x_n) \to y,
+]
+then $T(x) = y$ (graph is closed).</p>
+
+<p>Then <strong>$T$ is bounded</strong>.</p>
+
+<h3 id="pf">pf)</h3>
+<p>Define a new norm on $X$ by
+[
+\lVert x\rVert’ = \lVert x\rVert + \lVert T(x)\rVert.
+]</p>
+
+<p>Then $(X, \lVert\cdot\rVert’)$ is a normed space, and
+[
+\lVert x\rVert \le \lVert x\rVert’ \le M \lVert x\rVert
+]
+for some $M&gt;0$, because the graph is closed and $X$ is complete.</p>
+
+<p>Thus the norms $\lVert\cdot\rVert$ and $\lVert\cdot\rVert’$ are equivalent.</p>
+
+<p>Since the map $x \mapsto T(x)$ is continuous under $\lVert\cdot\rVert’$, it is also continuous under $\lVert\cdot\rVert$. Therefore $T$ is bounded.</p>
+
+<hr />
+
+<h2 id="theorem-12-2-uniform-boundedness-principle-banachsteinhaus">Theorem 12-2. (Uniform Boundedness Principle, Banach–Steinhaus)</h2>
+
+<p>Let $X$ be a Banach space and $Y$ a normed space.<br />
+Let $\lbrace T_\alpha : \alpha \in A \rbrace$ be a family of bounded linear maps from $X$ to $Y$.</p>
+
+<p>Assume that for each $x \in X$,
+[
+M(x) := \sup_{\alpha \in A} \lVert T_\alpha(x)\rVert &lt; \infty.
+]</p>
+
+<p>Then
+[
+\sup_{\alpha \in A} \lVert T_\alpha\rVert &lt; \infty.
+]</p>
+
+<h3 id="pf-1">pf)</h3>
+<p>For $n = 1,2,\ldots$ and define the closed sets
+[
+C_n = \bigcap_{\alpha \in A} 
+\lbrace x \in X : \lVert T_\alpha(x)\rVert \le n \rbrace.
+]
+Each $C_n$ is closed (as an intersection of inverse of closed sets), and by assumption $X = \bigcup_{n=1}^{\infty} C_n.$</p>
+
+<p>By the <strong>Baire category theorem</strong>, some $C_N$ contains a ball<br />
+[
+N(x_0, r) \subset C_N.
+]</p>
+
+<p>Thus, if $\lVert x - x_0\rVert &lt; r$, then for all $\alpha \in A$,
+[
+\lVert T_\alpha(x)\rVert \le N.
+]</p>
+
+<p>Let $x \in X$ with $\lVert x\rVert &lt; r$. Then
+[
+\lVert T_\alpha(x)\rVert 
+\le \lVert T_\alpha(x) - T_\alpha(x_0)\rVert + \lVert T_\alpha(x_0)\rVert
+\le \lVert T_\alpha\rVert \lVert x - x_0\rVert + N \le N + M(x_0).
+]</p>
+
+<p>Hence
+[
+\sup_{\alpha \in A} \lVert T_\alpha\rVert &lt; \infty.
+]</p>
+
+<hr />
+<hr />
+
+<h1 id="12b-dual-space-of-a-hilbert-space-">(12b) Dual Space of a Hilbert Space <!-- % 힐베르트 공간의 쌍대공간 --></h1>
+
+<h2 id="definition-12-1">Definition 12-1.</h2>
+<p>Let $H$ be a Hilbert space and $C \subset H$ a nonempty subset.</p>
+
+<ol>
+  <li>
+    <p>$C$ is <strong>convex</strong> if for all $x,y \in C$ and $t \in \lbrack 0,1\rbrack$,
+[
+tx + (1-t)y \in C.
+]</p>
+  </li>
+  <li>
+    <p>For $x_0 \in H$ we define the distance from $x_0$ to $C$ by
+[
+d\left(x_0,C\right)
+= \inf\limits_{y\in C} \lVert x_0 - y\rVert.
+]</p>
+  </li>
+</ol>
+
+<p>A point $y_0 \in C$ with $\lVert x_0 - y_0\rVert = d\left(x_0,C\right)$ is called a <strong>best approximation</strong> (or the metric projection of $x_0$ onto $C$).</p>
+
+<hr />
+
+<h2 id="theorem-12-3-projection-onto-a-closed-convex-set">Theorem 12-3. (Projection onto a Closed Convex Set)</h2>
+<p>Let $H$ be a Hilbert space and let $C \subset H$ be nonempty, closed, and convex.<br />
+For $x_0 \in H \setminus C$ set
+[
+d = d\left(x_0,C\right) = \inf\limits_{y\in C} \lVert x_0 - y\rVert.
+]
+Then there exists unique $y_0 \in C$ such that
+[
+\lVert x_0 - y_0\rVert = d.
+]</p>
+
+<h3 id="pf-2">pf)</h3>
+<p>By translating $C$ we may assume $x_0 = 0$; it suffices to find $y_0 \in C$ with
+[
+\lVert y_0\rVert = \inf\limits_{y\in C} \lVert y\rVert =: d.
+]</p>
+
+<p>Choose a sequence $\lbrace y_n\rbrace \subset C$ such that $\lVert y_n\rVert \to d$.<br />
+We show that $\lbrace y_n\rbrace$ is Cauchy.</p>
+
+<p>In a Hilbert space we have, for all $x,y \in H$,
+[
+\frac{1}{4}\,\lVert x-y\rVert^2
+\le \frac{1}{2}\,\lVert x\rVert^2 + \frac{1}{2}\,\lVert y\rVert^2 - \left\lVert \frac{x+y}{2} \right\rVert^2.
+]</p>
+
+<p>Since $C$ is convex, the midpoint $\frac{y_n + y_m}{2}$ belongs to $C$, and hence
+[
+\left\lVert \frac{y_n + y_m}{2} \right\rVert^2
+\ge d^2.
+]
+Therefore
+[
+\frac{1}{4}\,\lVert y_n - y_m\rVert^2
+\le \frac{1}{2}\,\lVert y_n\rVert^2 + \frac{1}{2}\,\lVert y_m\rVert^2 - d^2.
+]</p>
+
+<p>Letting $n,m \to \infty$ and using $\lVert y_n\rVert, \lVert y_m\rVert \to d$, we get
+[
+\limsup_{n,m\to\infty} \lVert y_n - y_m\rVert^2 \le 0,
+]
+so $\lbrace y_n\rbrace$ is Cauchy.<br />
+Since $H$ is complete and $C$ is closed, there exists $y_0 \in C$ with $y_n \to y_0$.<br />
+By continuity of the norm,
+[
+\lVert y_0\rVert = \lim_{n\to\infty} \lVert y_n\rVert = d.
+]
+Thus $y_0$ is a best approximation of $0$ (and hence of $x_0$ before translation).</p>
+
+<hr />
+
+<h2 id="theorem-12-4-orthogonal-decomposition-wrt-a-closed-subspace">Theorem 12-4. (Orthogonal Decomposition w.r.t. a Closed Subspace)</h2>
+<p>Let $E$ be a closed subspace of a Hilbert space $H$ and let $x_0 \in H \setminus E$.<br />
+Then there exists a unique $y_0 \in E$ such that
+[
+\lVert x_0 - y_0\rVert \le \lVert x_0 - y\rVert \quad \text{for all } y \in E.
+]
+Moreover,
+[
+x_0 - y_0 \perp E.
+]</p>
+
+<h3 id="pf-3">pf)</h3>
+<p>Apply <strong>Theorem 12-3</strong> to the closed convex set $C = E$ to obtain $y_0 \in E$ with
+[
+\lVert x_0 - y_0\rVert \le \lVert x_0 - y\rVert \quad \text{for all } y \in E.
+]</p>
+
+<p>Put $z_0 = x_0 - y_0$. We prove $z_0 \perp E$.<br />
+Fix $y \in E$ and consider, for $\alpha \in \mathbb{R}$,
+[
+\lVert x_0 - (y_0 + \alpha y)\rVert^2
+= \lVert z_0 - \alpha y\rVert^2 + \alpha^2 \lVert y\rVert^2.
+]</p>
+
+<p>By minimality of $y_0$, the function
+[
+f(\alpha) = \lVert z_0 - \alpha y\rVert^2
+]
+has a minimum at $\alpha = 0$. Hence $f’(0) = 0$, which gives
+[
+-2 \operatorname{Re}\langle z_0, y\rangle = 0.
+]</p>
+
+<p>Since this holds for all $y \in E$, we obtain $\langle z_0, y\rangle = 0$ for all $y \in E$, i.e.,
+[
+z_0 \perp E.
+]</p>
+
+<p>Uniqueness: if $x_0 = y_0 + z_0 = y_1 + z_1$ with $y_0,y_1 \in E$ and $z_0,z_1 \perp E$, then
+[
+(y_0 - y_1) = (z_1 - z_0) \in E \cap E^\perp = \lbrace 0\rbrace,
+]
+so $y_0 = y_1$ and $z_0 = z_1$.</p>
+
+<hr />
+
+<h2 id="theorem-12-5-riesz-representation-theorem">Theorem 12-5. (Riesz Representation Theorem)</h2>
+<p>Define, for $y \in H$, the functional
+[
+\varphi_y : H \to H^\ast, 
+\quad \varphi_y(x) = \langle x, y\rangle.
+]
+Then $\varphi_y$ is a bounded linear functional and
+[
+\lVert \varphi_y\rVert = \lVert y\rVert.
+]</p>
+
+<p>Conversely, for every bounded linear functional $\varphi \in H^*$ there exists a unique $y \in H$ such that
+[
+\varphi(x) = \langle x, y\rangle \quad \text{for all } x \in H.
+]
+Hence the map
+[
+H \ni y \longmapsto \varphi_y \in H^*
+]
+is an isometric isomorphism.</p>
+
+<h3 id="pf-4">pf)</h3>
+<p>For $y \in H$ we clearly have linearity and, by Cauchy–Schwarz,
+[
+\lvert \varphi_y(x)\rvert
+= \lvert \langle x,y\rangle\rvert
+\le \lVert x\rVert\, \lVert y\rVert,
+]
+so $\varphi_y$ is bounded and $\lVert \varphi_y\rVert \le \lVert y\rVert$.<br />
+Taking $x = y/\lVert y\rVert$ (for $y \ne 0$) gives equality, so $\lVert \varphi_y\rVert = \lVert y\rVert$.</p>
+
+<p>Now let $\varphi \in H^*$ be nonzero. Its kernel
+[
+E = \ker \varphi = \lbrace x \in H : \varphi(x) = 0\rbrace
+]
+is a closed subspace of $H$. Choose $z \in E^\perp$ with $\lVert z\rVert = 1$ (possible since $\varphi \ne 0$ implies $E \ne H$).</p>
+
+<p>For arbitrary $x \in H$ write the orthogonal decomposition
+[
+x = x_E + \lambda z,
+\quad x_E \in E, \ \lambda \in \mathbb{F}.
+]
+Then
+[
+\varphi(x) = \varphi(x_E) + \lambda \varphi(z)
+= \lambda \varphi(z).
+]</p>
+
+<p>Note that
+[
+\lambda = \langle x, z\rangle,
+]
+because $x - \langle x,z\rangle z \perp z$ and lies in $E$.<br />
+Hence
+[
+\varphi(x) = \varphi(z)\, \langle x, z\rangle
+= \langle x, \overline{\varphi(z)}\, z\rangle
+]
+(in the real case simply $\varphi(z) z$).</p>
+
+<p>Thus if we define
+[
+y = \overline{\varphi(z)}\, z,
+]
+we obtain
+[
+\varphi(x) = \langle x, y\rangle \quad \text{for all } x \in H.
+]</p>
+
+<p>Uniqueness: if $\langle x, y_1\rangle = \langle x, y_2\rangle$ for all $x$, then
+[
+\langle x, y_1 - y_2\rangle = 0 \quad \forall x.
+]
+Taking $x = y_1 - y_2$ gives $\lVert y_1 - y_2\rVert^2 = 0$, so $y_1 = y_2$.</p>
+
+<p>Therefore every bounded linear functional arises uniquely from an inner product with some $y \in H$, and the correspondence $y \mapsto \varphi_y$ is an isometric isomorphism $H \cong H^*$.</p>
+
+<hr />
+<hr />
+
+<h1 id="12c-orthonormal-bases-in-a-hilbert-space-">(12c) Orthonormal Bases in a Hilbert Space <!-- % 정규직교기저 --></h1>
+
+<h2 id="definition-12-2">Definition 12-2.</h2>
+<p>Let $H$ be a Hilbert space.<br />
+A family $\mathcal{A} = \lbrace u_\alpha : \alpha \in A\rbrace$ is called <strong>orthonormal</strong> in $H$ if</p>
+
+<ol>
+  <li>$\langle u_\alpha, u_\beta\rangle = 0$ for $\alpha \ne \beta$,</li>
+  <li>$\lVert u_\alpha\rVert = 1$ for all $\alpha$.</li>
+</ol>
+
+<p>We say that $\mathcal{A}$ is an <strong>orthonormal basis</strong> (or complete orthonormal system) if the following equivalent conditions hold:</p>
+
+<h3 id="i-parseval-identity">(i) Parseval identity</h3>
+<p>For all $x \in H$,
+[
+\sum_{\alpha \in A} \lvert \langle x, u_\alpha\rangle\rvert^2 = \lVert x\rVert^2.
+]</p>
+
+<h3 id="ii-reproducing-formula">(ii) Reproducing formula</h3>
+<p>For all $x,y \in H$,
+[
+\sum_{\alpha \in A} \langle x, u_\alpha\rangle \langle u_\alpha, y\rangle
+= \langle x, y\rangle.
+]</p>
+
+<h3 id="iii-maximality">(iii) Maximality</h3>
+<p>$\mathcal{A}$ is maximal among orthonormal families;<br />
+no further nonzero vector can be added without losing orthonormality.</p>
+
+<h3 id="iv-density">(iv) Density</h3>
+<p>Let
+[
+P_{\mathcal{A}} = \text{span}_{\text{fin}} \lbrace u_\alpha : \alpha\in A\rbrace
+]
+be the set of all finite linear combinations of $u_\alpha$.<br />
+Then $P_{\mathcal{A}}$ is dense in $H$.</p>
+
+<hr />
+
+<h2 id="bessel-inequality">Bessel Inequality</h2>
+<p>Let $F \subset A$ be a finite subset. For any $x \in H$,
+[
+\left\lVert x - \sum_{\alpha \in F} \langle x, u_\alpha\rangle u_\alpha \right\rVert^2
+\le \lVert x - y\rVert^2
+\quad\text{for all } y \in P_F.
+]</p>
+
+<p>In particular:
+[
+\sum_{\alpha \in F} \lvert \langle x, u_\alpha\rangle\rvert^2
+\le \lVert x\rVert^2.
+]</p>
+
+<p>Equality holds when
+[
+y = \sum_{\alpha \in F} \langle x, u_\alpha\rangle u_\alpha.
+]</p>
+
+<hr />
+
+<h2 id="coefficient-map">Coefficient Map</h2>
+<p>Given an orthonormal basis $\mathcal{A}$, define the coefficient map
+[
+x \longmapsto \widehat{x}(\alpha) := \langle x, u_\alpha\rangle.
+]</p>
+
+<p>This map is an isometry of $H$ into $\ell^2(A)$ via Parseval identity.</p>
+
+<hr />
+<hr />
+
+<h1 id="12d-plancherel-transform-">(12d) Plancherel Transform <!-- % 플랑셰렐 변환 --></h1>
+
+<h2 id="definition-12-3-fourier-transform-on-mathbbr">Definition 12-3. (Fourier Transform on $\mathbb{R}$)</h2>
+<p>For $f \in L^1(\mathbb{R})$ define its Fourier transform by
+[
+\widehat{f}(\xi)
+= \frac{1}{2\pi}\int_{\mathbb{R}} f(x)\, e^{-i \xi x}\, dx.
+]</p>
+
+<p>Parseval/Plancherel theory extends this to $L^2(\mathbb{R})$.</p>
+
+<hr />
+
+<h2 id="fourier-series-representation">Fourier Series Representation</h2>
+<p>Let $f \in L^1(\mathbb{R})$ be $2\pi$–periodic.<br />
+Define the Fourier series
+[
+F(t) = \sum_{n=-\infty}^{\infty} f(t-2n\pi) = \sum_{n=-\infty}^{\infty} \widehat{f}(n)\, e^{i n t},
+\qquad F \in L^1(\lbrack -\pi,\pi\rbrack).
+]</p>
+
+<p>The coefficients satisfy
+[
+\widehat{f}(n)
+= \frac{1}{2\pi}\int_{-\pi}^{\pi} f(t)\, e^{-i n t}\, dt.
+]</p>
+
+<hr />
+
+<h2 id="plancherel-formula-compact-support-case">Plancherel Formula (Compact Support Case)</h2>
+<p>If $f \in C_c(\mathbb{R})$, then $f \in L^1(\mathbb{R}) \cap L^2(\mathbb{R})$ and
+[
+\int_{\mathbb{R}} \lvert f(x)\rvert^2\, dx
+= \frac{1}{2\pi} \int_{\mathbb{R}} \lvert \widehat{f}(\xi)\rvert^2\, d\xi.
+]</p>
+
+<h3 id="sketch-of-argument">Sketch of Argument</h3>
+<p>If $\operatorname{supp} f \subset \lbrack -\pi,\pi\rbrack$, then by Fourier series computation,
+[
+\frac{1}{2\pi}\int_{-\pi}^{\pi} \lvert f(t)\rvert^2\, dt
+= \sum_{n=-\infty}^{\infty} \left\lvert \frac{1}{2\pi} \widehat{f}(n) \right\rvert^2.
+]</p>
+
+<p>Let $g(x) = f(x)\, e^{-i x \xi}$.<br />
+Applying orthogonality,
+[
+\int_{-\pi}^{\pi} \lvert f(x)\rvert^2\, dx
+= \frac{1}{2\pi} \sum_{n=-\infty}^{\infty}
+  \left\lvert \int_{\mathbb{R}} f(x)\, e^{-i (n+\xi)x}\, dx \right\rvert^2.
+]</p>
+
+<p>Taking the limit as the period grows and using Riemann sum approximation gives
+[
+\int_{\mathbb{R}} \lvert f(x)\rvert^2 \, dx
+= \frac{1}{2\pi}\int_{-\infty}^{\infty} \lvert \widehat{f}(\xi)\rvert^2\, d\xi.
+]</p>
+
+<p>Thus the Fourier transform extends to an isometry on $L^2(\mathbb{R})$.</p>
+
+<hr />
+
+<p>📚 <em>Reference:</em> <a href="https://www.math.snu.ac.kr/~kye/lecture_V/V_real/index.html">Real Analysis Lecture by Prof. Seung-Hyeok Kye (SNU)</a></p>]]></content><author><name>Dayeon Jung</name></author><category term="Real_analysis" /><summary type="html"><![CDATA[Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures.]]></summary></entry><entry><title type="html">Real Analysis Lecture 11: Dual Space</title><link href="http://localhost:4000/real_analysis/2025/11/16/real_analysis-leacture11.html" rel="alternate" type="text/html" title="Real Analysis Lecture 11: Dual Space" /><published>2025-11-16T00:00:00+09:00</published><updated>2025-11-16T00:00:00+09:00</updated><id>http://localhost:4000/real_analysis/2025/11/16/real_analysis-leacture11</id><content type="html" xml:base="http://localhost:4000/real_analysis/2025/11/16/real_analysis-leacture11.html"><![CDATA[<blockquote>
+  <p><em>Disclaimer:</em> This post is a personal study note based on the Real Analysis course I attended.<br />
+The explanations and formulations are written in my own words for educational purposes only,<br />
+and do not reproduce or distribute any copyrighted material from the original lectures.</p>
+</blockquote>
+
+<h1 id="11a-bounded-linear-maps-">(11a) Bounded Linear Maps <!-- % 유계 선형 사상 --></h1>
+
+<h2 id="definition">Definition</h2>
+<p>Let $X, Y$ be normed vector spaces and let $T: X \to Y$ be linear. The following are equivalent:</p>
+
+<ol>
+  <li>$T$ is continuous at $0$.</li>
+  <li>$\sup\limits_{\lVert x\rVert \le 1} \lVert T(x)\rVert &lt; \infty$.</li>
+  <li>$T$ is uniformly continuous on $X$.</li>
+</ol>
+
+<p>We denote by $\mathcal{B}(X, Y)$ the normed space of all bounded linear maps.</p>
+
+<p>If $Y$ is complete, then the operator space $\mathcal{B}(X, Y)$ is also complete.</p>
+
+<p>The <strong>dual space</strong> of $X$ is
+[
+X^*, 
+]
+the set of all bounded linear functionals on $X$.</p>
+
+<p>If $\mathbb{F} = \mathbb{R}$ or $\mathbb{C}$ denotes the scalar field, then
+[
+X^* = \mathcal{B}(X, \mathbb{F}).
+]</p>
+
+<hr />
+<hr />
+
+<h1 id="11b-dual-space-examples-">(11b) Dual Space Examples <!-- % 쌍대공간 예시 --></h1>
+
+<h2 id="1-ellplbrack-12rbrack-for-1-le-p-le-infty">1. $\ell^p(\lbrack 1,2\rbrack)$ for $1 \le p \le \infty$</h2>
+<p>For the vector $(x, y)$:</p>
+
+<ul>
+  <li>
+    <p>If $1 \le p &lt; \infty$:
+[
+\lVert (x, y)\rVert_p = \lbrace \lvert x\rvert^p + \lvert y\rvert^p \rbrace^{1/p}.
+]</p>
+  </li>
+  <li>
+    <p>If $p = \infty$:
+[
+\lVert (x, y)\rVert_\infty = \max\lbrace \lvert x\rvert , \lvert y\rvert \rbrace.
+]</p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="2-varphi_abxy--ax--by">2. $\varphi_{a,b}(x,y) = ax + by$</h2>
+
+<p>[
+\sup\limits_{\lVert (x,y)\rVert_p \le 1} \lbrace \lvert ax + by\rvert \rbrace = 
+\lVert \varphi_{a,b}\rVert = \lVert (a,b)\rVert_q,  1 &lt; p \le \infty, \; \tfrac{1}{p} + \tfrac{1}{q} = 1
+]</p>
+
+<hr />
+<h2 id="3-lpmu-dual-space">3. $L^p(\mu)$ dual space</h2>
+<p>For $1 \le p &lt; \infty$, the dual is
+[
+(L^p)^* = L^q, \qquad \tfrac{1}{p} + \tfrac{1}{q} = 1.
+]</p>
+
+<p>Given $g \in L^q$, define the functional
+[
+\varphi_g \;:\; f \mapsto \int f g \, d\mu.
+]</p>
+
+<p>Then:
+[
+\lvert \varphi_g(f) \rvert =
+\lvert \int f g\, d\mu \rvert \le \lVert f\rVert_p \lVert g\rVert_q.
+]</p>
+
+<p>Thus every functional is bounded $\lVert \varphi_g \rVert \le \lVert g\rVert_q$.</p>
+
+<h3 id="to-show-lvert-varphi_g-rvert--lvert-grvert_q">To show $\lVert \varphi_g \rVert = \lVert g\rVert_q$</h3>
+<p>We choose $f$ to approximate the sign of $g$:</p>
+
+<ol>
+  <li>
+    <p>If $g \ne 0$ and $1 &lt; p &lt; \infty$:
+[
+f = \operatorname{sgn}(g)\, \lvert g\rvert^{q-1},<br />
+\quad \text{scaled so that } \int \lvert f\rvert^p = 1.
+]</p>
+  </li>
+  <li>
+    <p>If $q=1$ and $p=\infty$:
+[
+f = \operatorname{sgn}(g) = \frac{\lvert g(x) \rvert}{g(x)} I(g(x) \ne 0)
+]</p>
+  </li>
+  <li>
+    <p>If $p=1$ and $q=\infty$:
+[
+\int f g \ge \lVert f \rVert_1 \cdot (\lVert g \rVert_\infty - \epsilon)
+]</p>
+  </li>
+</ol>
+
+<hr />
+<hr />
+
+<h1 id="11c-hahnbanach-theorem-">(11c) Hahn–Banach Theorem <!-- % 한–바나흐 정리 --></h1>
+
+<h2 id="theorem-11-1-hahnbanach">Theorem 11-1. (Hahn–Banach)</h2>
+<p>Let $X$ be a normed space, $Y$ a subspace of $X$, and let $\varphi: Y \to \mathbb{C}$ be a bounded linear functional.</p>
+
+<p>Then there exists an bounded linear functional
+[
+\tilde{\varphi}: X \to \mathbb{C}
+]
+such that</p>
+
+<ol>
+  <li>$\tilde{\varphi}\lvert_Y = \varphi$,</li>
+  <li>$\lVert \tilde{\varphi} \rVert = \lVert \varphi\rVert$.</li>
+</ol>
+
+<h3 id="pf">pf)</h3>
+<p>For any $x_0 \notin Y$ with $\lVert \varphi \rVert = 1$, let $X = \lbrace ax_0 + y : a \in \mathbb{R}, y \in Y \rbrace$, $\psi_1: X \to \mathbb{C}$.</p>
+
+<p>Since $\psi_1 ( \alpha x_0 + y) = \alpha \psi_1(x_0) + \varphi(y)$ and $\lVert \psi_1 \rVert = 1$,</p>
+
+<p>[
+\lvert \psi_1 (x_0) - \varphi(y)\rvert
+\le \lVert y - x_0\rVert.
+]</p>
+
+<p>Thus
+[
+\lvert \psi_\alpha (x_0) \rvert 
+\le \lvert \varphi(y)\rvert + \lVert y - x_0\rVert.
+]</p>
+
+<p>Taking the infimum over all $y \in Y$ gives
+[
+\lvert \psi_\alpha (x_0) \rvert 
+\le \inf_{y\in Y} \lbrace \lvert \varphi(y)\rvert + \lVert y - x_0\rVert\rbrace.
+]</p>
+
+<hr />
+<hr />
+
+<h1 id="11d-open-mapping-theorem-">(11d) Open Mapping Theorem <!-- % 열린사상 정리 --></h1>
+
+<h2 id="theorem-11-2-baire-category-theorem">Theorem 11-2. (Baire Category Theorem)</h2>
+<p>Let $X$ be a complete metric space and $\lbrace C_n\rbrace_{n=1}^{\infty}$ a sequence of closed sets such that<br />
+[
+X = \bigcup_{n=1}^{\infty} C_n.
+]
+Then at least one $C_n$ has nonempty interior.</p>
+
+<h3 id="pf-1">pf)</h3>
+<p>Assume to the contrary that every $C_n$ has empty interior.</p>
+
+<p>Take a ball $N(x_1, r_1)$ with $\overline{N(x_1, r_1)} \cap C_1 = \varnothing$.<br />
+Since $C_1$ has empty interior, we choose
+[
+\overline{N(x_2, r_2)} \subset N(x_1, r_1) \setminus (C_1 \cup C_2).
+]</p>
+
+<p>Inductively:
+[
+\overline{N(x_{n}, r_{n})} \subset N(x_n-1, r_n-1) \setminus (C_1 \cup \cdots \cup C_n)
+]</p>
+
+<p>Since $X$ is complete, $x_n \to x$.<br />
+Then $x \in \overline{N(x_n, r_n)}$ for all $n$, so
+[
+x \notin \bigcup_{n=1}^{\infty} C_n,
+]
+contradicting $X = \bigcup C_n$.</p>
+
+<hr />
+
+<h2 id="theorem-11-3-open-mapping-theorem">Theorem 11-3. (Open Mapping Theorem)</h2>
+<p>Let $X, Y$ be Banach spaces and let  $T: X \to Y$ be a bounded onto linear map.
+[
+\Rightarrow \exists\; \delta &gt; 0 \text{ s.t. } T(X_1) \supset Y_\delta. \;\;
+(X_r = \lbrace x \in X: \lVert x \rVert &lt; r \rbrace)
+]</p>
+
+<h3 id="pf-2">pf)</h3>
+
+<h3 id="1-to-show-y_delta-subset-overlinetx_1">1. To Show $Y_\delta \subset \overline{T(X_1)}$:</h3>
+
+<p>Let $X = \bigcup_{n=1}^\infty X_n$ and $Y = \bigcup_{n=1}^\infty \overline{T(X_n)}$.</p>
+
+<p>By <strong>Baire’s theorem</strong>, one $Y_n$ must have nonempty interior.</p>
+
+<p>Thus $\exists r&gt;0$ and $y_0 \in Y$ such that
+[
+N(y_0,r) \subset Y_n = \overline{T(X_n)}.
+]</p>
+
+<p>Hence for all $y$ with $\lVert y\rVert &lt; r$,
+[
+y \in \overline{T(X_n)} - y_0.
+]
+[
+\Rightarrow Y_r \subset \overline{T( X_{n + \lVert x_o \rVert} )} \text{ for } f(x_0)=y_0.
+]</p>
+
+<p>Choose $\delta = \frac{r}{n + \lVert x_0\rVert}$, then
+[
+Y_\delta \subset \overline{T(X_1)}.
+]</p>
+
+<h3 id="2-to-show-y_delta-subset-tx_1">2. To Show $Y_\delta \subset T(X_1)$:</h3>
+
+<p>For all $s &gt; 0$, $Y_s \subset \overline{T(X_{\frac{s}{\delta}})}$.</p>
+
+<p>For $\varepsilon\in (0,1)$ and $y \in Y_1$,
+[
+\exists \; x_1 \in X_{\frac{1}{\delta}} \text{ s.t. } \lVert y - T(x_1)\rVert &lt; \varepsilon.
+]</p>
+
+<p>Since $y - T(x_1) \in Y_\varepsilon$, 
+[
+\exists \; x_2 \in X_{\frac{\varepsilon}{\delta}} \text{ s.t. } \lVert y - T(x_1) - T(x_2)\rVert &lt; \varepsilon^2.
+]</p>
+
+<p>Inductively,
+[
+\exists \; x_n \in X_{\frac{\varepsilon^{n-1}}{\delta}} \text{ s.t. } \lVert y - T(x_1) - T(x_2) - \ldots - T(x_n) \rVert &lt; \varepsilon^n.
+]</p>
+
+<p>Because $X$ is Banach, $x = \sum_{k=1}^{\infty} x_k$ converges in $X$, and
+[
+y = \sum_{k=1}^{\infty} T(x_k) = T(x) \in T(X_{\frac{1}{\delta(1-\varepsilon)}}).
+]</p>
+
+<p>Thus:
+[
+Y_1 \subset T(X_{\frac{1}{\delta(1-\varepsilon)}}), 
+\;\Rightarrow\;
+Y_\delta \subset T(X_1).
+]</p>
+
+<hr />
+
+<p>📚 <em>Reference:</em> <a href="https://www.math.snu.ac.kr/~kye/lecture_V/V_real/index.html">Real Analysis Lecture by Prof. Seung-Hyeok Kye (SNU)</a></p>]]></content><author><name>Dayeon Jung</name></author><category term="Real_analysis" /><summary type="html"><![CDATA[Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures.]]></summary></entry><entry><title type="html">Real Analysis Lecture 10: Fourier Integral</title><link href="http://localhost:4000/real_analysis/2025/11/09/real_analysis-leacture10.html" rel="alternate" type="text/html" title="Real Analysis Lecture 10: Fourier Integral" /><published>2025-11-09T00:00:00+09:00</published><updated>2025-11-09T00:00:00+09:00</updated><id>http://localhost:4000/real_analysis/2025/11/09/real_analysis-leacture10</id><content type="html" xml:base="http://localhost:4000/real_analysis/2025/11/09/real_analysis-leacture10.html"><![CDATA[<blockquote>
+  <p><em>Disclaimer:</em> This post is a personal study note based on the Real Analysis course I attended.<br />
+The explanations and formulations are written in my own words for educational purposes only,<br />
+and do not reproduce or distribute any copyrighted material from the original lectures.</p>
+</blockquote>
+
+<h1 id="10a-fourier-series-and-fourier-integral-">(10a) Fourier Series and Fourier Integral <!-- % 푸리에 급수와 푸리에 적분 --></h1>
+
+<h2 id="definition-fourier-transform">Definition: Fourier Transform</h2>
+<p>For $f \in L^1(\mathbb{R})$, define
+[
+\widehat{f}(\alpha)
+= \int_{\mathbb{R}} f(x)\, e^{-i \alpha x}\, dx, \; \alpha \in \mathbb{R}
+]</p>
+
+<p>Then:</p>
+
+<ol>
+  <li>
+    <p>$\widehat{f} \in C_0(\mathbb{R}) \;(L^1(\mathbb{R}) \to C_0(\mathbb{R}))$</p>
+  </li>
+  <li>
+    <p>$f \mapsto \widehat{f}$ is linear and bounded.</p>
+  </li>
+  <li>
+    <p>Linear Trigonometric: $\widehat{(f \ast g)}(\alpha) = \widehat{f}(\alpha) \cdot \widehat{g}(\alpha).$</p>
+  </li>
+  <li>
+    <p>$\lVert \widehat{f} \rVert_{\sup} \le \lVert f\rVert_1$</p>
+  </li>
+</ol>
+
+<h2 id="theorem-10-1">Theorem 10-1.</h2>
+
+<p>If</p>
+<ol>
+  <li>$h_n \ge 0$,</li>
+  <li>$\int_{\mathbb{R}} h_n=1$</li>
+  <li>$\lim_{\lambda\to\infty} \int_{\mathbb{R} \setminus \lbrack -\delta, \delta \rbrack} h_{\lambda} = 0, \; \forall \lambda, \delta &gt; 0$,</li>
+</ol>
+
+<p>Then,</p>
+
+<ul>
+  <li>
+    <p>$f \in L^1(\mathbb{R}) \Rightarrow \lVert f - f\ast h_{\lambda}\rVert_1 \to 0$</p>
+  </li>
+  <li>
+    <p>If $f$ is bounded and uniformly continuous, $\Rightarrow \lVert f - f\ast h_{\lambda}\rVert_{\infty} \to 0.$</p>
+  </li>
+  <li>
+    <p>$f \ast u_{\alpha} = \widehat{f}(\alpha) \cdot u_{\alpha}$</p>
+  </li>
+</ul>
+
+<hr />
+<hr />
+
+<h1 id="10b-approximate-identity-">(10b) Approximate Identity <!-- % 근사 항등원 --></h1>
+
+<h2 id="basic-formulas-for-fourier-trnasform">Basic Formulas for Fourier Trnasform</h2>
+
+<ul>
+  <li>
+    <p>$\widehat{f’}(\alpha) = i\alpha\, \widehat{f}(\alpha)$</p>
+  </li>
+  <li>
+    <p>$(\widehat{f})_{\alpha} = \widehat{g}(\alpha)$, where $g(x) = -ixf(x)$</p>
+  </li>
+  <li>
+    <p>$\widehat{f \cdot u_\alpha} = (\widehat{f})_{\alpha}$,</p>
+
+    <p>where $(\widehat{f})_{\alpha}$: $\alpha$ translation of $\widehat{f}$</p>
+  </li>
+  <li>
+    <p>$(\widehat{f_\alpha})(\alpha) = \widehat{f}(\alpha) \cdot u_\alpha (-x)$</p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="example-10-1">Example 10-1.</h2>
+<p>For $a&gt;0$,</p>
+
+<ol>
+  <li>
+    <p>$f(x)=e^{-\lvert x\rvert /a} \;\Rightarrow\; \widehat{f}(\alpha) = \int_{-\infty}^\infty e^{-\lvert x\rvert /a} \cdot e^{-i\alpha x} dx = \frac{2a}{1 + a^2\alpha^2}.$</p>
+  </li>
+  <li>
+    <p>$f(x)=\chi_{\lbrack -a, a \rbrack} \;\Rightarrow\; \widehat{f}(\alpha) = \int_{-a}^a  e^{-i\alpha x} dx = \frac{2\sin{ax}}{\alpha}.$</p>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="constructing-kernels-approximate-identity">Constructing Kernels (Approximate Identity)</h2>
+
+<ol>
+  <li>
+    <p>Let $h\ge 0$, $\int_{\mathbb{R}} h=1$. Define
+[
+h_{\lambda}(x)=\lambda h(\lambda x), \; x \in \mathbb{R}, \; \lambda&gt;0.
+]</p>
+  </li>
+  <li>
+    <p>Let $p \in L^1(\mathbb{R}), \;0 \le p \le 1, \;p(0) = \lim_{\alpha \to 0} p(\alpha) = 1$. Define
+[
+h(x) = \frac{1}{2\pi} \int_{\mathbb{R}} p(\alpha) \cdot u_\alpha (x) d\alpha 
+]
+[\Rightarrow h_{\lambda}(x)=\lambda h(\lambda x)]</p>
+  </li>
+</ol>
+
+<p>Example:
+[
+H(x)=\frac{1}{2\pi} \int_{\mathbb{R}} e^{-\lvert\alpha\rvert} \cdot e^{i\alpha x} \, dx
+= \frac{1}{\pi} \cdot \frac{1}{1 + x^2}
+]
+[
+\Rightarrow H_{\lambda}(x)
+= \frac{1}{2\pi} \cdot \frac{2\lambda}{1+\lambda^2 x^2}.
+]</p>
+
+<hr />
+<hr />
+
+<h1 id="10c-inversion-formula-">(10c) Inversion Formula <!-- % 역변환 공식 --></h1>
+
+<h2 id="theorem-10-2">Theorem 10-2.</h2>
+<p>If  $\lim_{\alpha \to \pm \infty} \hat f(\alpha) = 0$, then
+[
+\widehat{f} \in C_0(\mathbb{R}).
+]</p>
+
+<h3 id="pf">pf)</h3>
+<p>By definition,
+[
+\hat f(\alpha)
+= - \int_{\mathbb{R}} f(x)\, e^{-i\alpha (x + \frac{\pi}{\alpha})}\, dx
+= \int_{\mathbb{R}} f(x-\tfrac{\pi}{\alpha})\, e^{-i\alpha x}\, dx.
+]</p>
+
+<p>Thus,
+[
+2\,\hat f(\alpha)
+= \int_{\mathbb{R}} \lbrace f(x) - f_{\frac{\pi}{\alpha}}(x) \rbrace e^{-i\alpha x}\, dx.
+]
+[
+2\, \lvert \hat f(\alpha)\rvert
+\le \lVert f - f_{\frac{\pi}{\alpha}} \rVert_1 \to 0.
+]</p>
+
+<hr />
+
+<p>Using the identity $(f \ast g)’ = f \ast g’$, we see the relation<br />
+[
+L^1(\mathbb{R}) \ast C^{\infty}_C(\mathbb{R}) \subset C^{\infty}_C(\mathbb{R}).
+]</p>
+
+<p>Thus <strong>$C^{\infty}_0(\mathbb{R})$ is dense in $L^1(\mathbb{R})$</strong>.</p>
+
+<hr />
+
+<h2 id="theorem-10-3">Theorem 10-3.</h2>
+
+<p>If $\hat f \in L^1(\mathbb{R})$, then 
+[
+f(x) = \frac{1}{2\pi} \int_{\mathbb{R}} \hat f(\alpha)\, e^{i\alpha x}\, d\alpha \; \text{a.e.}
+]</p>
+
+<h3 id="pf-1">pf)</h3>
+<blockquote>
+  <p>$(h_\lambda \ast f)(x) = \int_{\mathbb{R}} f(x-y)\, h_\lambda(y)\, dy$,</p>
+
+  <p>$= \int_{\mathbb{R}} \left\lbrack f(x-y) \cdot \frac{\lambda}{2\pi} \int p(\alpha) e^{-i\alpha \lambda y} d\alpha \right\rbrack \, dy$</p>
+
+  <p>$= \frac{1}{2\pi} \int_{\mathbb{R}} \left\lbrack f(x-y) \int p(\frac{\alpha}{\lambda}) e^{-i\alpha y} d\alpha \right\rbrack \, dy$</p>
+
+  <p>$= \frac{1}{2\pi} \int_{\mathbb{R}} p(\frac{\alpha}{\lambda}) \int  f(x-y)  e^{-i\alpha y} dy \,  d\alpha $</p>
+
+  <p>$= \frac{1}{2\pi} \int_{\mathbb{R}} p(\frac{\alpha}{\lambda}) \int  f(y)  e^{i\alpha (x-y)} dy \,  d\alpha $</p>
+
+  <p>$= \frac{1}{2\pi} \int_{\mathbb{R}} p(\frac{\alpha}{\lambda}) \hat f(\alpha)  e^{i\alpha x} \,  d\alpha $</p>
+
+  <p>$\to \frac{1}{2\pi} \int_{\mathbb{R}}  \hat f(\alpha)  e^{i\alpha x} \,  d\alpha $ when $\hat f \in L^1(\mathbb{R})$</p>
+
+</blockquote>
+
+<p>Since $\lVert h_\lambda \ast f - f \rVert_1 \to 0$,<br />
+we obtain<br />
+[
+h_{\lambda_n} \ast f(x) \to f(x)
+\quad \text{a.e.}
+]</p>
+
+<hr />
+
+<h2 id="theorem-10-4">Theorem 10-4.</h2>
+<p>$f, \; \hat f$ is one-to-one (i.e., uniquely determined).</p>
+
+<hr />
+<hr />
+
+<h1 id="10d-examples-of-fourier-transforms-">(10d) Examples of Fourier Transforms <!-- % 푸리에 변환 예시 --></h1>
+
+<h2 id="example-10-2">Example 10-2.</h2>
+<p>Let $p(\alpha) = \max\lbrace 1 - \frac{\lvert \alpha\rvert}{\lambda}, 0 \rbrace,$ then</p>
+
+<p>[
+k_\lambda (x)
+= \frac{1}{2\pi \lambda} \cdot \frac{\sin^2(\frac{\lambda x}{2})}{(\frac{x}{2})^2}
+]</p>
+
+<hr />
+
+<h2 id="example-10-3">Example 10-3.</h2>
+<p>Let $p(\alpha) = e^{- \frac{\alpha^{2}}{2} }$, then
+[
+G(x)
+= \frac{1}{\sqrt{2\pi}}\, e^{- \frac{x^2}{2}},
+]
+[
+G_{\lambda}(x)
+= \frac{\lambda}{\sqrt{2\pi}}\, e^{- \frac{(\lambda x)^2}{2}},
+]</p>
+
+<hr />
+
+<p>📚 <em>Reference:</em> <a href="https://www.math.snu.ac.kr/~kye/lecture_V/V_real/index.html">Real Analysis Lecture by Prof. Seung-Hyeok Kye (SNU)</a></p>]]></content><author><name>Dayeon Jung</name></author><category term="Real_analysis" /><summary type="html"><![CDATA[Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures.]]></summary></entry><entry><title type="html">Real Analysis Lecture 9: Fourier Series</title><link href="http://localhost:4000/real_analysis/2025/11/02/real_analysis-lecture9.html" rel="alternate" type="text/html" title="Real Analysis Lecture 9: Fourier Series" /><published>2025-11-02T00:00:00+09:00</published><updated>2025-11-02T00:00:00+09:00</updated><id>http://localhost:4000/real_analysis/2025/11/02/real_analysis-lecture9</id><content type="html" xml:base="http://localhost:4000/real_analysis/2025/11/02/real_analysis-lecture9.html"><![CDATA[<blockquote>
+  <p><em>Disclaimer:</em> This post is a personal study note based on the Real Analysis course I attended.<br />
+The explanations and formulations are written in my own words for educational purposes only,<br />
+and do not reproduce or distribute any copyrighted material from the original lectures.</p>
+</blockquote>
+
+<h1 id="09a-fourier-series-of-periodic-functions-">(09a) Fourier Series of Periodic Functions <!-- % 주기함수의 푸리에 급수 --></h1>
+
+<h2 id="introduction">Introduction</h2>
+<p>Fourier series express a periodic function as a sum of complex exponentials.<br />
+For a $2\pi$-periodic function $f$, (i.e. $f(t + 2\pi) = f(t)$) the basic idea is:</p>
+
+<p>[
+f(t) \sim \sum_{n\in\mathbb{Z}} \widehat{f}(n) e^{int}.
+]</p>
+
+<p>Here</p>
+<ul>
+  <li>$e^{int}$ are the <em>Fourier basis functions</em>,</li>
+  <li>$\widehat{f}(n)$ are the <em>Fourier coefficients</em>,</li>
+  <li>and the symbol $\sim$ represents convergence in an appropriate sense (e.g., $L^2$, pointwise a.e., etc.).</li>
+</ul>
+
+<hr />
+
+<p>Let<br />
+[
+\mathbb{T} = \mathbb{R}/2\pi\mathbb{Z} = ( -\pi, \pi \rbrack.
+]</p>
+
+<ul>
+  <li>
+    <p>If $f, g \in L^1(\mathbb{T} )$, then $f \ast g \in L^1(\mathbb{T} )$ and 
+$\lVert f \ast g \rVert_1 \le \lVert f \rVert_1 \lVert g \rVert_1$</p>
+  </li>
+  <li>
+    <p>If $f \in L^1(\mathbb{T} )$, then $x \mapsto \tau_x f$ is <strong>uniformly continuous</strong> as a map $\mathbb{T}  \to L^1(\mathbb{T} )$,</p>
+
+    <p>where $\tau_x f(t) = f(t+x)$</p>
+  </li>
+  <li>
+    <p>$C(\mathbb{T} )$ is dense in $L^1(\mathbb{T} )$</p>
+  </li>
+</ul>
+
+<hr />
+
+<p>The Fourier coefficients of $f\in L^1(\mathbb{T} )$ are defined as<br />
+[
+\widehat{f}(n)
+=
+\int_{\mathbb{T} } f(t)\, e^{-int}\, dt.
+]</p>
+
+<p>Define
+[
+u_n(t) = e^{int}, \qquad n\in\mathbb{Z}.
+]</p>
+
+<p>They satisfy the orthogonality relation
+[
+\langle u_n, u_m \rangle
+= \,\delta_{nm}.
+]</p>
+
+<p>Thus, ${u_n}$ forms an orthogonal system in $L^2(\mathbb{T} )$.<br />
+<!-- % e^{int}는 직교기저 역할 --></p>
+
+<hr />
+
+<p>Let $f : \mathbb{T}  \to \mathbb{C}$. (Define $\int_\mathbb{T}  f = \frac{1}{2\mathbb{T} } \int_{-\mathbb{T} }^\mathbb{T}  f(t) dt$ )</p>
+
+<ul>
+  <li>
+    <p>$\widehat{f \ast u_n}(m) = \widehat{f}(m) \cdot \widehat{u_n}(m) = \widehat{f}(n) \cdot \delta_{nm} $</p>
+
+    <p>$\Rightarrow \widehat{f \ast u_n} = \widehat{f}(n) \cdot e_n = \widehat{f}(n) \cdot \widehat{u_n}$</p>
+
+    <p>$\Rightarrow f \ast u_n = \widehat{f}(n)\, u_n.$</p>
+  </li>
+</ul>
+
+<hr />
+<hr />
+
+<h1 id="09b-fejér-kernel-">(09b) Fejér Kernel <!-- % 페제르핵 --></h1>
+
+<h2 id="theorem-9-1">Theorem 9-1.</h2>
+
+<p>Let $h_n \in L^1(\mathbb{T})$ satisfy:
+[
+h_n \ge 0,\qquad 
+\int_{\mathbb{T}} h_n = 1,\qquad
+\forall \delta \in (0,\pi),\;
+\lim_{n\to\infty} \int_{\mathbb{T} \setminus [-\delta,\delta]} h_n = 0.
+]</p>
+
+<p>Then for any $ f \in L^1(\mathbb{T})$,
+[
+\lVert f - f\ast h_n \rVert_1 \longrightarrow 0.
+]</p>
+
+<h3 id="pf">pf)</h3>
+
+<p>For each $t \in \mathbb{T}$,</p>
+
+<p>[
+f(t) - (f\ast h_n)(t)
+= \int_{\mathbb{T}} h_n(s)\, ( f(t)-f(t-s) ) \, ds.
+]</p>
+
+<p>Taking $L^1$-norm:</p>
+
+<p>[
+\lVert f - f\ast h_n \rVert_1
+\le \int_{\mathbb{T}} \int_{\mathbb{T}} h_n(s)\, \lvert f(t) - f_s(t) \rvert \, dt ds,
+= \int_{\mathbb{T}} h_n(s)\, \lVert f - f_s \rVert_1\, ds,
+]
+where $f_s(t)=f(t-s)$.</p>
+
+<p>For any $\varepsilon&gt;0$, $\exists\, \delta&gt;0$ s.t.
+[
+|s|&lt;\delta \Rightarrow \lVert f - f_s \rVert_1 &lt; \varepsilon.
+]</p>
+
+<p>Split the integral:</p>
+
+<ol>
+  <li>On $\lvert s\rvert &lt;\delta$: $\int_{[-\delta, \delta]} h_n(s)\, \lVert f-f_s\rVert_1 \,ds &lt;\varepsilon$.</li>
+  <li>On $|s|\ge\delta$:<br />
+[
+\int_{\mathbb{T} \setminus [-\delta, \delta]} h_n(s)\, \lVert f-f_s\rVert_1 \,ds
+  \le 2\lVert f\rVert_1 \int_{\mathbb{T} \setminus [-\delta, \delta]} h_n(s)
+  \longrightarrow 0.
+]</li>
+</ol>
+
+<p>Hence
+[
+\lVert f - f\ast h_n \rVert_1 \to 0.
+]</p>
+
+<hr />
+
+<h2 id="theorem-9-2">Theorem 9-2.</h2>
+
+<p>If $f \in C(\mathbb{T})$, then<br />
+[
+\lVert f - f\ast h_n\rVert_{\sup} \to 0.
+]</p>
+
+<h3 id="proof">Proof</h3>
+
+<p>Because $f$ is uniformly continuous on compact $\mathbb{T}$,<br />
+for any $\varepsilon&gt;0$ there exists $\delta&gt;0$ such that
+[
+|s|&lt;\delta \Rightarrow |f(t)-f(t-s)|&lt;\varepsilon.
+]</p>
+
+<p>Then</p>
+
+<p>[
+|f(t) - (f\ast h_n)(t)|
+\le \int_{\mathbb{T}} h_n(s)\, |f(t)-f(t-s)|\, ds.
+]</p>
+
+<p>Split into $\lvert s\rvert&lt;\delta$ and $\lvert s\rvert\ge\delta$ regions, obtain</p>
+
+<p>[
+\lVert f - f\ast h_n\rVert_{\sup} \to 0.
+]</p>
+
+<hr />
+
+<h2 id="property-9-1">Property 9-1.</h2>
+<p>Trigonometric polynomials $T(\mathbb{T})$ are dense in $L^1(\mathbb{T})$.</p>
+
+<h2 id="property-9-2">Property 9-2.</h2>
+<p>If $\widehat{f}(n)=0$ for all $n\in\mathbb{Z}$, then $f=0$ a.e.</p>
+
+<h3 id="proof-1">Proof</h3>
+<p>Fejér means satisfy<br />
+[
+\sigma_n(f) = f \ast h_n = \sum_{k=-\infty}^{\infty} \widehat{f}(k)\widehat{h_n}(k)u_k.
+]
+All coefficients vanish ⇒ every Fejér mean is identically 0 ⇒<br />
+[
+f = \lim_{n\to\infty} f\ast h_n = 0 \quad\text{a.e.}
+]</p>
+
+<h2 id="property-9-3">Property 9-3.</h2>
+<p>If $\widehat{f} \in \ell^1(\mathbb{Z})$, then</p>
+
+<p>[
+f(t) = \sum_{n=-\infty}^{\infty} \widehat{f}(n) e^{int}
+]
+uniformly.</p>
+
+<h3 id="proof-2">Proof</h3>
+<p>Absolute convergence of<br />
+[
+\sum |\widehat{f}(n)| &lt; \infty
+]
+implies uniform convergence of the Fourier series, and the limit must equal $f$.</p>
+
+<h2 id="property-9-4">Property 9-4.</h2>
+<p>If $f \in L^1(\mathbb{T})$, then Fejér means converge uniformly<br />
+iff $f\in C_0(\mathbb{Z})$.</p>
+
+<hr />
+
+<p>📚 <em>Reference:</em> <a href="https://www.math.snu.ac.kr/~kye/lecture_V/V_real/index.html">Real Analysis Lecture by Prof. Seung-Hyeok Kye (SNU)</a></p>]]></content><author><name>Dayeon Jung</name></author><category term="Real_analysis" /><summary type="html"><![CDATA[Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures.]]></summary></entry><entry><title type="html">Real Analysis Lecture 8: Fubini’s Theorem</title><link href="http://localhost:4000/real_analysis/2025/10/26/real_analysis-lecture8.html" rel="alternate" type="text/html" title="Real Analysis Lecture 8: Fubini’s Theorem" /><published>2025-10-26T00:00:00+09:00</published><updated>2025-10-26T00:00:00+09:00</updated><id>http://localhost:4000/real_analysis/2025/10/26/real_analysis-lecture8</id><content type="html" xml:base="http://localhost:4000/real_analysis/2025/10/26/real_analysis-lecture8.html"><![CDATA[<blockquote>
+  <p><em>Disclaimer:</em> This post is a personal study note based on the Real Analysis course I attended.<br />
+The explanations and formulations are written in my own words for educational purposes only,<br />
+and do not reproduce or distribute any copyrighted material from the original lectures.</p>
+</blockquote>
+
+<h1 id="08a-fubinis-theorem-">(08a) Fubini’s Theorem <!-- % 푸비니 정리 --></h1>
+
+<p>Let $f : X \times Y \to \mathbb{C}$ and write<br />
+[
+f_x(y) = f(x,y), \qquad f^y(x) = f(x,y).
+]</p>
+
+<h2 id="tonellis-theorem-">Tonelli’s Theorem <!-- % 토넬리 정리 --></h2>
+
+<p>If $f : (\mathcal{S}\times\mathcal{T})$ - measurable and $f \ge 0$, then</p>
+
+<ol>
+  <li>
+    <p>For each $x$,<br />
+$f_x : Y \to \lbrack 0,\infty\rbrack$ is $\mathcal{T}$-measurable.</p>
+  </li>
+  <li>
+    <p>For each $y$,<br />
+$f^y : X \to \lbrack 0,\infty\rbrack$ is $\mathcal{S}$-measurable.</p>
+  </li>
+  <li>
+    <p>The functions<br />
+[
+x \mapsto \int_Y f_x\, d\nu
+\quad\text{and}\quad<br />
+y \mapsto \int_X f^y\, d\mu
+]
+are $\mathcal{S}$-measurable and $\mathcal{T}$-measurable.</p>
+  </li>
+</ol>
+
+<p>Moreover,
+[
+\int_{X\times Y} f\, d(\mu\times\nu)
+=
+\int_X \left( \int_Y f_x \, d\nu \right) d\mu
+=
+\int_Y \left( \int_X f^y \, d\mu \right) d\nu.
+]</p>
+
+<hr />
+
+<h2 id="fubinis-theorem-">Fubini’s Theorem <!-- % 푸비니 정리 --></h2>
+
+<p>If $f \in L^1(\mu\times\nu)$, i.e.
+[
+\int_{X\times Y} \lvert f(x,y)\rvert \, d(\mu\times\nu) &lt; \infty,
+]
+then:</p>
+
+<ul>
+  <li>$f_x \in L^1(\nu)$ for a.e. $x$</li>
+  <li>$f^y \in L^1(\mu)$ for a.e. $y$</li>
+</ul>
+
+<p>Define
+[
+\varphi(x) = \int_Y f_x\, d\nu(y),
+\qquad
+\psi(y) = \int_X f^y\, d\mu(x).
+]</p>
+
+<p>Then
+[
+\varphi \in L^1(\mu), \qquad \psi \in L^1(\nu),
+]
+and
+[
+\int_{X\times Y} f\, d(\mu\times\nu)
+=
+\int_X \varphi\, d\mu
+=
+\int_Y \psi \, d\nu.
+]</p>
+
+<hr />
+<hr />
+
+<h1 id="08b-borel-product--lebesgue-measure-">(08b) Borel Product &amp; Lebesgue Measure <!-- % 보렐 측도와 르벡측도 --></h1>
+
+<p>Consider $(\mathbb{R}\times\mathbb{R}, \mathcal{L}\times\mathcal{L}, m\times m)$.</p>
+
+<p>Let<br />
+[
+\mathcal{L}_2 = (\mathcal{L}\times\mathcal{L})^\ast
+]
+be the <strong>completion</strong> of the product measure.</p>
+
+<h2 id="definition-completion-of-a-measure-space-">Definition: Completion of a measure space <!-- % 완비화 정의 --></h2>
+<p>For a measure space $(X, \mathcal{A}, \mu)$, the <em>completion</em> is the process of
+enlarging $\mathcal{A}$ by including all subsets of measure–zero sets.
+Formally, the completed $\sigma$–algebra is<br />
+[
+\mathcal{A}^\ast
+=
+\lbrace E \subseteq X :
+\exists A,B \in \mathcal{A},\ A \subseteq E \subseteq B,\ 
+\mu(B \setminus A)=0 \rbrace.
+]
+This makes every null set and every subset of a null set measurable.</p>
+
+<hr />
+
+<p>We conclude
+[
+\mathcal{B}_2 \subseteq \mathcal{L}\times\mathcal{L} \subseteq (\mathcal{L}\times\mathcal{L})^\ast.
+]</p>
+
+<h3 id="pf">pf)</h3>
+<h4 id="1-mathcalb_2-subseteq-mathcalltimesmathcall">1. $\mathcal{B}_2 \subseteq \mathcal{L}\times\mathcal{L}$</h4>
+
+<ul>
+  <li>$\mathcal{B}_2$ is the <strong>Borel σ-algebra</strong> on $\mathbb{R}^2$, generated by all open sets.</li>
+  <li>Every open set in $\mathbb{R}^2$ belongs to $\mathcal{L}\times\mathcal{L}$ because:
+    <ul>
+      <li>open sets in $\mathbb{R}$ are Lebesgue measurable,</li>
+      <li>products of Lebesgue measurable sets are measurable in $\mathcal{L}\times\mathcal{L}$,</li>
+      <li>$\mathcal{L}\times\mathcal{L}$ is a σ-algebra and contains all measurable rectangles.</li>
+    </ul>
+  </li>
+  <li>Since $\mathcal{B}_2$ is the <em>smallest</em> σ-algebra containing all open sets,<br />
+it must be contained in <strong>any</strong> σ-algebra that contains all open sets.</li>
+</ul>
+
+<h4 id="2-mathcalltimesmathcall-subseteq-mathcalltimesmathcallast">2. $\mathcal{L}\times\mathcal{L} \subseteq (\mathcal{L}\times\mathcal{L})^\ast$</h4>
+
+<ul>
+  <li>$(\mathcal{L}\times\mathcal{L})^\ast$ is the <strong>completion</strong> of the product σ-algebra.</li>
+  <li>By definition of completion,
+[
+\mathcal{A} \subseteq \mathcal{A}^\ast
+\qquad\text{for any σ-algebra } \mathcal{A}.
+]</li>
+  <li>Thus every set in the Lebesgue product σ-algebra automatically belongs to its completion.</li>
+</ul>
+
+<hr />
+
+<h2 id="theorem-8-3">Theorem 8-3.</h2>
+
+<p>If $f : \mathbb{R}^2 \to \mathbb{C}$ is $\mathcal{L}$-measurable, then</p>
+
+<blockquote>
+  <p>$\exists\; g: \mathbb{R}^2 \to \mathbb{C}$ Borel–measurable with $f=g\;$ a.e.</p>
+</blockquote>
+
+<h3 id="pf-1">pf)</h3>
+
+<p>Let $f = \sum_{k=1}^\infty c_k \cdot \chi_{E_k}$.</p>
+
+<p>Take $g = \sum_{k=1}^\infty c_k \cdot \chi_{A_k}$ s.t.</p>
+<ul>
+  <li>$A_k, B_k$ Borel-measurable,</li>
+  <li>$A_k \subseteq E \subseteq B_k$,</li>
+  <li>$(m \times m)^\ast(B_k\setminus A_k)=0$.</li>
+</ul>
+
+<h2 id="property-8-1">Property 8-1.</h2>
+
+<p>If $f : \mathbb{R}^2 \to \mathbb{C}$ is $\mathcal{L}$-measurable, then</p>
+
+<p>[
+\Rightarrow f = g + h
+]
+, wherer $g$ is Borel-measurable and $h$ is zero a.e.</p>
+
+<hr />
+<hr />
+
+<h1 id="08c-convolution-of-integrable-functions-">(08c) Convolution of Integrable Functions <!-- % 적분가능 함수의 곱하기(합성곱) --></h1>
+
+<p>Let $f,g \in L^1(\mathbb{R})$.</p>
+
+<h2 id="definition-convolution">Definition: Convolution</h2>
+
+<p>For $f, g \in L^1(\mathbb{R})$,
+[
+(f\ast g)(x)
+=
+\int_{\mathbb{R}} f(y)\, g(x-y)\, dy.
+]</p>
+
+<p>This corresponds to the “real” version of the group algebra convolution.</p>
+
+<hr />
+
+<h2 id="basic-computation">Basic Computation</h2>
+
+<p>Using Fubini’s Theorem and translation invariance of Lebesgue measure:</p>
+
+<p>[
+\int_{\mathbb{R}} \left\lbrace \int_{\mathbb{R}} \lvert f(y)g(x-y) \rvert \, dx \right\rbrace dy
+\le
+\int_{\mathbb{R}} \left\lbrace \int_{\mathbb{R}} \lvert f(y)\rvert \; \lvert g(x-y) \rvert \, dx \right\rbrace dy
+]
+[
+= 
+\int_{\mathbb{R}} \left\lbrace \lvert f(y) \rvert \int_{\mathbb{R}} \lvert g(x-y) \rvert \, dx \right\rbrace dy
+]
+[
+= \int_{\mathbb{R}} \left\lbrace \lvert f(y) \rvert \int_{\mathbb{R}} \lvert g(x) \rvert \, dx \right\rbrace dy
+]
+[
+= \int_{\mathbb{R}} \lvert f(y) \rvert \, dy \cdot \int_{\mathbb{R}} \lvert g(x) \rvert \, dx
+]</p>
+
+<p>Thus,
+[
+\lVert f\ast g \rVert_1 \le \lVert f\rVert_1 \lVert g\rVert_1.
+]</p>
+
+<p>This shows that $(L^1(\mathbb{R}), \ast)$ is a <strong>Banach algebra</strong>.</p>
+
+<h2 id="definition-banach-algebra">Definition: Banach Algebra</h2>
+
+<p>A <strong>Banach algebra</strong> is a mathematical structure that combines:</p>
+
+<ol>
+  <li>
+    <p><strong>Banach space</strong><br />
+A complete normed vector space (every Cauchy sequence converges).</p>
+  </li>
+  <li>
+    <p><strong>Algebra structure</strong><br />
+A multiplication operation $a \ast b$ defined on the space
+that is associative and bilinear.</p>
+  </li>
+  <li>
+    <p><strong>Norm compatibility</strong><br />
+The multiplication satisfies
+[
+\lVert a \ast b \rVert \le \lVert a \rVert \, \lVert b \rVert.
+]</p>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="algebraic-properties">Algebraic Properties</h2>
+
+<p>For $f,g,h\in L^1$:</p>
+
+<ol>
+  <li>$(f\ast g)\ast h = f\ast(g\ast h)$</li>
+  <li>$(af + bg)\ast h = af\ast h + bg\ast h$</li>
+  <li>$f\ast g = g\ast f$</li>
+  <li>$(f\ast g)’ = f\ast g’$</li>
+</ol>
+
+<hr />
+
+<h2 id="approximation-via-convolution">Approximation via Convolution</h2>
+
+<p>Let $1&lt;p,q&lt;\infty$ and $\frac{1}{p} + \frac{1}{q} = 1$.</p>
+
+<p>If $f\in L^p(\mathbb{R})$ and $g\in L^q(\mathbb{R})$, then
+[
+f\ast g \in L^\infty.
+]</p>
+
+<h3 id="pf-2">pf)</h3>
+<p>Hölder’s inequality gives:
+[
+\lvert(f\ast g)(x)\rvert
+= \left\lvert\int_{\mathbb{R}} f(y) g(x-y)\, dy\right\rvert
+= \int_{\mathbb{R}} \lvert f(y) g_{-x}(-y) \rvert \, dy
+\le \lVert f\rVert_p \lVert g\rVert_q.
+]</p>
+
+<hr />
+
+<h2 id="theorem-8-4">Theorem 8-4.</h2>
+<p>If $f\in L^p(\mathbb{R})$ and $g\in L^q(\mathbb{R})$, then<br />
+[
+f\ast g \in C_0(\mathbb{R}).
+]</p>
+
+<h3 id="pf-3">pf)</h3>
+
+<p>Let $x_n\to x$. Then
+[
+(f\ast g)(x_n) - (f\ast g)(x)
+=
+\int_{\mathbb{R}} f(y)g(x_n-y)\, dy
+-
+\int_{\mathbb{R}} f(y)g(x-y)\, dy.
+]</p>
+
+<p>Rewrite:
+[
+(f\ast g)(x_n)-(f\ast g)(x)
+=
+\int_{\mathbb{R}} f(y) \lbrack g(x_n-y)-g(x-y) \rbrack \, dy.
+]</p>
+
+<p>Let $h_n := x_n - x$,
+[
+(f \ast g)(x_n) - (f \ast g)(x)
+=
+\int_{\mathbb{R}} f(y)\, \lbrack g(x + h_n - y) - g(x - y) \rbrack \, dy
+]
+[
+=
+\int_{\mathbb{R}} f(x - t)\, \lbrack g(t + h_n) - g(t) \rbrack \, dt.
+]</p>
+
+<p>Let $\tau_{h} g(t) = g(t + h)$ and using <strong>Hölder’s inequality</strong>,
+[
+\lvert (f \ast g)(x_n) - (f \ast g)(x) \rvert
+\le
+\lVert f \rVert_p \, \lVert \tau_{h_n} g - g \rVert_q.
+]</p>
+
+<p>By the previously established result on the $L^{q}$–continuity of translations,
+[
+h_n \to 0 \;\Rightarrow\; \lVert \tau_{h_n} g - g \rVert_q \to 0.
+]</p>
+
+<p>Consequently,
+[
+(f \ast g)(x_n) \to (f \ast g)(x),
+]
+which shows that $f \ast g$ is continuous on $\mathbb{R}$.</p>
+
+<hr />
+
+<p>📚 <em>Reference:</em> <a href="https://www.math.snu.ac.kr/~kye/lecture_V/V_real/index.html">Real Analysis Lecture by Prof. Seung-Hyeok Kye (SNU)</a></p>]]></content><author><name>Dayeon Jung</name></author><category term="Real_analysis" /><summary type="html"><![CDATA[Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures.]]></summary></entry><entry><title type="html">Real Analysis Lecture 7: Product Measure</title><link href="http://localhost:4000/real_analysis/2025/10/19/real_analysis-lecture7.html" rel="alternate" type="text/html" title="Real Analysis Lecture 7: Product Measure" /><published>2025-10-19T00:00:00+09:00</published><updated>2025-10-19T00:00:00+09:00</updated><id>http://localhost:4000/real_analysis/2025/10/19/real_analysis-lecture7</id><content type="html" xml:base="http://localhost:4000/real_analysis/2025/10/19/real_analysis-lecture7.html"><![CDATA[<blockquote>
+  <p><em>Disclaimer:</em> This post is a personal study note based on the Real Analysis course I attended.<br />
+The explanations and formulations are written in my own words for educational purposes only,<br />
+and do not reproduce or distribute any copyrighted material from the original lectures.</p>
+</blockquote>
+
+<h1 id="07a-double-integral-and-iterated-integral-">(07a) Double Integral and Iterated Integral <!-- % 이중적분과 반복적분 --></h1>
+
+<h2 id="definition">Definition</h2>
+<p>Let $\lbrace X, \mathcal{S}, \mu \rbrace$ and $\lbrace Y, \mathcal{T}, \nu \rbrace$ be measure spaces.</p>
+
+<p>For $E \subset X \times Y$, $x \in X$, $y \in Y$, define<br />
+[
+E_x = \lbrace y \in Y : \lbrace x, y \rbrace \in E \rbrace,<br />
+\qquad
+E^y = \lbrace x \in X : \lbrace x, y \rbrace \in E \rbrace.
+]</p>
+
+<h2 id="properties">Properties</h2>
+
+<ol>
+  <li>
+    <p>$E \in \mathcal{S} \times \mathcal{T} \;\Rightarrow\; E_x \in \mathcal{T}, \; E^y \in \mathcal{S}$.</p>
+  </li>
+  <li>
+    <p>Define $\varphi(x) = \nu(E_x), \, \psi(y) = \mu(E^y)$.</p>
+
+    <p>Then $\varphi$ is $\mu$-measurable and $\psi$ is $\nu$-measurable.</p>
+  </li>
+  <li>
+    <p>$\int_X \varphi \, d\mu = \int_Y \psi \, d\nu$.</p>
+  </li>
+</ol>
+
+<p>[ \text{i.e.} \;
+\int_X \int_Y \chi_E(x,y) \, d\nu(y) \, d\mu(x)
+=
+\int_Y \int_X \chi_E(x,y) \, d\mu(x) \, d\nu(y).
+]</p>
+
+<hr />
+
+<p>Let<br />
+[
+(X \times Y,\; \mathcal{S} \times \mathcal{T},\; \mu \times \nu).
+]
+For $S \in \mathcal{S}$ and $T \in \mathcal{T}$, $\mathcal{R} = S \times T \subset X \times Y$ is a <strong>measurable rectangle</strong>.</p>
+
+<ul>
+  <li>$\mathcal{S} \times \mathcal{T}$ is the <strong>smallest $\sigma$-algebra containing all measurable rectangles</strong>.</li>
+</ul>
+
+<hr />
+<hr />
+
+<h1 id="07b-product-measure-and-measurable-set-">(07b) Product Measure and Measurable Set <!-- % 곱측도와 잴 수 있는 집합 --></h1>
+
+<p>Assume $(X, \mu)$ and $(Y, \nu)$ are <strong>$\sigma$-finite</strong>.</p>
+
+<p>i.e.</p>
+
+<ul>
+  <li>
+    <p>$X = \bigcup_{n=1}^\infty X_n, \; \mu(X_n) &lt; \infty$</p>
+  </li>
+  <li>
+    <p>$Y = \bigcup_{m=1}^\infty Y_m, \; \nu(Y_m) &lt; \infty$</p>
+  </li>
+</ul>
+
+<h2 id="definition-1">Definition</h2>
+<p>[
+\mathcal{A} = \lbrace E \in \mathcal{S} \times \mathcal{T} : E_x \in \mathcal{T},\ \forall x \in X \rbrace,
+]
+[
+\mathcal{B} = \lbrace E \in \mathcal{S} \times \mathcal{T} : \varphi \;\&amp;\; \psi \; \text{is measureable},  \int_X \varphi \, d\mu = \int_Y \psi \, d\nu \ \rbrace.
+]</p>
+
+<h3 id="property-7-1">Property 7-1.</h3>
+<p>If $E_n \in \mathcal{B}$ is increasing, then $\bigcup_{n=1}^\infty E_n \in \mathcal{B}$.</p>
+
+<h4 id="pf">pf)</h4>
+
+<ul>
+  <li>$\varphi_n$ increase pointwise $\Rightarrow$ $\varphi$ is measurable.</li>
+  <li>$\psi_n$ increase pointwise $\Rightarrow$ $\psi$ is measurable.</li>
+</ul>
+
+<p>Let<br />
+[
+E = \bigcup_{n=1}^\infty E_n.
+]</p>
+
+<p>Since $\lbrace E_n \rbrace$ is increasing, for each fixed $x \in X$,
+[
+\varphi_n(x)
+= \int_Y \chi_{E_n}(y)\, d\nu(y)
+\nearrow
+\int_Y \chi_{E}(y)\, d\nu(y)
+= \varphi(x).
+]</p>
+
+<p>Likewise, for each fixed $y \in Y$,
+[
+\psi_n(y)
+= \int_X \chi_{E_n}(x)\, d\mu(x)
+\nearrow
+\int_X \chi_{E}(x)\, d\mu(x)
+= \psi(y).
+]</p>
+
+<p>By the Monotone Convergence Theorem,
+[
+\int_X \varphi \, d\mu
+=
+\lim_{n\to\infty} \int_X \varphi_n \, d\mu,
+\quad
+\int_Y \psi \, d\nu
+=
+\lim_{n\to\infty} \int_Y \psi_n \, d\nu.
+]</p>
+
+<p>Since $E_n \in \mathcal{B}$,
+[
+\int_X \varphi_n \, d\mu
+=
+\int_Y \psi_n \, d\nu
+\quad \text{for all } n.
+]</p>
+
+<p>Taking limits,
+[
+\int_X \varphi \, d\mu
+=
+\lim_{n\to\infty} \int_X \varphi_n \, d\mu
+=
+\lim_{n\to\infty} \int_Y \psi_n \, d\nu
+=
+\int_Y \psi \, d\nu.
+]</p>
+
+<p>Thus $E$ satisfies the defining property of $\mathcal{B}$ and hence<br />
+[
+E \in \mathcal{B}.
+]</p>
+
+<h3 id="property-7-2">Property 7-2.</h3>
+<p>If $E_n \in \mathcal{B}$, then $\bigcup_{n=1}^\infty E_n \in \mathcal{B}$.</p>
+
+<h4 id="pf-1">pf)</h4>
+
+<p>First reduce to the <strong>pairwise disjoint</strong> case.</p>
+
+<p>Define
+[
+F_1 = E_1,\qquad
+F_n = E_n \setminus \bigcup_{k=1}^{n-1} E_k \quad (n \ge 2).
+]
+Then $\lbrace F_n \rbrace \in \mathcal{B}$ are pairwise disjoint and
+[
+\bigcup_{n=1}^\infty F_n = \bigcup_{n=1}^\infty E_n.
+]</p>
+
+<p>Now set
+[
+G_n = \bigcup_{k=1}^n F_k \quad (n \ge 1).
+]
+Then $\lbrace G_n \rbrace$ is an <strong>increasing</strong> sequence and
+each $G_n \in \mathcal{B}$.
+Moreover,
+[
+\bigcup_{n=1}^\infty G_n = \bigcup_{n=1}^\infty F_n
+= \bigcup_{n=1}^\infty E_n.
+]</p>
+
+<p>By <strong>Property 7-1</strong>, the increasing union of sets in $\mathcal{B}$
+again belongs to $\mathcal{B}$, so
+[
+\bigcup_{n=1}^\infty E_n
+= \bigcup_{n=1}^\infty G_n \in \mathcal{B}.
+]</p>
+
+<hr />
+
+<h2 id="definition-2">Definition</h2>
+<p>[
+\mathcal{C} = \lbrace E \in \mathcal{S} \times \mathcal{T} : E \cap (X_n \times Y_m) \in \mathcal{B}, \; \forall m,n = 1,2,\dots \rbrace,
+]</p>
+
+<h3 id="property-7-3">Property 7-3.</h3>
+<p>If $E_n \in \mathcal{C}$ is increasing, then $\bigcup_{n=1}^\infty E_n \in \mathcal{C}$.</p>
+
+<h4 id="pf-apply-the-mct">pf) Apply the MCT.</h4>
+
+<h3 id="property-7-4">Property 7-4.</h3>
+<p>If $E_n \in \mathcal{C}$ is decreasing, then $\bigcap_{n=1}^\infty E_n \in \mathcal{C}$.</p>
+
+<h4 id="pf--apply-the-lebesgue-dominated-convergence-theorem">pf)  Apply the Lebesgue Dominated Convergence Theorem.</h4>
+
+<h3 id="property-7-5">Property 7-5.</h3>
+<p>If $E_1, \dots, E_n \in \mathcal{R}$, then $\bigcup_{i=1}^N E_i \in \mathcal{C}$.</p>
+
+<hr />
+
+<h2 id="definition-3">Definition</h2>
+
+<p>Let $\mathcal{D}$ ($\subseteq \varphi \subseteq \mathcal{S} \times \mathcal{T}$) be the smallest family satisfying</p>
+
+<ol>
+  <li>
+    <p>$\mathcal{D} \supset \mathcal{R}$</p>
+  </li>
+  <li>
+    <p>Satisties <strong>Property 7-3 ~ 7-5</strong></p>
+  </li>
+</ol>
+
+<p>Let $\mathcal{E}$ be finite disjoint unions of measurable rectangles.</p>
+
+<p>Then $\mathcal{D}$ be the smallest family containing $\mathcal{E}$ with</p>
+
+<p>[
+E_n \in \mathcal{D} \nearrow \; \Rightarrow \; \bigcup_{n=1}^\infty \in \mathcal{D}
+]
+[
+E_n \in \mathcal{D} \searrow \; \Rightarrow \; \bigcap_{n=1}^\infty \in \mathcal{D}
+]</p>
+
+<ul>
+  <li>
+    <p>$E, F \in \mathcal{E} \Rightarrow E \setminus F \in \mathcal{E}, \; F \setminus E \in \mathcal{E}, \; E \cup F \in \mathcal{E}$</p>
+  </li>
+  <li>
+    <p>For $E \subset X \times Y$, define
+[
+\Omega(E) = \lbrace F \subset X \times Y :
+E \setminus F \in \mathcal{D}, \; F \setminus E \in \mathcal{D}, \; E \cup F \in \mathcal{D} \rbrace
+]</p>
+  </li>
+  <li>
+    <p>$E, F \in \mathcal{E} \Rightarrow F \in \Omega(E)$</p>
+
+    <p>$E \in \mathcal{E} \Rightarrow \mathcal{E} \subseteq \Omega(E) \Rightarrow \mathcal{D} \subseteq \Omega(E)$</p>
+
+    <p>$E \in \mathcal{D} \Rightarrow \mathcal{D} \subseteq \Omega(E)$</p>
+  </li>
+  <li>
+    <p>$E_n \in \mathcal{D} \Rightarrow F_N = E_1 \cup \ldots \cup E_N \in \mathcal{D}$</p>
+
+    <p>$\bigcup_{n=1}^\infty E_n = \bigcup_{n=1}^\infty F_n \in \mathcal{D}$</p>
+  </li>
+  <li>
+    <p>$\mathcal{D} = \varphi = \mathcal{S} \times \mathcal{T}$ is <strong>$\sigma$-algebra</strong></p>
+  </li>
+</ul>
+
+<h3 id="property-7-6">Property 7-6.</h3>
+
+<p>We conclude:
+$
+(\mu \times \nu)(E) 
+= \int_X \nu(E_x)\, d\mu(x)
+= \int_Y \mu(E^y)\, d\nu(y).
+$</p>
+
+<p>[
+\Rightarrow E = \bigcup_{n=1}^\infty E_n, \; \sum_{n=1}^\infty (\mu \times \nu) (E_n) = (\mu \times \nu)(E)
+]</p>
+
+<h4 id="pf-2">pf)</h4>
+
+<p>Since $\mathcal{D}$ was constructed to satisfy Properties 7-3–7-5 and contains all measurable rectangles, it follows (from the previous steps in the construction) that:</p>
+
+<ol>
+  <li>
+    <p>If $E_n\nearrow E$ with $E_n\in\mathcal{D}$, then<br />
+[
+\nu((E_n)_x)\nearrow\nu(E_x)
+\quad\text{for all }x,
+]
+and 
+[
+\mu((E_n)^y)\nearrow\mu(E^y)
+\quad\text{for all }y.
+]</p>
+  </li>
+  <li>
+    <p>Each $E_n$ satisfies the defining identity of $\mathcal{D}$:
+[
+(\mu\times\nu)(E_n)
+=\int_X \nu((E_n)_x)\,d\mu
+=\int_Y \mu((E_n)^y)\,d\nu.
+]</p>
+  </li>
+</ol>
+
+<p>If $E_n$ are pairwise disjoint,
+[
+\chi_E=\sum_{n=1}^{\infty}\chi_{E_n}.
+]
+Integrating both sides over $X\times Y$:
+[
+(\mu\times\nu)(E)
+=\int_{X\times Y}\chi_E\,d(\mu\times\nu)
+=\int_{X\times Y}\sum_{n=1}^{\infty}\chi_{E_n}\,d(\mu\times\nu).
+]</p>
+
+<p>Apply MCT again:
+[
+\int_{X\times Y}\sum_{n=1}^{\infty}\chi_{E_n}
+=
+\sum_{n=1}^{\infty}\int_{X\times Y}\chi_{E_n}
+=
+\sum_{n=1}^{\infty}(\mu\times\nu)(E_n).
+]</p>
+
+<p>Thus,
+[
+(\mu\times\nu)(E)
+=\sum_{n=1}^{\infty}(\mu\times\nu)(E_n).
+]</p>
+
+<hr />
+<hr />
+
+<h1 id="07c-two-dimensional-lebesgue-measure-">(07c) Two-Dimensional Lebesgue Measure <!-- % 이차원 르벡측도 --></h1>
+
+<p>Consider $(\mathbb{R}^2, \mathcal{L} \times \mathcal{L}, m \times m)$.</p>
+
+<ul>
+  <li>Every open set is in $\mathcal{L} \times \mathcal{L}$.</li>
+  <li>Let $\mathcal{B}_2$ be the smallest $\sigma$-algebra containing all open sets.<br />
+Then <strong>Borel sets</strong> $\in \mathcal{B}_2$.</li>
+</ul>
+
+<h2 id="definition-complete-measure">Definition: Complete measure</h2>
+
+<p>$(X, \mathcal{S}, \mu)$ is a <strong>complete measure space</strong>, if</p>
+
+<p>$E \subset F$, $F \in \mathcal{S}$, and $\mu(F)=0$,  $\Rightarrow E \in \mathcal{S}$.</p>
+
+<h2 id="definition-positive-measure">Definition: Positive measure</h2>
+
+<p>$(X, \mathcal{S}, \mu)$ is a <strong>positive measure space</strong>, if
+[
+\mathcal{S}^\ast = \lbrace E \subset X : \exists A, B \in \mathcal{S},\ A \subset E \subset B,\ \mu(B\setminus A)=0 \rbrace.
+]
+Then for $E \in \mathcal{S}^\ast$, define $\mu^\ast(E) = \mu(A)$.</p>
+
+<p>Thus $(X, \mathcal{S}^\ast, \mu^\ast)$ is complete measure.</p>
+
+<hr />
+
+<h2 id="borel-vs-product-completion">Borel vs Product Completion</h2>
+
+<p>Claim:
+[
+\mathcal{B}_2^\ast = (\mathcal{L} \times \mathcal{L})^\ast.
+]</p>
+
+<p><strong>pf)</strong><br />
+($\subseteq$) If $B \in \mathcal{B}_2$, then $B \subset L \times L$ and completion preserves inclusion.</p>
+
+<p>($\supseteq$)  For $S \in \mathcal{L}$, 
+Let $A$ be an $F_\sigma$- set and $B$ a $G_\delta$- set, $A \subset S \subset B$, $\mu(B\setminus A)=0$.</p>
+
+<p>Thus $A \times \mathbb{R}$ and $B \times \mathbb{R}$ are Borel sets in $\mathbb{R}^2$.</p>
+
+<p>Hence
+[
+m \times m \lbrack (B \times \mathbb{R}) \setminus (A \times \mathbb{R}) \rbrack
+= m \times m \lbrack (B \setminus A) \times \mathbb{R} \rbrack = 0.
+]
+Thus $S \times \mathbb{R} \in \mathcal{B}_2^\ast$.</p>
+
+<p>And $S \times T = (S \times \mathbb{R}) \cap (\mathbb{R} \times T) \in \mathcal{B}_2^\ast $</p>
+
+<p>Therefore
+[
+(\mathcal{L} \times \mathcal{L})^\ast \subseteq \mathcal{B}_2^\ast
+]</p>
+
+<ul>
+  <li>$(\mathbb{R}^2, (\mathcal{L} \times \mathcal{L})^\ast, (m \times m)^\ast)$: <strong>Lebesgue measure in the plane</strong></li>
+</ul>
+
+<hr />
+
+<p>📚 <em>Reference:</em> <a href="https://www.math.snu.ac.kr/~kye/lecture_V/V_real/index.html">Real Analysis Lecture by Prof. Seung-Hyeok Kye (SNU)</a></p>]]></content><author><name>Dayeon Jung</name></author><category term="Real_analysis" /><summary type="html"><![CDATA[Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures.]]></summary></entry><entry><title type="html">Real Analysis Lecture 6: Two-sided Measure and Integration</title><link href="http://localhost:4000/real_analysis/2025/10/12/real_analysis-lecture6.html" rel="alternate" type="text/html" title="Real Analysis Lecture 6: Two-sided Measure and Integration" /><published>2025-10-12T00:00:00+09:00</published><updated>2025-10-12T00:00:00+09:00</updated><id>http://localhost:4000/real_analysis/2025/10/12/real_analysis-lecture6</id><content type="html" xml:base="http://localhost:4000/real_analysis/2025/10/12/real_analysis-lecture6.html"><![CDATA[<blockquote>
+  <p><em>Disclaimer:</em> This post is a personal study note based on the Real Analysis course I attended.<br />
+The explanations and formulations are written in my own words for educational purposes only,<br />
+and do not reproduce or distribute any copyrighted material from the original lectures.</p>
+</blockquote>
+
+<h1 id="06a-pointwise-convergence-and-uniform-convergence-">(06a) Pointwise Convergence and Uniform Convergence <!-- % 점별수렴과 고른수렴 --></h1>
+
+<h2 id="lemma-6-1">Lemma 6-1</h2>
+<p>Let $E \subset \mathbb{R}$ with $\mu(E) &lt; \infty$.</p>
+
+<p>Let ${f_n}$ be a sequence of measurable functions on $E$ such that $f_n \to f$ pointwise a.e.</p>
+
+<p>Then $\forall \varepsilon &gt; 0$,  $\exists\;\delta &gt; 0, \; N \in \mathbb{N}$ s.t.</p>
+
+<p>[
+\mu(A) &lt; \delta \Rightarrow n \ge N, \ x \in E \setminus A \ \Rightarrow\ \lvert f_n(x) - f(x) \rvert &lt; \varepsilon.
+]</p>
+
+<h3 id="pf">pf)</h3>
+
+<p>Fix $\varepsilon&gt;0$ and define
+[
+A_n \;=\; \bigcup_{k \ge n} \,\lbrace x \in E : \lvert f_k(x)-f(x) \rvert \ge \varepsilon \rbrace .
+]</p>
+
+<p>Then ${A_n}$ is decreasing and
+[
+\bigcap_{n=1}^\infty A_n \;\subseteq\; \lbrace x \in E : \lim_{n\to\infty} f_n(x) \neq f(x) \rbrace .
+]</p>
+
+<p>Since $f_n \to f$ a.e., $\;\mu \left(\bigcap_{n=1}^\infty A_n\right)=0$, hence $\mu(A_n)\downarrow 0$.</p>
+
+<p>Let $\delta&gt;0$ be arbitrary. Choose $N$ so that $\mu(A_N)&lt;\delta$, and set $A:=A_N$.</p>
+
+<p>Then:</p>
+
+<p>1) $\mu(A)=\mu(A_N)&lt;\delta$.</p>
+
+<p>2) If $x \in E \setminus A=E \setminus A_N$, 
+[
+x \notin \bigcup_{k\ge N} \lbrace \lvert f_k(x)-f(x) \rvert \ge \varepsilon \rbrace
+\;\Longrightarrow\;
+\lvert f_k(x)-f(x) \rvert &lt; \varepsilon \ \text{for all } k\ge N .
+]</p>
+
+<p>In particular, for every $n\ge N$ and every $x\in E\setminus A$, $\lvert f_n(x)-f(x) \rvert &lt; \varepsilon$.</p>
+
+<p>Thus the convergence is uniform on $E\setminus A$.</p>
+
+<hr />
+
+<h2 id="egoroffs-theorem">Egoroff’s Theorem</h2>
+<p>Let $E \subset \mathbb{R}$ with $\mu(E) &lt; \infty$ and $f_n \to f$ pointwise a.e. on $E$.</p>
+
+<p>Then $\forall \varepsilon &gt; 0$, $\exists \; A \subset E$ s.t.
+[
+\mu(A) &lt; \varepsilon, \quad
+f_n \to f \text{ uniformly on } E \setminus A.
+]</p>
+
+<h3 id="pf-1">pf)</h3>
+<p>Using the previous <strong>Lemma 6-1</strong> with fixed $\varepsilon = 1/m &gt; 0$ and let $\varepsilon_m = \varepsilon / 2^m$, $\exists \, A_m, N_m$ s.t. $\mu(A_m) &lt; \varepsilon / 2^m$.</p>
+
+<p>For $x \in E \setminus A_m, \; n \ge N_m \Rightarrow \lvert f_m (x) - f(x) \rvert &lt; 1/m$</p>
+
+<p>Let
+[
+A = \bigcup_{m=1}^\infty A_m.
+]</p>
+
+<p>Then $n \ge N_m$:
+[
+\Rightarrow \sup_{x \in E \setminus A} \lvert f_m(x) - f(x) \rvert
+\le \sup_{x \in E \setminus A_m} \lvert f_m(x) - f(x) \rvert
+&lt; \frac{1}{m}.
+]</p>
+
+<p>Thus for $x \in A \setminus E$, $f_n(x) \to f(x)$ <strong>uniformly</strong>.</p>
+
+<hr />
+<hr />
+
+<h1 id="06b-definition-of-two-sided-measure-">(06b) Definition of Two-sided Measure <!-- % 양측도의 정의 --></h1>
+
+<p>Let $(X, \mathcal{S}, \mu)$ be a <strong>measure space</strong>, where:</p>
+
+<ol>
+  <li>$\mathcal{S} \subset 2^X$ is a <strong>σ-algebra</strong>, satisfying
+    <ul>
+      <li>\emptyset \in \mathcal{S}, \; X \in \mathcal{S}</li>
+      <li>$E \in \mathcal{S} \Rightarrow E^c \in \mathcal{S}$</li>
+      <li>${E_i} \subset \mathcal{S} \Rightarrow \bigcup_i E_i \in \mathcal{S}$</li>
+    </ul>
+  </li>
+  <li>$\mu : \mathcal{S} \to [0,\infty]$ satisfies
+    <ul>
+      <li>$\mu\left(\bigcup_i E_i\right) = \sum_i \mu(E_i)$ for disjoint ${E_i}$ (<strong>countable additivity</strong>)</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+<hr />
+
+<h1 id="06c-two-sided-measure-and-integration-">(06c) Two-sided Measure and Integration <!-- % 양측도와 적분 --></h1>
+
+<h2 id="examples">Examples</h2>
+<ol>
+  <li>$(X, 2^X, c)$ with $c(A) = \text{#}A$ (<strong>counting measure</strong>)</li>
+  <li>$(X, 2^X, \delta_x)$ with $x \in X$, $\delta_x(A) = I(x \in A)$ (<strong>indicator measure</strong>)</li>
+  <li>for $f : \mathcal{R} \to [0, \infty]$, then the <strong>integral with respect to a measure</strong> is written
+[
+\int_{ \bigcup_{n} E_n } f = \sum_n \int_{E_n} f,
+\quad
+\mathcal{V} (E) = \int_E f.
+]</li>
+</ol>
+
+<hr />
+
+<h2 id="definition-measurable-and-simple-functions">Definition (Measurable and Simple Functions)</h2>
+<ol>
+  <li>
+    <p>$f : X \to [0,\infty]$ is <strong>measurable</strong> if<br />
+[
+f^{-1}((a,\infty)) \in \mathcal{S}, \quad \forall a &gt; 0.
+]</p>
+  </li>
+  <li>
+    <p>A function $s : X \to [0,\infty]$ is <strong>simple</strong> if it is measurable and has finite range:<br />
+[
+s = \sum_{i=1}^{\infty} c_i \chi_{E_i}, \, E_i \in \mathcal{S} \;
+\longrightarrow \; \int_E s = \sum_{i=1}^{\infty} c_i \mu(E_i).
+]</p>
+  </li>
+  <li>
+    <p>For a measurable $f : X \to [0,\infty]$, define<br />
+[
+\int_X f = \sup \Big \lbrace \int_E s : 0 \le s \le f,\ s \text{ is simple} \Big \rbrace .
+]</p>
+  </li>
+  <li>
+    <p>For $f : X \to \mathcal{C}$ and for non-negative real-valued functions $f_1, f_2, f_3, f_4$,<br />
+[
+f = (f_1 - f_2) + i (f_3 - f_4)
+]</p>
+  </li>
+</ol>
+
+<hr />
+<hr />
+
+<h1 id="06d-various-lebesgue-spaces-">(06d) Various Lebesgue Spaces <!-- % 여러가지 르벡공간 --></h1>
+
+<h2 id="theorem">Theorem</h2>
+<p>Let $\mu(X) &lt; \infty$ and $F \subset \mathbb{C}$ closed,$f \in L^1(X, \mathcal{S}, \mu)$.</p>
+
+<p>If $F \in \mathcal{S}, \; \mu(E) &gt; 0$ and $\frac{1}{\mu(E)} \int_E f \, d\mu \in F$,
+[
+f(x) \in F \text{ a.e.}
+]</p>
+
+<h3 id="pf-2">pf)</h3>
+<p>Suppose $f(x)$ takes values outside $F$ on a set $A_{\alpha, r}$ with $\mu(A_{\alpha, r}) &gt; 0$ s.t. $A_{\alpha, r} = \lbrace x : f(x) \in N(\alpha, r) \rbrace$.</p>
+
+<p>Then
+[
+\left| \frac{1}{\mu(A_{\alpha, r})} \int_{A_{\alpha, r}} f \, d\mu - \alpha \right|
+= \frac{1}{\mu(A_{\alpha, r})} \left| \int_{A_{\alpha, r}} (f - \alpha) \, d\mu  \right|
+\le \frac{1}{\mu(A_{\alpha, r})} \int_{A_{\alpha, r}} \lvert f - \alpha \rvert \, d\mu 
+\le r,
+]</p>
+
+<p>This contradicts the assumption, so $\mu(A_{\alpha, r}) = 0$.</p>
+
+<hr />
+
+<h2 id="definition">Definition</h2>
+<p>For a measure space $(X, 2^X, c)$ and $1 \le p &lt; \infty$,
+[
+L^p(X, 2^X, c) = \ell^p(X)
+]</p>
+
+<p>When $X = \mathbb{N}$ with counting measure and $1 \le p &lt; q &lt; \infty$,
+[
+\ell^p(\mathbb{N}) \subseteq \ell^p(\mathbb{N}),
+]
+[
+\ell^p(\lbrack 0,1 \rbrack) \subseteq \ell^p(\lbrack 0,1 \rbrack) 
+]
+by <strong>Hölder’s inequality</strong></p>
+
+<hr />
+
+<p>📚 <em>Reference:</em> <a href="https://www.math.snu.ac.kr/~kye/lecture_V/V_real/index.html">Real Analysis Lecture by Prof. Seung-Hyeok Kye (SNU)</a></p>]]></content><author><name>Dayeon Jung</name></author><category term="Real_analysis" /><summary type="html"><![CDATA[Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures.]]></summary></entry><entry><title type="html">Real Analysis Lecture 5: Space of Integrable Functions</title><link href="http://localhost:4000/real_analysis/2025/10/05/real_analysis-lecture5.html" rel="alternate" type="text/html" title="Real Analysis Lecture 5: Space of Integrable Functions" /><published>2025-10-05T00:00:00+09:00</published><updated>2025-10-05T00:00:00+09:00</updated><id>http://localhost:4000/real_analysis/2025/10/05/real_analysis-lecture5</id><content type="html" xml:base="http://localhost:4000/real_analysis/2025/10/05/real_analysis-lecture5.html"><![CDATA[<blockquote>
+  <p><em>Disclaimer:</em> This post is a personal study note based on the Real Analysis course I attended.<br />
+The explanations and formulations are written in my own words for educational purposes only,<br />
+and do not reproduce or distribute any copyrighted material from the original lectures.</p>
+</blockquote>
+
+<h1 id="05a-lebesgue-spaces-">(05a) Lebesgue Spaces <!-- % 르벡 공간 --></h1>
+
+<h2 id="definition">Definition</h2>
+
+<p>[
+L^1(E) = \lbrace f : \int_E \lvert f \rvert &lt; \infty \rbrace, \quad
+L^2(E) = \lbrace f : \int_E \lvert f \rvert^2 &lt; \infty \rbrace.
+]</p>
+
+<hr />
+
+<h2 id="jensens-inequality-">Jensen’s Inequality <!-- % 젠센 부등식 --></h2>
+
+<p>Let $\phi : (a,b) \to \mathbb{R}$ be <strong>convex</strong>, and let $f : [0,1] \to (a,b)$ be integrable.<br />
+Then
+[
+\phi \left(\int_0^1 f(t)\,dt\right) \le \int_0^1 \phi(f(t))\,dt.
+]</p>
+
+<h3 id="pf">pf)</h3>
+<p>Let $\alpha = \int_0^1 f(x)\,dx$, and $\beta = \sup \lbrace \frac{\phi(\alpha) - \phi(s)}{\alpha - s} \rbrace$ for $a &lt; s &lt; \alpha &lt; b$.<br />
+[
+\Rightarrow \phi(s) - \phi(\alpha) \ge \beta(s - \alpha), \; \forall s \in (a,b)
+]
+[
+\Rightarrow \phi(f(x)) - \phi(\alpha) \ge \beta(f(x) - \alpha).
+]</p>
+
+<p>Hence
+[
+\int_0^1 \phi(f(t))\,dt - \phi \left(\int_0^1 f(t)\,dt\right) \ge 0.
+]</p>
+
+<h2 id="example-exponential-case">Example (Exponential Case)</h2>
+
+<p>Let $a_i&gt;0$ with $\sum_{i=1}^n a_i = 1$, and let $s_1 \le s_2 \le \cdots \le s_n$,</p>
+
+<p>$t_0 := 0,\; t_k := \sum_{i=1}^k a_i \ \ (k=1,\dots,n)$, so that $0=t_0 &lt; t_1 &lt; \cdots &lt; t_n = 1$ .</p>
+
+<p>Define the step function $f:\lbrack 0,1 \rbrack \to \mathbb{R}$ s.t.
+[
+f(x)= \sum_{i=1}^n s_i \,\chi_{\lbrack t_{i-1},\, t_i )}(x).
+]</p>
+
+<p>Define $\phi(x) = e^x$.</p>
+
+<p>Then</p>
+
+<ol>
+  <li>
+    <p>$e^{a_1 s_1 + a_2 s_2 + \dots + a_n s_n} \le a_1 e^{s_1} + a_2 e^{s_2} + \dots + a_n e^{s_n}$</p>
+  </li>
+  <li>
+    <p>$t_1^{a_1} \dots t_b^{a_n} \le a_1 t_1 + \dots + a_n t_n \; (t_i &gt; 0)$</p>
+  </li>
+  <li>
+    <p>$s^{\frac{1}{p}} \cdot t^{\frac{1}{q}} \le \frac{1}{p} \cdot s + \frac{1}{q} \cdot t (\frac{1}{p} + \frac{1}{q} = 1, \; 0&lt;p,q&lt; \infty)$</p>
+  </li>
+  <li>
+    <p>$S \cdot T \le \frac{1}{p} \cdot S^p + \frac{1}{q} \cdot T^q \; (S, T \ge 0)$</p>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="hölders-inequality-">Hölder’s Inequality <!-- % 홀더 부등식 --></h2>
+
+<p>For $f,g : E \to [0,\infty]$ and $1 &lt; p, q &lt; \infty$ with $\frac{1}{p} + \frac{1}{q} = 1$,<br />
+[
+\int_E f g \le \left(\int_E f^p\right)^{1/p} \left(\int_E g^q\right)^{1/q}.
+]</p>
+
+<h3 id="pf-1">pf)</h3>
+<p>Let
+[
+A = \left(\int_E f^p\right)^{1/p}, \quad
+B = \left(\int_E g^q\right)^{1/q}.
+]
+Define
+[
+F = \frac{f}{A}, \quad G = \frac{g}{B}.
+]
+Then $\int_E F^p = \int_E G^q = 1$.</p>
+
+<p>By Jensen’s inequality,
+[
+F(x) G(x) \le \frac{F(x)^p}{p} + \frac{G(x)^q}{q},
+]
+and integrating both sides gives
+[
+\int_E F G \le \frac{1}{p} + \frac{1}{q} = 1.
+]
+Multiplying both sides by $AB$ yields Hölder’s inequality.</p>
+
+<hr />
+
+<h2 id="minkowskis-inequality-">Minkowski’s Inequality <!-- % 민코프스키 부등식 --></h2>
+
+<p>For $p &gt; 1$,
+[
+\left(\int_E (f+g)^p \right)^{1/p} \le 
+\left(\int_E f^p \right)^{1/p} + \left(\int_E g^p \right)^{1/p}.
+]</p>
+
+<h3 id="pf-2">pf)</h3>
+<p>First,
+[
+\int_E (f+g)^p
+= \int_E (f+g)\,(f+g)^{p-1}
+= \int_E f\,(f+g)^{p-1} + \int_E g\,(f+g)^{p-1}.
+]</p>
+
+<p>Apply <strong>Hölder’s inequality</strong> to each term with exponents $(p,q)$:
+[
+\int_E f\,(f+g)^{p-1}
+\le \lVert f\rVert_p \,\lVert (f+g)^{p-1}\rVert_q,
+\qquad
+\int_E g\,(f+g)^{p-1}
+\le \lVert g\rVert_p \,\lVert (f+g)^{p-1}\rVert_q.
+]</p>
+
+<p>Since $q=\dfrac{p}{p-1}$, we have
+[
+\lVert (f+g)^{p-1}\rVert_q
+= \Big(\int_E (f+g)^{(p-1)q}\Big)^{1/q}
+= \Big(\int_E (f+g)^p\Big)^{1/q}
+= \lVert f+g\rVert_p^{\,p-1}.
+]</p>
+
+<p>Combining the estimates,
+[
+\int_E (f+g)^p
+\le \big(\lVert f\rVert_p+\lVert g\rVert_p\big)\, \lVert f+g\rVert_p^{\,p-1}.
+]</p>
+
+<p>Divide both sides by $\lVert f+g\rVert_p^{\,p-1}$ to obtain
+[
+\lVert f+g\rVert_p \le \lVert f\rVert_p + \lVert g\rVert_p,
+]
+which is Minkowski’s inequality. $\square$</p>
+
+<hr />
+
+<h2 id="definition-lp-space">Definition (Lp Space)</h2>
+
+<p>For a measurable set $E \subset \mathbb{R}$, define
+[
+L^p(E) = \lbrace f : E \to \mathbb{C} \text{ measurable and } \int_E \lvert f \rvert^p &lt; \infty \rbrace.
+]</p>
+
+<h3 id="properties">Properties</h3>
+<ol>
+  <li>
+    <p>$L^p(E)$ is a <strong>vector space</strong> for $1 \le p &lt; \infty$.</p>
+  </li>
+  <li>
+    <p>The <strong>norm</strong>
+[
+\lVert f \rVert_p = \left( \int_E \lvert f \rvert^p \right)^{1/p}
+]
+satisfies:</p>
+
+    <ol>
+      <li>
+        <p>$\lVert f \rVert_p = 0 \Rightarrow f = 0 \text{ a.e.}$</p>
+      </li>
+      <li>
+        <p>$\lVert a f \rVert_p = \lvert a \rvert \lVert f \rVert_p$</p>
+      </li>
+      <li>
+        <p>$\lVert f + g \rVert_p \le \lVert f \rVert_p + \lVert g \rVert_p$</p>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+<p>Thus $L^p(E)$ is a <strong>normed space</strong>.</p>
+
+<hr />
+<hr />
+
+<h1 id="05b-completeness-of-lebesgue-spaces-">(05b) Completeness of Lebesgue Spaces <!-- % 르벡공간의 완비성 --></h1>
+
+<p>For $f : E \to [0,\infty]$, define 
+[
+\operatorname*{ess\,sup} f = \inf \lbrace \alpha \in \mathbb{R} : \mu( f^{-1} (\alpha, \infty) ) = 0 \rbrace.
+]</p>
+
+<p>Then
+[
+\lVert f \rVert_\infty = \operatorname*{ess\,sup} \lvert f \rvert.
+]</p>
+
+<p>Also,
+[
+f \in L^\infty(E) \;\Leftrightarrow\; \lVert f \rVert_\infty &lt; \infty.
+]</p>
+
+<hr />
+
+<h2 id="theorem">Theorem</h2>
+<p>$L^p(E)$ is a <strong>complete normed space</strong> for $1 \le p \le \infty$.</p>
+
+<ul>
+  <li>$X$ is <strong>complete</strong>
+[
+\Leftrightarrow \; \sum_{n=1}^{\infty} \lVert x_n \rVert &lt; \infty \longrightarrow
+\exists \; x \in X \text{ s.t. } \lim_{N \rightarrow \infty} \lVert x - \sum_{n=1}^{N} x_n \rVert
+]</li>
+</ul>
+
+<h3 id="case-1-p--infty">Case 1: $p = \infty$</h3>
+
+<p>Let $\lbrace f_n \rbrace$ be a Cauchy sequence in $L^\infty(E)$.</p>
+
+<p>Define<br />
+[
+A_{k} = \lbrace x \in E : \lvert f_k(x) \rvert &gt; \lVert f_k \rVert_\infty \rbrace.
+]
+[
+B_{m,n} = \lbrace x \in E : \lvert f_m(x) - f_n(x) \rvert &gt; \lVert f_m - f_n \rVert_\infty \rbrace.
+]</p>
+
+<p>Let $F$ be union of $A_k$ and $B_{m,n}$. Then $\mu(F) = 0$.</p>
+
+<p>For $x \in E \setminus F$, the sequence $\lbrace f_n(x) \rbrace$ is Cauchy in $\mathbb{R}$, hence convergent to some $f(x)$.</p>
+
+<p>(i.e. $\lvert f_m(x) - f_n(x) \rvert &lt; \lVert f_m - f_n \rVert \rightarrow 0$ as $m,n \rightarrow 0$)</p>
+
+<p>Define $f(x) = \lim_{n \to \infty} f_n(x)$ on $E \setminus F$.</p>
+
+<p>Then
+[
+\lVert f_n - f \rVert_\infty \to 0,
+]
+and thus $L^\infty(E)$ is complete.</p>
+
+<h3 id="case-2-1-le-p--infty">Case 2: $1 \le p &lt; \infty$</h3>
+
+<p>Let $\lbrace f_n \rbrace$ be a Cauchy sequence in $L^p(E)$.</p>
+
+<p>Take a subsequence $\lbrace f_{n_i} \rbrace$ such that<br />
+[
+\lVert f_{n_{i+1}} - f_{n_i} \rVert_p \le 2^{-i}.
+]</p>
+
+<p>Define
+[
+g_k = \sum_{i=1}^k \lvert f_{n_{i+1}} - f_{n_i} \rvert, \quad
+g = \sum_{i=1}^\infty \lvert f_{n_{i+1}} - f_{n_i} \rvert.
+]</p>
+
+<p>Then by <strong>Fatou’s lemma</strong> and since $\lVert g_k \rVert_p &lt; 1, \; \forall k = 1,2,\ldots$,
+[
+\int_E g^p \le \sum_{k=1}^\infty \int_E g_k^p \le 1,
+]</p>
+
+<p>so $g \in L^p(E)$.</p>
+
+<p>Define
+[
+f = f_{n_1} + (f_{n_2} - f_{n_1}) + (f_{n_3} - f_{n_2}) + \dots,
+]</p>
+
+<p>then $f = \sum (f_{n_{k+1}} - f_{n_k})$ converges absolutely a.e.</p>
+
+<p>Thus $L^p(E)$ is complete. ✅</p>
+
+<hr />
+<hr />
+
+<h1 id="05c-luzins-theorem-">(05c) Luzin’s Theorem <!-- % 루진 정리 --></h1>
+
+<h2 id="lemma-5-1">Lemma 5-1</h2>
+<p>Let $U$ be open and $K \subset U$ be compact set.</p>
+
+<p>Then there exists a continuous function $f$ s.t.
+[
+f(x) = 1, x \in K \; / \; f(x) = 0, x \in U^c
+]</p>
+
+<h3 id="pf-3">pf)</h3>
+
+<p>Assume $K\subset\mathbb{R}$ and use compactness: choose finitely many closed intervals
+[
+K \subset \bigcup_{j=1}^{N} I_j \subset U
+]
+with disjoint interiors such that $\operatorname{dist}(I_j, U^{c})&gt;0$ for all $j$.</p>
+
+<p>For each $j$, pick continuous $\varphi_j:\mathbb{R}\to[0,1]$ with
+[
+\varphi_j\equiv 1 \text{ on } I_j, \qquad \operatorname{supp}\varphi_j \subset J_j\subset U,
+]
+where $J_j$ are slightly larger open intervals still inside $U$.</p>
+
+<p>(Construct $\varphi_j$ piecewise linearly on $J_j$ so that it tapers to $0$ at $\partial J_j$.)</p>
+
+<p>Let
+[
+s(x):=\sum_{j=1}^{N}\varphi_j(x),\qquad
+f(x):=\min\lbrace1,\, s(x) \rbrace.
+]
+Then $f$ is continuous, $f\equiv 1$ on $K$ (since each $x\in K$ lies in some $I_j$), and $f\equiv 0$ on $U^{c}$ because $\operatorname{supp} f \subset \bigcup_j J_j \subset U$. $\square$</p>
+
+<hr />
+
+<h2 id="theorem-5-1-luzin">Theorem 5-1 (Luzin)</h2>
+<p>Let $f : [a,b] \to \mathbb{C}$ be measurable. Then</p>
+
+<ol>
+  <li>
+    <p>$\forall \varepsilon &gt; 0, \; \exists \; g: [a,b] \to \mathbb{C}$ continuous function s.t. $\mu(\lbrace x : f(x) \ne g(x) \rbrace) &lt; \varepsilon.$</p>
+  </li>
+  <li>
+    <p>If $f \in L^{\infty} [a,b]$, then $\exists \; g \in C[a,b]$ s.t. $\lVert g \rVert_{sup} \le \lVert f \rVert_{\infty}$ and $\mu(\lbrace x : f(x) \ne g(x) \rbrace) &lt; \varepsilon$.</p>
+  </li>
+</ol>
+
+<h3 id="pf-4">pf)</h3>
+
+<h3 id="case-1-0-le-f--1">Case 1: $0 \le f &lt; 1$</h3>
+
+<p>Construct step functions
+[
+S_n(x) = \sum_{k=1}^{2^n} \frac{k-1}{2^n} \chi_{A_k}(x),
+]
+where $A_k = \lbrace x : \frac{k-1}{2^n} \le f(x) &lt; \frac{k}{2^n} \rbrace$.</p>
+
+<p>Then define
+[
+t_n = S_n - S_{n-1} = \frac{1}{2^n} \chi_{T_n}, \quad T_n = \lbrace x : \lvert t_n(x) \rvert &gt; 0 \rbrace.
+]</p>
+
+<p>Take open $U_n$ and compact $K_n$ with $K_n \subseteq T_n \subseteq U_n$ and $\mu(U_n \setminus K_n) &lt; \varepsilon / 2^n$.</p>
+
+<p>By the <strong>Lemma 5-1</strong>, built continuous $h_n$ so that
+[
+h_n=\chi_{T_n}\quad\text{on}\quad \big(U_n\setminus K_n\big)^c.
+]</p>
+
+<p>Define set $G:= [a,b]\setminus \bigcup_{n=1}^{\infty}(U_n\setminus K_n)$.</p>
+
+<p>Then for every $x\in G$ and every $n$,
+[
+h_n(x)=\chi_{T_n}(x).
+]</p>
+
+<p>Hence, on $G$,
+[
+g(x)=\sum_{n=1}^{\infty}2^{-n}h_n(x)
+=\sum_{n=1}^{\infty}2^{-n}\chi_{T_n}(x)
+=\sum_{n=1}^{\infty}\big(S_n(x)-S_{n-1}(x)\big)
+=\lim_{N\to\infty} S_N(x)=f(x).
+]</p>
+
+<p>Therefore ${x:f(x)\ne g(x)}\subseteq G^c=\bigcup_{n\ge1}(U_n\setminus K_n)$ and</p>
+
+<p>[
+\mu\big({x:f(x)\ne g(x)}\big)
+\le \mu\left(\bigcup_{n=1}^{\infty}(U_n\setminus K_n)\right)
+\le \sum_{n=1}^{\infty}\mu(U_n\setminus K_n)
+&lt; \sum_{n=1}^{\infty}\frac{\varepsilon}{2^n}=\varepsilon.
+]</p>
+
+<h3 id="case-2-f-is-a-bounded-and-complex-function">Case 2: $f$ is a bounded and complex function</h3>
+
+<p>Write
+[
+f = (f_1 - f_2) + i (f_3 - f_4),
+]
+where $f_1, f_2, f_3, f_4$ satisfy <strong>Case 1</strong>.</p>
+
+<h3 id="case-3-f-is-a-not-bounded">Case 3: $f$ is a not bounded</h3>
+
+<p>Let $A_n = \lbrace x \in [a,b] : \lvert f(x) \rvert &gt; n \rbrace$. Then $\mu(A_n) \downarrow 0$ as $n \to \infty$.</p>
+
+<p>For any $\varepsilon &gt; 0$, choose $N$ such that<br />
+[
+\mu(A_N) &lt; \frac{\varepsilon}{2}.
+]</p>
+
+<p>Define 
+[
+h(x) = (1 - \chi_{A_N}(x)) \cdot f(x)
+]</p>
+
+<p>Since $h$ is bounded and measurable, by <strong>Luzin’s theorem for bounded functions</strong>,<br />
+there exists a continuous function $g$ on $[a,b]$ such that
+[
+\mu({x : h(x) \ne g(x)}) &lt; \frac{\varepsilon}{2}.
+]</p>
+
+<p>Because $f = h$ outside $A_N$, we have
+[
+\lbrace x : f(x) \ne g(x)\rbrace
+\subseteq
+A_N \cup \lbrace x : h(x) \ne g(x)\rbrace.
+]</p>
+
+<p>Hence
+[
+\mu({x : f(x) \ne g(x)})
+\le
+\mu(A_N) + \mu({x : h(x) \ne g(x)})
+&lt; \frac{\varepsilon}{2} + \frac{\varepsilon}{2}
+= \varepsilon.
+]</p>
+
+<h3 id="case-4-f-in-linftyab">Case 4: $f \in L^\infty([a,b])$</h3>
+
+<p>Take continuous $\varphi: \mathcal{C} \to \mathcal{C}$ s.t.</p>
+
+<ol>
+  <li>
+    <p>$z \to z, \lvert z \rvert \le \lVert f \rVert_{\infty}$</p>
+  </li>
+  <li>
+    <p>$z \to \frac{z}{\lvert z \rvert} \cdot \lVert f \rVert_{\infty}, \lvert z \rvert &gt; \lVert f \rVert_{\infty}$</p>
+  </li>
+</ol>
+
+<p>Given $\varepsilon&gt;0$, by the bounded (Luzin) case for complex functions, choose a continuous $g:[a,b]\to\mathbb{C}$ such that
+[
+\mu\big({x : f(x)\ne g(x)}\big)&lt;\varepsilon .
+]</p>
+
+<p>Set
+[
+\tilde g := \varphi\circ g .
+]
+Then $\tilde g$ is continuous and $\lVert \tilde g\rVert_\infty \le M=\lVert f\rVert_\infty$.</p>
+
+<p>Moreover, on the set where $g=f$ we have $|f(x)|\le M$, hence
+[
+\tilde g(x)=\varphi(g(x))=\varphi(f(x))=f(x).
+]</p>
+
+<p>Therefore
+[
+\lbrace x: f(x)\ne \tilde g(x) \rbrace \subseteq \lbrace x: f(x)\ne g(x) \rbrace,
+]
+and consequently
+[
+\mu\big(\lbrace x: f(x)\ne \tilde g(x)\rbrace \big)
+\le
+\mu\big(\lbrace x: f(x)\ne g(x)\rbrace \big)
+&lt;\varepsilon.
+]</p>
+
+<hr />
+<hr />
+
+<h1 id="05d-lebesgue-space-and-continuous-functions-">(05d) Lebesgue Space and Continuous Functions <!-- % 르벡공간과 연속함수 --></h1>
+
+<h2 id="theorem-5-2">Theorem 5-2</h2>
+<p>For $1 \le p &lt; \infty$, the set $C[a,b]$ of continuous functions is <strong>dense</strong> in $L^p([a,b])$:
+$C[a,b] \subset L^p([a,b]).$
+<!-- % 연속함수는 Lp공간에서 조밀 --></p>
+
+<h3 id="pf-5">pf)</h3>
+
+<p>Let $f \in L^p([a,b])$ and $\varepsilon &gt; 0$.</p>
+
+<ol>
+  <li>
+    <p><strong>Approximation by step functions:</strong><br />
+There exists a step function $S_n$ such that<br />
+[
+\lVert f - S_n \rVert_p &lt; \varepsilon.
+]</p>
+  </li>
+  <li>
+    <p><strong>Approximation by simple functions:</strong><br />
+Since $\lVert S_n - f \rVert_p \to 0$,<br />
+we can take a <strong>simple function</strong> $S$ satisfying<br />
+[
+\lVert S - f \rVert_p &lt; \varepsilon.
+]</p>
+  </li>
+  <li>
+    <p><strong>Approximation by continuous functions (Luzin):</strong><br />
+By Luzin’s theorem, there exists a continuous function $g \in C[a,b]$ such that<br />
+[
+\lVert g \rVert_{\sup} \le \lVert S \rVert_\infty, \quad
+\mu(\lbrace x : S(x) \ne g(x) \rbrace) &lt; \varepsilon.
+]
+Hence $\lVert S - g \rVert_p &lt; \varepsilon$,<br />
+and therefore $\lVert f - g \rVert_p &lt; 2\varepsilon$.</p>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="theorem-5-3">Theorem 5-3</h2>
+<p>$C_c(\mathbb{R})$ is dense in $L^p(\mathbb{R})$ for $1 \le p &lt; \infty$.<br />
+Here $C_c(\mathbb{R})$ denotes the space of continuous functions with compact support.
+<!-- % 유한 지지 연속함수의 조밀성 --></p>
+
+<h3 id="pf-6">pf)</h3>
+
+<p>Let $f \in L^p(\mathbb{R})$.<br />
+Then
+[
+\int_{-\infty}^\infty \lvert f \rvert^p &lt; \infty.
+]
+Hence there exists $N &gt; 0$ such that
+[
+\int_{\lvert x \rvert &gt; N} \lvert f(x) \rvert^p &lt; \varepsilon^p.
+]</p>
+
+<p>Let $g \in C[-N, N]$ such that $ \lVert g - f \rVert_p &lt; \varepsilon^p$.</p>
+
+<p>Take $\alpha_1, \alpha_2 &gt; 0$ and define a continuous cutoff function
+$h(x) = 1,  x \in [-N+\alpha_1, N-\alpha_2]$ and 
+$0, x \notin [-N, N]$</p>
+
+<p>Then $h g \in C_c(\mathbb{R})$ and
+[
+\lVert f - h g \rVert_p \le \lVert f - g \rVert_p + \lVert g - h g \rVert_p &lt; 2\varepsilon.
+]</p>
+
+<hr />
+
+<h2 id="corollary">Corollary</h2>
+<p>$[C_c(\mathbb{R}), \lVert \rVert_\sup]$ is dense in $C_0(\mathbb{R})$,<br />
+where
+[
+C_0(\mathbb{R}) = \lbrace f \in C(\mathbb{R}) : \lim_{\lvert x \rvert \to \infty} f(x) = 0 \rbrace.
+]</p>
+
+<hr />
+
+<h2 id="theorem-5-4">Theorem 5-4</h2>
+<p>For $f \in L^p(\mathbb{R})$, define 
+[
+f_y(x) = f(x - y).
+]
+Then the map $y \mapsto f_y$ is <strong>uniformly continuous</strong> in $L^p(\mathbb{R})$:
+[
+\lim_{y \to 0} \lVert f_y - f \rVert_p = 0.
+]</p>
+
+<h3 id="pf-7">pf)</h3>
+
+<p>Let $g \in C_c(\mathbb{R})$. Then [ \lVert f_x - f_y \rVert_p \le \lVert f_x - g_x \rVert_p + \lVert g_x - g_y \rVert_p + \lVert f_y - g_y \rVert_p, ]</p>
+
+<p>Fix $\varepsilon&gt;0$. Choose $g\in C_c(\mathbb{R})$ with $|f-g|_{p}&lt;\frac{\varepsilon}{3}$ (using the density of $C_c$ in $L^p$).</p>
+
+<p>For any $x,y\in\mathbb{R}$ the translation is an isometry in $L^p$:
+[
+\lvert f_x-g_x\rvert_{p} = \lvert f-g \rvert_{p} &lt; \frac{\varepsilon}{3}.
+]</p>
+
+<p>Hence, for all $y$,
+$
+\lvert  f_y-f\rvert_{p} \le \lvert f_y-g_y\rvert_{p} + \lvert g_y-g\rvert_{p} + \lvert g-f\rvert_{p}
+&lt; \frac{2\varepsilon}{3}+\lvert g_y-g\rvert_{p}.
+$</p>
+
+<p>It remains to show $\lvert g_y-g\rvert_{p}\to 0$ as $y\to0$ for $g\in C_c(\mathbb{R})$.</p>
+
+<p>Let $\operatorname{supp} g\subset K$ with $0&lt;\lvert K \rvert &lt;\infty$.</p>
+
+<p>Since $g$ is uniformly continuous on $K$,  define the modulus of continuity
+$
+\omega(\delta):=\sup_{\lvert h\rvert \le\delta}\ \sup_{x\in\mathbb{R}}\lvert g(x-h)-g(x) \rvert \xrightarrow[\delta\downarrow 0]{} 0.
+$</p>
+
+<p>For $\lvert y\rvert\le \delta$ we have $\lvert g(x-y)-g(x)\rvert \le \omega(\delta)$, and the support of
+$g(x-y)-g(x)$ is contained in $K\cup(K+y)$, whose measure is at most $2 \lvert K\rvert$.</p>
+
+<p>Therefore,
+[
+\lvert g_y-g\rvert_{p}^{p}=\int_{\mathbb{R}} \lvert g(x-y)-g(x)\rvert^{p}dx
+\le \omega(\delta)^{p}\, \lvert K\cup(K+y)\rvert \le \omega(\delta)^{p}\,2\lvert K\rvert.
+]</p>
+
+<p>Taking $p$-th roots gives
+$
+\lvert g_y-g\rvert_{p}\le \omega(\delta)\,(2 \lvert K\rvert)^{1/p}\xrightarrow[\delta\downarrow 0]{}0.
+$</p>
+
+<p>Hence there exists $\delta&gt;0$ such that $\lvert y\rvert &lt;\delta\Rightarrow \lvert g_y-g\rvert_{p}&lt;\varepsilon/3$.</p>
+
+<p>Plugging this into (1) yields $\lvert f_y-f\rvert_{p}&lt;\varepsilon$ for all $ \lvert y\rvert&lt;\delta$.<br />
+Since $\varepsilon&gt;0$ was arbitrary, $\lvert f_y-f\rvert_{p}\to 0$ as $y\to 0$. $\square$</p>
+
+<hr />
+
+<p>📚 <em>Reference:</em> <a href="https://www.math.snu.ac.kr/~kye/lecture_V/V_real/index.html">Real Analysis Lecture by Prof. Seung-Hyeok Kye (SNU)</a></p>]]></content><author><name>Dayeon Jung</name></author><category term="Real_analysis" /><summary type="html"><![CDATA[Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures.]]></summary></entry><entry><title type="html">Real Analysis Lecture 4: Lebesgue Integration and Differentiation</title><link href="http://localhost:4000/real_analysis/2025/09/28/real_analysis-lecture4.html" rel="alternate" type="text/html" title="Real Analysis Lecture 4: Lebesgue Integration and Differentiation" /><published>2025-09-28T00:00:00+09:00</published><updated>2025-09-28T00:00:00+09:00</updated><id>http://localhost:4000/real_analysis/2025/09/28/real_analysis-lecture4</id><content type="html" xml:base="http://localhost:4000/real_analysis/2025/09/28/real_analysis-lecture4.html"><![CDATA[<blockquote>
+  <p><em>Disclaimer:</em> This post is a personal study note based on the Real Analysis course I attended.<br />
+The explanations and formulations are written in my own words for educational purposes only,<br />
+and do not reproduce or distribute any copyrighted material from the original lectures.</p>
+</blockquote>
+
+<h1 id="04a-differentiation-of-monotone-increasing-functions-">(04a) Differentiation of Monotone Increasing Functions <!-- % 단조증가함수의 미분 --></h1>
+
+<h2 id="theorem-4-1-lebesgue">Theorem 4-1 (Lebesgue)</h2>
+<p>If $f$ is monotone increasing on $I \subset \mathbb{R}$, then $f$ is <strong>differentiable almost everywhere (a.e.)</strong> on $I$.</p>
+
+<h3 id="pf">pf)</h3>
+
+<p>For $f : I \to \mathbb{R}$, define
+[
+D^+ f(x) = \limsup_{h \to 0^+} \frac{f(x+h) - f(x)}{h}, \quad
+D_- f(x) = \liminf_{h \to 0^+} \frac{f(x) - f(x-h)}{h}.
+]</p>
+
+<p>Let<br />
+[
+A = \lbrace x \in I : D_- f(x) &lt; D^+ f(x) \rbrace.
+]
+For $r &lt; s \in \mathbb{R}$, put<br />
+[
+A_{r,s} = \lbrace x \in I : D_- f(x) &lt; r &lt; s &lt; D^+ f(x) \rbrace.
+]
+We want to show that $\mu(A_{r,s}) = \alpha$.</p>
+
+<h3 id="step-i">Step (i)</h3>
+
+<p>Given $\varepsilon &gt; 0$, take an open set $U$ such that<br />
+[
+A_{r,s} \subset U, \quad \mu(U) &lt; \alpha + \varepsilon.
+]</p>
+
+<p>For $x \in A_{r,s}$, choose $h_1^x, h_2^x, \dots \to 0$ such that $[x-h_i^x, x] \subset U$.</p>
+
+<p>Then $D_- f(x) &lt; r$ implies $f(x) - f(x - h_i^x) &lt; r h_i^x$.</p>
+
+<p>Apply <strong>Vitali’s Covering Lemma</strong> to<br />
+[
+\bigcup_{x \in A_{r,s}} \lbrace \lbrack x - h_i^x, x \rbrack, i = 1,2,\dots \rbrace,
+]
+to obtain finitely many disjoint intervals<br />
+[
+I_A := \lbrack x_1 - h_1, x_1 \rbrack \cup \lbrack x_2 - h_2, x_2 \rbrack \cup \dots \cup \lbrack x_n - h_n, x_n \rbrack
+]
+such that $\mu(A_{r,s} \backslash I_A) &lt; \varepsilon$.</p>
+
+<p>Then
+$
+\sum_{i=1}^n [f(x_i) - f(x_i - h_i)] &lt; r \sum_{i=1}^n h_i
+&lt; r \mu(U) &lt; r (\alpha + \varepsilon).
+$</p>
+
+<h3 id="step-ii">Step (ii)</h3>
+
+<p>Let $B = A_{r,s} \cap I_A$. Then $\mu(B) &gt; \alpha - \varepsilon$.</p>
+
+<p>For $y \in B$, take $k_1^y, k_2^y, \dots \to 0$ such that  $[y, y+k^y] \subset I_A$.</p>
+
+<p>Then $D^+ f(x) &gt; s$ implies 
+$
+f(y + k_j^y) - f(y) &gt; s k_j^y.
+$</p>
+
+<p>Apply Vitali again to obtain finitely many disjoint intervals <br />
+[
+I_B := \lbrack y_1, y_1 + k_1 \rbrack \cup \lbrack y_2, y_2 + k_2 \rbrack \cup \dots \cup \lbrack y_m, y_m + k_m \rbrack
+]
+such that  $\mu(B \backslash I_B) &lt; \varepsilon$.</p>
+
+<p>Then
+$
+\sum_{j=1}^m [f(y_j + k_j) - f(y_j)] &gt; s \sum_{j=1}^m k_j.
+$</p>
+
+<p>Since $\mu(B \cap I_B) &gt; \alpha - 2\varepsilon$,
+$
+\sum_{j=1}^m [f(y_j + k_j) - f(y_j)] &gt; s (\alpha - 2\varepsilon).
+$</p>
+
+<h3 id="step-iii">Step (iii)</h3>
+
+<p>By Step (i) and (ii), since
+[
+\sum_{j=1}^m \lbrack f(y_j + k_j) - f(y_j) \rbrack &lt; \sum_{i=1}^n \lbrack f(x_i) - f(x_i - h_i) \rbrack,
+]</p>
+
+<p>$s(\alpha - 2\varepsilon) &lt; r(\alpha + \varepsilon)$,  which implies $\alpha = 0 \quad a.e.$</p>
+
+<p>Therefore $D^- f(x) = D^+ f(x)$ for almost every $x \in I$,<br />
+and thus $f$ is differentiable a.e.</p>
+
+<p><span style="color:red">(Do it yourself for all below situation)</span> 
+[
+D^- f(x) = \limsup_{h \to 0^+} \frac{f(x) - f(x-h)}{h},
+\quad
+D_+ f(x) = \liminf_{h \to 0^+} \frac{f(x+h) - f(x)}{h}.
+]</p>
+
+<hr />
+<hr />
+
+<h1 id="04b-differentiation-of-integrals-">(04b) Differentiation of Integrals <!-- % 적분의 미분 --></h1>
+
+<h2 id="theorem-4-2">Theorem 4-2</h2>
+<p>Let $f : [a,b] \to \mathbb{R}$ be monotone increasing.<br />
+Then $f’$ is measurable and
+[
+\int_a^b f’(x)\,dx \le f(b) - f(a).
+]
+<!-- % 단조함수의 미분가능성과 적분 부등식 --></p>
+
+<h3 id="pf-1">pf)</h3>
+<p>Let
+[
+g_n(x) = \frac{f(x+h_n) - f(x)}{h_n}, \quad h_n \to 0.
+]
+Since $f$ is measurable, $g_n$ is measurable, and $g_n \to f’$ implies $f’$ is measurable.</p>
+
+<p>By <strong>Fatou’s Lemma</strong>, since $g_n \ge 0$,
+[
+\int_a^b f’ \le \liminf_n \int_a^b g_n
+= \liminf_n \lbrace \frac{1}{h_n} \int_b^{b+h_n} f - \frac{1}{h_n} \int_a^{a+h_n} f \rbrace
+\le f(b) - f(a).
+]</p>
+
+<hr />
+
+<h2 id="theorem-4-3">Theorem 4-3</h2>
+<p>Let $f : E \to \mathbb{R}$ be integrable ($f \in L^1(E)$).<br />
+Then $\forall \; \varepsilon &gt; 0$, $ \exists \; \delta &gt; 0$ such that<br />
+[
+A \subset E, \ \mu(A) &lt; \delta \Rightarrow \int_A \lvert f \rvert &lt; \varepsilon.
+]
+<!-- % 적분가능함수의 절대연속성 --></p>
+
+<h3 id="pf-2">pf)</h3>
+<p>Let $f_n(x) = \min \lbrace f(x), n \rbrace$.</p>
+
+<p>Then $f_n$ is bounded and 
+$
+\lvert f_n(x) \rvert \nearrow \lvert f(x) \rvert \quad \text{as } n \to \infty.
+$</p>
+
+<p>Hence, by the Monotone Convergence Theorem,
+[
+\int_E (|f|-|f_n|)\,d\mu \;\downarrow\; 0 .
+]</p>
+
+<p>Fix $N$ so large that
+[
+\int_E (|f|-|f_N|)\,d\mu &lt; \frac{\varepsilon}{2}.
+]</p>
+
+<p>Set $\delta:=\dfrac{\varepsilon}{2N}$. For any measurable $A\subset E$ with $\mu(A)&lt;\delta$,
+[
+\int_A |f|\,d\mu
+= \int_A |f_N|\,d\mu + \int_A (|f|-|f_N|)\,d\mu
+\le \int_A N\,d\mu + \int_E (|f|-|f_N|)\,d\mu
+\le N\,\mu(A) + \frac{\varepsilon}{2}
+&lt; N\cdot\frac{\varepsilon}{2N} + \frac{\varepsilon}{2}
+= \varepsilon .
+]</p>
+
+<hr />
+
+<h2 id="theorem-4-4">Theorem 4-4</h2>
+<p>Let $f : [a,b] \to \mathbb{R}$ be integrable, and define
+[
+F(x) = f(a) + \int_a^x f(t)\,dt.
+]
+Then $F’(x) = f(x)$ <strong>almost everywhere (a.e.)</strong>.
+<!-- % 적분함수의 미분 정리 --></p>
+
+<h3 id="pf-3">pf)</h3>
+<p>Let $f \ge 0$ and $h_n \to 0$. Define
+[
+f_n(x) = \frac{F(x+h_n) - F(x)}{h_n}
+= \frac{1}{h_n} \int_x^{x+h_n} f(t)\,dt.
+]
+By the <strong>Lebesgue Differentiation Theorem</strong>, $f_n \to F’$ a.e.</p>
+
+<h3 id="step-i-1">Step (i)</h3>
+<p>Let $0 &lt; f \le M$. (Bounded)</p>
+
+<p>[
+\int_a^x f_n
+= \frac{1}{h_n} \int_x^{x+h_n} f - \frac{1}{h_n} \int_a^{a+h_n} f \;
+\rightarrow \; F(x) - F(a) = \int_a^x f_n
+]</p>
+
+<p>Since $\int_a^b f_n \to \int_a^b f$ when bounded, $\int_a^x(F’ - f) = 0$</p>
+
+<p>This satisfies for all $x$,
+[
+F’(x) = f(x) \text{ a.e.}
+]</p>
+
+<h3 id="step-ii-1">Step (ii)</h3>
+<p>Let $f_n(x) = \min \lbrace f(x), n \rbrace$.</p>
+
+<p>Then
+[
+F(x) - F(a) = \int_a^x (f - f_n) + \int_a^x f_n.
+]
+Since $(f - f_n) \ge 0$ and $f_n$ is bounded, $F’(x) \ge f_n(x)$.<br />
+Taking $n \to \infty$ gives $F’ \ge f$, and since we already know
+$
+\int_a^b F’ \le \int_a^b f = F(b) - F(a),
+$</p>
+
+<p>we conclude 
+[
+\int_a^b F’ = \int_a^b f = F(b) - F(a) 
+\;\Rightarrow\;
+\int_a^b (F’ - f) = 0.<br />
+]</p>
+
+<p>Since the integral of a non-negative function is zero,
+[
+F’(x) = f(x) \text{ a.e.}
+]</p>
+
+<hr />
+
+<h2 id="fubini-theorem">Fubini Theorem</h2>
+<p>If $f_n : [a,b] \to \mathbb{R}$ is increasing for all $n$ and  $\sum f_n = s$ converges pointwise,<br />
+then [S’ = \sum f_n’ \text{ a.e.}]
+<!-- % 증가함수열의 도함수 합 공식 --></p>
+
+<hr />
+<hr />
+
+<h1 id="04c-absolutely-continuous-functions-">(04c) Absolutely Continuous Functions <!-- % 절대연속함수 --></h1>
+
+<h2 id="definition-bounded-variation">Definition (Bounded Variation)</h2>
+<p>A function $f : [a,b] \to \mathbb{R}$ is of <strong>bounded variation</strong><br />
+if for a partition $P = \lbrace x_0, x_1, \dots, x_n \rbrace$,
+[
+V_a^b(f,P) = \sum_{i=1}^n \lvert f(x_i) - f(x_{i-1}) \rvert \le V
+]
+for all $P$.<br />
+<!-- % 유계변동함수 정의 --></p>
+
+<hr />
+
+<h2 id="definition-absolutely-continuous">Definition (Absolutely Continuous)</h2>
+<p>$F$ is <strong>absolutely continuous</strong> if</p>
+
+<p>$\forall \varepsilon &gt; 0$, $\exists \delta &gt; 0$ s.t. for any finite disjoint intervals $\lbrack x_i, y_i \rbrack$ with<br />
+$\mu \left([x_1,y_1] \cup [x_2,y_2] \cup \ldots \cup [x_n,y_n] \right) &lt; \delta$, we have
+[
+\sum_{i=1}^n \lvert F(y_i) - F(x_i) \rvert &lt; \varepsilon.
+]</p>
+
+<hr />
+
+<h2 id="properties">Properties</h2>
+
+<ul>
+  <li>Every <strong>monotone increasing function</strong> is of <strong>bounded variation</strong>.</li>
+  <li>The <strong>difference of two monotone functions</strong> can represent any function of <strong>bounded variation</strong>.</li>
+  <li>If $F$ is absolutely continuous, then $F$ is uniformly continuous.</li>
+</ul>
+
+<p>[
+\forall \varepsilon &gt; 0, \exists \delta &gt; 0
+\ \text{s.t. } \mu(\lbrack x,y \rbrack) &lt; \delta \Rightarrow \lvert F(y) - F(x) \rvert &lt; \varepsilon.
+]</p>
+
+<ul>
+  <li>Every <strong>absolutely continuous function</strong> is of <strong>bounded variation</strong>.</li>
+</ul>
+
+<hr />
+<hr />
+
+<h1 id="04d-integration-of-differentials-">(04d) Integration of Differentials <!-- % 미분의 적분 --></h1>
+
+<h2 id="lemma-4-1">Lemma 4-1</h2>
+<p>If $f : [a,b] \to \mathbb{R}$ is <strong>absolutely continuous</strong> and $f’(x) = 0$ a.e.,<br />
+then $f$ is <strong>constant</strong>.<br />
+<!-- % 절대연속함수의 도함수가 0이면 상수함수 --></p>
+
+<h3 id="pf-4">pf)</h3>
+<p>Let $c \in [a,b]$, $\varepsilon &gt; 0$, and $\alpha &gt; 0$.<br />
+Define
+[
+E = \lbrace x \in \lbrack a,c \rbrack : f’(x) = 0 \rbrace.
+]
+For each $x \in E$, choose $h_x &gt; 0$ such that<br />
+[
+\lbrack x, x + h_x \rbrack \subset \lbrack a,c \rbrack, \quad \lvert f(x+h_x) - f(x) \rvert &lt; \alpha h_x &lt; \alpha(c-a).
+]</p>
+
+<p>By <strong>Vitali’s covering lemma</strong>, choose finitely many disjoint intervals<br />
+[
+\lbrack x_1, x_1 + h_1 \rbrack, \lbrack x_2, x_2 + h_2 \rbrack, \dots, \lbrack x_n, x_n + h_n \rbrack
+]
+s.t.
+[
+\mu\big(\lbrack a,c \rbrack \setminus \bigcup_i \lbrack x_i, x_i + h_i \rbrack\big) &lt; \delta.
+]</p>
+
+<p>By absolute continuity,
+[
+\sum_i \lvert f(x_i + h_i) - f(x_i) \rvert &lt; \varepsilon.
+]
+Then
+[
+\lvert f(c) - f(a) \rvert &lt; \varepsilon + \alpha (c - a).
+]
+Since $\varepsilon, \alpha$ are arbitrary, $f(c) = f(a)$, hence $f$ is constant.</p>
+
+<hr />
+
+<h2 id="theorem-4-5">Theorem 4-5</h2>
+<p>A function $f : [a,b] \to \mathbb{R}$ is <strong>absolutely continuous</strong> if and only if</p>
+<ul>
+  <li>(i) $ f \text{ is differentiable a.e.}$</li>
+  <li>(ii) $ f’ \in L^1([a,b])$</li>
+  <li>(iii) $ \int_a^x f’(t)\,dt = f(x) - f(a) , \quad \forall x \in [a,b]$</li>
+</ul>
+
+<h3 id="pf-5">pf)</h3>
+
+<h4>(⇐)</h4>
+<p>If $f$ satisfies the three conditions, then $\forall \varepsilon &gt; 0$, $\exists \delta &gt; 0$ s.t. for any disjoint intervals  $\lbrack x_i, y_i \rbrack$ with $\sum_i (y_i - x_i) &lt; \delta$,<br />
+[
+\sum_i \lvert f(y_i) - f(x_i) \rvert
+= \sum_i \left\lvert \int_{x_i}^{y_i} f’(t)\,dt \right\rvert
+\le \int_{\cup_i [x_i,y_i]} \lvert f’(t) \rvert \,dt &lt; \varepsilon.
+]
+Hence $f$ is absolutely continuous.</p>
+
+<h4 id="-1">(⇒)</h4>
+
+<p><strong>(i)</strong>
+If $f$ is absolutely continuous, then it is of bounded variation,<br />
+and thus it can be expressed as the difference of two increasing functions $f_1, f_2$ that are differentiable a.e.</p>
+
+<p><strong>(ii)</strong>
+Let $f = f_1 - f_2$.<br />
+Then both $f_1’, f_2’ \in L^1([a,b])$, and
+[
+\int_a^b \lvert f’ \rvert \le \int_a^b \lvert f_1’ \rvert + \int_a^b \lvert f_2’ \rvert
+\le \lvert f_1(b) - f_1(a) \rvert + \lvert f_2(b) - f_2(a) \rvert &lt; \infty.
+]
+Thus $f’ \in L^1([a,b])$.</p>
+
+<p><strong>(iii)</strong>
+Let $g(x) = f(a) + \int_a^x f’(t)\,dt.$</p>
+
+<p>Then $g$ is absolutely continuous and $g’ = f’$ a.e. Hence $(f - g)’ = 0$ a.e.,</p>
+
+<p>By the <strong>Lemma 4-1</strong>, $f - g$ is constant.<br />
+Then we get
+[
+f(x) = g(x) = f(a) + \int_a^x f’(t)\,dt.
+]</p>
+
+<hr />
+
+<p>📚 <em>Reference:</em> <a href="https://www.math.snu.ac.kr/~kye/lecture_V/V_real/index.html">Real Analysis Lecture by Prof. Seung-Hyeok Kye (SNU)</a></p>]]></content><author><name>Dayeon Jung</name></author><category term="Real_analysis" /><summary type="html"><![CDATA[Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures.]]></summary></entry><entry><title type="html">Real Analysis Lecture 3: Convergence Theorem of Integral</title><link href="http://localhost:4000/real_analysis/2025/09/21/real_analysis-lecture3.html" rel="alternate" type="text/html" title="Real Analysis Lecture 3: Convergence Theorem of Integral" /><published>2025-09-21T00:00:00+09:00</published><updated>2025-09-21T00:00:00+09:00</updated><id>http://localhost:4000/real_analysis/2025/09/21/real_analysis-lecture3</id><content type="html" xml:base="http://localhost:4000/real_analysis/2025/09/21/real_analysis-lecture3.html"><![CDATA[<blockquote>
+  <p><em>Disclaimer:</em> This post is a personal study note based on the Real Analysis course I attended.<br />
+The explanations and formulations are written in my own words for educational purposes only,<br />
+and do not reproduce or distribute any copyrighted material from the original lectures.</p>
+</blockquote>
+
+<h1 id="03a-monotone-convergence-theorem-">(03a) Monotone Convergence Theorem <!-- % 단조수렴정리 --></h1>
+
+<h2 id="monotone-convergence-theorem">Monotone Convergence Theorem</h2>
+
+<p>Let $\lbrace f_n \rbrace$ be a sequence of measurable functions s.t. $0 \le f_n \nearrow f$.
+[
+\Rightarrow \quad
+\lim_{n \to \infty} \int_E f_n = \int_E \left( \lim_{n \to \infty} f_n \right).
+]</p>
+
+<h3 id="pf">pf)</h3>
+
+<p>Let $\int_E f_n \nearrow L$ ($\lim_{n \to \infty} \int_E f_n := L$)</p>
+
+<p><strong>($\Rightarrow$)</strong></p>
+
+<p>$\forall n, f_n \le f \;\Rightarrow\; \int_E. f_n \le \int_E f$</p>
+
+<p>Then, do
+[ L ( = \lim_{n \to \infty} \int_E f_n) \le \int_E f ]</p>
+
+<p><strong>($\Leftarrow$)</strong></p>
+
+<p>Let $s$ be a simple function such that $0 \le s \le f$, and take $c \in (0,1)$ and define
+[
+E_n = \lbrace x \in E \mid c \cdot s(x) &lt; f_n(x) \rbrace.
+]
+Then
+[
+E_n \nearrow E = \bigcup_{n=1}^{\infty} E_n.
+]</p>
+
+<p>Since $0 \le c \cdot s \cdot \chi_{E_n} \le f_n$ for all $n$, we have
+[
+\int_E c s \chi_{E_n} \le \int_E f_n.
+]</p>
+
+<p>By continuity of measure ($\lim_n \mu(E_n) = \mu(\lim_n E_n)$),
+[
+\lim_{n \to \infty} \int_E c s \chi_{E_n}
+= c \lim_{n \to \infty} \int_{E_n} s
+= c \int_E s.
+]</p>
+
+<p>Thus,
+[
+c \int_E s
+\le \lim_{n \to \infty} \int_E f_n
+= L.
+]</p>
+
+<p>Letting $c \to 1$, we get $\int_E s \le L$ for all simple $s \le f$.</p>
+
+<p>Hence,
+[
+\int_E f = \sup \lbrace \int_E s \rbrace \le L.
+]</p>
+
+<hr />
+
+<h2 id="fatous-lemma-">Fatou’s Lemma <!-- % Fatou 보조정리 --></h2>
+
+<p>If $0 \le f_n$, then
+[
+\int_E \left( \liminf_{n \to \infty} f_n \right) \le \liminf_{n \to \infty} \int_E f_n.
+]</p>
+
+<h3 id="pf-1">pf)</h3>
+
+<p>Let $f = \liminf f_n$ and define
+[
+g_k = \inf \lbrace f_k, f_{k+1}, f_{k+2}, \dots \rbrace,
+\quad \text{so that } g_k \nearrow f.
+]</p>
+
+<p>By MCT,
+[
+\int_E f 
+= \int_E \left( \lim_{k \to \infty} g_k \right)
+= \lim_{k \to \infty} \int_E g_k.
+]</p>
+
+<p>Since $g_k \le f_n$ for all $n \ge k \; (\forall k)$,
+[
+\int_E g_k \le \int_E f_n
+\;\Rightarrow\;
+\int_E g_k \le \inf_{n \ge k} \int_E f_n.
+]
+Taking limits,
+[
+\lim_{k \to \infty} \int_E g_k
+= \int_E f 
+\le \lim_{k \to \infty} \inf_{n \ge k} \int_E f_n
+= \liminf_{n \to \infty} \int_E f_n.
+]</p>
+
+<hr />
+
+<h2 id="corollary">Corollary</h2>
+
+<p>If $f_n \ge 0$, then
+[
+\int_E \Big( \sum_{n=1}^\infty f_n \Big)
+= \sum_{n=1}^\infty \int_E f_n.
+]</p>
+
+<h3 id="pf-2">pf)</h3>
+<p>Let the partial sums be
+[
+s_N(x)=\sum_{n=1}^N f_n(x), \qquad x\in E.
+]</p>
+
+<p>Then each $s_N$ is measurable and nonnegative, and
+[
+s_N(x)\nearrow s(x):=\sum_{n=1}^\infty f_n(x) \in \lbrack 0, \infty \rbrack
+\quad \forall x \in E.
+]</p>
+
+<p>By MCT,
+[
+\int_E s \,
+= \lim_{N\to\infty} \int_E s_N.
+]</p>
+
+<p>By linearity, for each finite $N$,
+[
+\int_E s_N \, d\mu
+= \int_E \sum_{n=1}^N f_n \, d\mu
+= \sum_{n=1}^N \int_E f_n \, d\mu,
+]
+so taking limits and using monotonicity of the partial sums yields
+[
+\int_E \Big( \sum_{n=1}^\infty f_n \Big) \, d\mu
+= \lim_{N\to\infty} \sum_{n=1}^N \int_E f_n \, d\mu
+= \sum_{n=1}^\infty \int_E f_n \, d\mu .
+]</p>
+
+<hr />
+<hr />
+
+<h1 id="03b-lebesgue-dominated-convergence-theorem-">(03b) Lebesgue Dominated Convergence Theorem <!-- % 르벡 수렴정리 --></h1>
+
+<h2 id="theorem">Theorem</h2>
+
+<p>Let $\lbrace f_n \rbrace$ be a sequence of measurable functions on $E$ such that</p>
+
+<p>[
+\exists g \in L^1(E) \text{ with } \lvert f_n \rvert \le g \text{ for all } n, 
+\; \text{and} \; \lim_{n \to \infty} f_n(x) = f(x).
+]</p>
+
+<p>Then
+[
+\int_E f = \lim_{n \to \infty} \int_E f_n.
+]</p>
+
+<h3 id="pf-3">pf)</h3>
+
+<p>Since $\lvert f - f_n \rvert \le 2g$, $\; 2g - \lvert f - f_n \rvert \ge 0$.</p>
+
+<p>By <strong>Fatou’s lemma</strong>,<br />
+[
+\int_E \liminf_n (2g - \lvert f - f_n \rvert)
+\le
+\liminf_n \int_E (2g - \lvert f - f_n \rvert).
+]</p>
+
+<p>Thus,
+[
+\int_E 2 g \le \int_E 2 g - \int_E \limsup_n \lvert f - f_n \rvert.
+]</p>
+
+<p>Since $\int_E g &lt; \infty$, we get
+[
+\limsup_n \int_E \lvert f - f_n \rvert \le 0.
+]</p>
+
+<p>i.e.
+[
+0 \le \liminf_n \int_E \lvert f - f_n \rvert \le \limsup_n \int_E \lvert f - f_n \rvert \le 0.
+]</p>
+
+<p>Therefore,
+[
+\int_E \lvert f - f_n \rvert \to 0.
+]
+—</p>
+
+<h2 id="levis-convergence-theorem-">Levi’s Convergence Theorem <!-- % 절대적 수렴이면 적분의 급수와 함수의 급수가 교환 가능 --></h2>
+
+<p>If $\sum_{n=1}^\infty \int_E \lvert f_n \rvert &lt; \infty$, then</p>
+
+<ol>
+  <li>$f(x) = \sum_{n=1}^\infty f_n(x)$ exists a.e.,</li>
+  <li>$\int_E f = \sum_{n=1}^\infty \int_E f_n$.</li>
+</ol>
+
+<hr />
+
+<h2 id="applications-and-related-results">Applications and Related Results</h2>
+
+<ol>
+  <li>
+    <p>If $\sum_{n=1}^{\infty} \lvert a_n \rvert &lt; \infty$, then $\sum_{n=1}^{\infty} a_n$ converges.</p>
+  </li>
+  <li>
+    <p>If $\sum_{n=1}^{\infty}  {\lVert f_n \rVert}_{\sup} &lt; \infty$,</p>
+
+    <p>then $f(x) = \sum_{n=1}^{\infty} f_{n}(x)$ is continuous.</p>
+  </li>
+  <li>
+    <p>If $\sum_{n=1}^{\infty}  {\lVert f_n \rVert}_{1} &lt; \infty$,</p>
+
+    <p>then $f(x) = \sum_{n=1}^{\infty} f_{n}(x) \in L^1$.</p>
+  </li>
+</ol>
+
+<blockquote>
+  <p><em>Note:</em><br />
+Application 3. is a new tool that defines a suitable integrable function.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="differentiation-under-the-integral-sign-">Differentiation Under the Integral Sign <!-- % 미분과 적분의 교환 정리 --></h2>
+
+<p>Let $f : I \times J \to \mathbb{C}$, and define  $F(x) = \int_J f(x, y) \, dy$.</p>
+
+<p>Suppose $\exists g \in L^1(J)$ s.t.<br />
+[
+\lvert D_x f(x, y) \rvert = \left\lvert \frac{\partial f}{\partial x} \right\rvert \le g(y).
+]</p>
+
+<p>Then 
+[
+\frac{d}{dx} \int_J f(x, y) \, dy = \int_J D_x f(x, y) \, dy.
+]</p>
+
+<h3 id="pf-4">pf)</h3>
+
+<p>Let $x_n \to x$, then
+[
+\frac{F(x_n) - F(x)}{x_n - x}
+= \int_J \frac{f(x_n, y) - f(x, y)}{x_n - x} \, dy.
+]
+By <strong>LDCT (Lebesgue Dominated Convergence Theorem)</strong>,
+[
+\lim_{n \to \infty} \frac{F(x_n) - F(x)}{x_n - x}
+= \int_J \lim_{n \to \infty} D_x f(s_n, y) \, dy (x_n \le s_n \le x)
+]
+[
+= \int_J D_x f(x, y) \, dy.
+]</p>
+
+<hr />
+<hr />
+
+<h1 id="03c-riemann-and-lebesgue-integrals-">(03c) Riemann and Lebesgue Integrals <!-- % 리만적분과 르벡적분 --></h1>
+
+<h2 id="definition">Definition</h2>
+
+<p>Let $P = \lbrace a = x_0, x_1, x_2, \dots, x_{n-1}, x_n = b \rbrace$.</p>
+
+<p>Then the <strong>lower sum</strong> and <strong>upper sum</strong> of $f$ with respect to $P$ are<br />
+[
+\int_{[a,b)} L_P = L^a_b(f, P), \quad \int_{[a,b)} U_P = U^a_b(f, P).
+]</p>
+
+<p><span style="color:blue">($L_P$ is a step function constructed from the lower sums of $f$)</span></p>
+
+<p>Let $\lVert P \rVert = \max_i (x_i - x_{i-1})$.</p>
+
+<p>If $P_1 \subseteq P_2 \subseteq \cdots$ and $\lVert P_n \rVert \to 0$,<br />
+then
+[
+L_{P_n} \nearrow f
+\;\Rightarrow\;
+\lim_{n \to \infty} \int_{[a,b)} L_{P_n} = \int_{[a,b)} L_P = \underline{\int_a^b} f
+]
+[
+U_{P_n} \searrow f
+\;\Rightarrow\;
+\lim_{n \to \infty} \int_{[a,b)} U_{P_n} = \int_{[a,b)} U_P = \overline{\int_a^b} f
+]</p>
+
+<h3 id="pf-5">pf)</h3>
+<p><span style="color:red">(Do it yourself using MCT between $L_{P_n}$ and $\min f$)</span></p>
+
+<hr />
+
+<h2 id="riemann-integrable">Riemann Integrable</h2>
+
+<p>The function $f$ is <strong>Riemann integrable</strong> on $[a,b]$ if and only if $\overline{\int_a^b} f = \underline{\int_a^b} f$.</p>
+
+<p>[
+\Leftrightarrow\;
+\int_{[a,b)} (U - L) = 0
+]
+[
+\Leftrightarrow\;
+U = L \; \text{a.e.}
+]
+[
+\Leftrightarrow\;
+f \; \text{is continuous at} \; x (x \neq a, x \neq b)
+]</p>
+
+<p>Hence, $f$ is Riemann integrable iff the set of discontinuities of $f$ has measure $0$.</p>
+
+<hr />
+<hr />
+
+<h1 id="03d-vitalis-lemma-">(03d) Vitali’s Lemma <!-- % 비탈리 도움 정리 --></h1>
+
+<h2 id="statement">Statement</h2>
+
+<p>Let $E$ be a measurable set with $\mu(E) &lt; \infty$,  and let $\mathcal{F}$ be a class of closed intervals.</p>
+
+<p>Then, $\forall \varepsilon &gt; 0$, there exist <strong>disjoint intervals</strong> $I_1, I_2, \dots, I_n \in \mathcal{F}$ s.t.
+[
+\mu\Big( E \setminus \bigcup_{k=1}^n I_k \Big) &lt; \varepsilon.
+]</p>
+
+<h3 id="pf-6">pf)</h3>
+
+<p>Let $U$ be an open set such that $E \subset U$ and $\mu(U) &lt; \infty$.<br />
+By the Vitali property of $\mathcal{F}$, for each $x \in E$, there exists $I_x \in \mathcal{F}$ such that $x \in I_x \subset U$.</p>
+
+<p>By countable additivity,
+[
+\sum_{k=1}^{\infty} \mu(I_k) \le \mu(U) &lt; \infty.
+]
+We construct intervals:</p>
+
+<ul>
+  <li>Choose $I_1$ from $\mathcal{F}$ arbitrarily.</li>
+  <li>Let $\alpha_2 = \sup \lbrace \mu(I) \mid I \in \mathcal{F}, I \cap I_1 = \emptyset \rbrace$ and take $I_2 \in \mathcal{F}$ s.t. $\mu(I) &gt; \frac{\alpha_2}{2}$ and $I \cap I_1 = \emptyset$.</li>
+  <li>Continue selecting intervals $I_3, I_4, \dots$ inductively.</li>
+</ul>
+
+<p>If this process terminates, then $\alpha_n = 0$. Otherwise,  $\sum_{k=1}^{\infty} \mu(I_k) &lt; \infty$.</p>
+
+<p>Take $n$ s.t.
+[
+\sum_{k=n+1}^\infty \mu(I_k) &lt; \frac{\varepsilon}{5}.
+]</p>
+
+<p>Let $x \in D := E \setminus \bigcup_{k=1}^n I_k$ and $J_k$ be an interval having the same center as $I_k$ but five times its length</p>
+
+<p>For $y \in D$, define $I_\nu$ as an interval in $\mathcal{F}$ centered at $y$ that overlaps with $I$.</p>
+
+<p>Then
+[
+\mu(I) \le \alpha_{\nu} &lt; 2 \mu(I_{\nu}).
+]</p>
+
+<p>[
+\Rightarrow \lvert x - y \rvert &lt; \frac{1}{2} \mu(I_{\nu}) + \mu(I) &lt; \frac{5}{2} \mu I_(\nu)
+]
+[
+\Rightarrow x \in J_{\nu}.
+]</p>
+
+<p>Hence, $D \subset (\bigcup_{k&gt;n} J_k)$ and
+[
+\mu(D) \le \sum_{k&gt;n} \mu(I_k) &lt; \varepsilon.
+]</p>
+
+<hr />
+
+<blockquote>
+  <p><em>Note:</em><br />
+The Vitali covering lemma is essential in the proof of the <strong>Lebesgue Differentiation Theorem</strong>,<br />
+providing a method to approximate measurable sets by disjoint intervals.
+<!-- % 르벡 미분정리 증명에 사용되는 핵심 도구 --></p>
+</blockquote>
+
+<hr />
+
+<p>📚 <em>Reference:</em> <a href="https://www.math.snu.ac.kr/~kye/lecture_V/V_real/index.html">Real Analysis Lecture by Prof. Seung-Hyeok Kye (SNU)</a></p>]]></content><author><name>Dayeon Jung</name></author><category term="Real_analysis" /><summary type="html"><![CDATA[Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures.]]></summary></entry></feed>

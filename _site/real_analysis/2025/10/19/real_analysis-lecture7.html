@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Real Analysis Lecture 7: Product Measure</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Real Analysis Lecture 7: Product Measure | Dayeon Jung</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Real Analysis Lecture 7: Product Measure" />
+<meta name="author" content="Dayeon Jung" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures." />
+<meta property="og:description" content="Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures." />
+<link rel="canonical" href="http://localhost:4000/real_analysis/2025/10/19/real_analysis-lecture7.html" />
+<meta property="og:url" content="http://localhost:4000/real_analysis/2025/10/19/real_analysis-lecture7.html" />
+<meta property="og:site_name" content="Dayeon Jung" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-10-19T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Real Analysis Lecture 7: Product Measure" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dayeon Jung"},"dateModified":"2025-10-19T00:00:00+09:00","datePublished":"2025-10-19T00:00:00+09:00","description":"Disclaimer: This post is a personal study note based on the Real Analysis course I attended. The explanations and formulations are written in my own words for educational purposes only, and do not reproduce or distribute any copyrighted material from the original lectures.","headline":"Real Analysis Lecture 7: Product Measure","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/real_analysis/2025/10/19/real_analysis-lecture7.html"},"url":"http://localhost:4000/real_analysis/2025/10/19/real_analysis-lecture7.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['\[', '\]'], ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/" alt="Dayeon Jung" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">Dayeon Jung</a>
+      </h2>
+      </div><p class="tagline">Statistician & Data Scientist</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/dayeonjung5294" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:dayeonjung5294@gmail.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2025</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/real_analysis/2025/10/19/real_analysis-lecture7.html">
+    <h2 class="post-title">Real Analysis Lecture 7: Product Measure</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Oct 19, 2025</div><ul class="post-categories"><li>Real_analysis</li></ul></div>
+  <div class="post">
+    <blockquote>
+  <p><em>Disclaimer:</em> This post is a personal study note based on the Real Analysis course I attended.<br />
+The explanations and formulations are written in my own words for educational purposes only,<br />
+and do not reproduce or distribute any copyrighted material from the original lectures.</p>
+</blockquote>
+
+<h1 id="07a-double-integral-and-iterated-integral-">(07a) Double Integral and Iterated Integral <!-- % 이중적분과 반복적분 --></h1>
+
+<h2 id="definition">Definition</h2>
+<p>Let $\lbrace X, \mathcal{S}, \mu \rbrace$ and $\lbrace Y, \mathcal{T}, \nu \rbrace$ be measure spaces.</p>
+
+<p>For $E \subset X \times Y$, $x \in X$, $y \in Y$, define<br />
+[
+E_x = \lbrace y \in Y : \lbrace x, y \rbrace \in E \rbrace,<br />
+\qquad
+E^y = \lbrace x \in X : \lbrace x, y \rbrace \in E \rbrace.
+]</p>
+
+<h2 id="properties">Properties</h2>
+
+<ol>
+  <li>
+    <p>$E \in \mathcal{S} \times \mathcal{T} \;\Rightarrow\; E_x \in \mathcal{T}, \; E^y \in \mathcal{S}$.</p>
+  </li>
+  <li>
+    <p>Define $\varphi(x) = \nu(E_x), \, \psi(y) = \mu(E^y)$.</p>
+
+    <p>Then $\varphi$ is $\mu$-measurable and $\psi$ is $\nu$-measurable.</p>
+  </li>
+  <li>
+    <p>$\int_X \varphi \, d\mu = \int_Y \psi \, d\nu$.</p>
+  </li>
+</ol>
+
+<p>[ \text{i.e.} \;
+\int_X \int_Y \chi_E(x,y) \, d\nu(y) \, d\mu(x)
+=
+\int_Y \int_X \chi_E(x,y) \, d\mu(x) \, d\nu(y).
+]</p>
+
+<hr />
+
+<p>Let<br />
+[
+(X \times Y,\; \mathcal{S} \times \mathcal{T},\; \mu \times \nu).
+]
+For $S \in \mathcal{S}$ and $T \in \mathcal{T}$, $\mathcal{R} = S \times T \subset X \times Y$ is a <strong>measurable rectangle</strong>.</p>
+
+<ul>
+  <li>$\mathcal{S} \times \mathcal{T}$ is the <strong>smallest $\sigma$-algebra containing all measurable rectangles</strong>.</li>
+</ul>
+
+<hr />
+<hr />
+
+<h1 id="07b-product-measure-and-measurable-set-">(07b) Product Measure and Measurable Set <!-- % 곱측도와 잴 수 있는 집합 --></h1>
+
+<p>Assume $(X, \mu)$ and $(Y, \nu)$ are <strong>$\sigma$-finite</strong>.</p>
+
+<p>i.e.</p>
+
+<ul>
+  <li>
+    <p>$X = \bigcup_{n=1}^\infty X_n, \; \mu(X_n) &lt; \infty$</p>
+  </li>
+  <li>
+    <p>$Y = \bigcup_{m=1}^\infty Y_m, \; \nu(Y_m) &lt; \infty$</p>
+  </li>
+</ul>
+
+<h2 id="definition-1">Definition</h2>
+<p>[
+\mathcal{A} = \lbrace E \in \mathcal{S} \times \mathcal{T} : E_x \in \mathcal{T},\ \forall x \in X \rbrace,
+]
+[
+\mathcal{B} = \lbrace E \in \mathcal{S} \times \mathcal{T} : \varphi \;\&amp;\; \psi \; \text{is measureable},  \int_X \varphi \, d\mu = \int_Y \psi \, d\nu \ \rbrace.
+]</p>
+
+<h3 id="property-7-1">Property 7-1.</h3>
+<p>If $E_n \in \mathcal{B}$ is increasing, then $\bigcup_{n=1}^\infty E_n \in \mathcal{B}$.</p>
+
+<h4 id="pf">pf)</h4>
+
+<ul>
+  <li>$\varphi_n$ increase pointwise $\Rightarrow$ $\varphi$ is measurable.</li>
+  <li>$\psi_n$ increase pointwise $\Rightarrow$ $\psi$ is measurable.</li>
+</ul>
+
+<p>Let<br />
+[
+E = \bigcup_{n=1}^\infty E_n.
+]</p>
+
+<p>Since $\lbrace E_n \rbrace$ is increasing, for each fixed $x \in X$,
+[
+\varphi_n(x)
+= \int_Y \chi_{E_n}(y)\, d\nu(y)
+\nearrow
+\int_Y \chi_{E}(y)\, d\nu(y)
+= \varphi(x).
+]</p>
+
+<p>Likewise, for each fixed $y \in Y$,
+[
+\psi_n(y)
+= \int_X \chi_{E_n}(x)\, d\mu(x)
+\nearrow
+\int_X \chi_{E}(x)\, d\mu(x)
+= \psi(y).
+]</p>
+
+<p>By the Monotone Convergence Theorem,
+[
+\int_X \varphi \, d\mu
+=
+\lim_{n\to\infty} \int_X \varphi_n \, d\mu,
+\quad
+\int_Y \psi \, d\nu
+=
+\lim_{n\to\infty} \int_Y \psi_n \, d\nu.
+]</p>
+
+<p>Since $E_n \in \mathcal{B}$,
+[
+\int_X \varphi_n \, d\mu
+=
+\int_Y \psi_n \, d\nu
+\quad \text{for all } n.
+]</p>
+
+<p>Taking limits,
+[
+\int_X \varphi \, d\mu
+=
+\lim_{n\to\infty} \int_X \varphi_n \, d\mu
+=
+\lim_{n\to\infty} \int_Y \psi_n \, d\nu
+=
+\int_Y \psi \, d\nu.
+]</p>
+
+<p>Thus $E$ satisfies the defining property of $\mathcal{B}$ and hence<br />
+[
+E \in \mathcal{B}.
+]</p>
+
+<h3 id="property-7-2">Property 7-2.</h3>
+<p>If $E_n \in \mathcal{B}$, then $\bigcup_{n=1}^\infty E_n \in \mathcal{B}$.</p>
+
+<h4 id="pf-1">pf)</h4>
+
+<p>First reduce to the <strong>pairwise disjoint</strong> case.</p>
+
+<p>Define
+[
+F_1 = E_1,\qquad
+F_n = E_n \setminus \bigcup_{k=1}^{n-1} E_k \quad (n \ge 2).
+]
+Then $\lbrace F_n \rbrace \in \mathcal{B}$ are pairwise disjoint and
+[
+\bigcup_{n=1}^\infty F_n = \bigcup_{n=1}^\infty E_n.
+]</p>
+
+<p>Now set
+[
+G_n = \bigcup_{k=1}^n F_k \quad (n \ge 1).
+]
+Then $\lbrace G_n \rbrace$ is an <strong>increasing</strong> sequence and
+each $G_n \in \mathcal{B}$.
+Moreover,
+[
+\bigcup_{n=1}^\infty G_n = \bigcup_{n=1}^\infty F_n
+= \bigcup_{n=1}^\infty E_n.
+]</p>
+
+<p>By <strong>Property 7-1</strong>, the increasing union of sets in $\mathcal{B}$
+again belongs to $\mathcal{B}$, so
+[
+\bigcup_{n=1}^\infty E_n
+= \bigcup_{n=1}^\infty G_n \in \mathcal{B}.
+]</p>
+
+<hr />
+
+<h2 id="definition-2">Definition</h2>
+<p>[
+\mathcal{C} = \lbrace E \in \mathcal{S} \times \mathcal{T} : E \cap (X_n \times Y_m) \in \mathcal{B}, \; \forall m,n = 1,2,\dots \rbrace,
+]</p>
+
+<h3 id="property-7-3">Property 7-3.</h3>
+<p>If $E_n \in \mathcal{C}$ is increasing, then $\bigcup_{n=1}^\infty E_n \in \mathcal{C}$.</p>
+
+<h4 id="pf-apply-the-mct">pf) Apply the MCT.</h4>
+
+<h3 id="property-7-4">Property 7-4.</h3>
+<p>If $E_n \in \mathcal{C}$ is decreasing, then $\bigcap_{n=1}^\infty E_n \in \mathcal{C}$.</p>
+
+<h4 id="pf--apply-the-lebesgue-dominated-convergence-theorem">pf)  Apply the Lebesgue Dominated Convergence Theorem.</h4>
+
+<h3 id="property-7-5">Property 7-5.</h3>
+<p>If $E_1, \dots, E_n \in \mathcal{R}$, then $\bigcup_{i=1}^N E_i \in \mathcal{C}$.</p>
+
+<hr />
+
+<h2 id="definition-3">Definition</h2>
+
+<p>Let $\mathcal{D}$ ($\subseteq \varphi \subseteq \mathcal{S} \times \mathcal{T}$) be the smallest family satisfying</p>
+
+<ol>
+  <li>
+    <p>$\mathcal{D} \supset \mathcal{R}$</p>
+  </li>
+  <li>
+    <p>Satisties <strong>Property 7-3 ~ 7-5</strong></p>
+  </li>
+</ol>
+
+<p>Let $\mathcal{E}$ be finite disjoint unions of measurable rectangles.</p>
+
+<p>Then $\mathcal{D}$ be the smallest family containing $\mathcal{E}$ with</p>
+
+<p>[
+E_n \in \mathcal{D} \nearrow \; \Rightarrow \; \bigcup_{n=1}^\infty \in \mathcal{D}
+]
+[
+E_n \in \mathcal{D} \searrow \; \Rightarrow \; \bigcap_{n=1}^\infty \in \mathcal{D}
+]</p>
+
+<ul>
+  <li>
+    <p>$E, F \in \mathcal{E} \Rightarrow E \setminus F \in \mathcal{E}, \; F \setminus E \in \mathcal{E}, \; E \cup F \in \mathcal{E}$</p>
+  </li>
+  <li>
+    <p>For $E \subset X \times Y$, define
+[
+\Omega(E) = \lbrace F \subset X \times Y :
+E \setminus F \in \mathcal{D}, \; F \setminus E \in \mathcal{D}, \; E \cup F \in \mathcal{D} \rbrace
+]</p>
+  </li>
+  <li>
+    <p>$E, F \in \mathcal{E} \Rightarrow F \in \Omega(E)$</p>
+
+    <p>$E \in \mathcal{E} \Rightarrow \mathcal{E} \subseteq \Omega(E) \Rightarrow \mathcal{D} \subseteq \Omega(E)$</p>
+
+    <p>$E \in \mathcal{D} \Rightarrow \mathcal{D} \subseteq \Omega(E)$</p>
+  </li>
+  <li>
+    <p>$E_n \in \mathcal{D} \Rightarrow F_N = E_1 \cup \ldots \cup E_N \in \mathcal{D}$</p>
+
+    <p>$\bigcup_{n=1}^\infty E_n = \bigcup_{n=1}^\infty F_n \in \mathcal{D}$</p>
+  </li>
+  <li>
+    <p>$\mathcal{D} = \varphi = \mathcal{S} \times \mathcal{T}$ is <strong>$\sigma$-algebra</strong></p>
+  </li>
+</ul>
+
+<h3 id="property-7-6">Property 7-6.</h3>
+
+<p>We conclude:
+$
+(\mu \times \nu)(E) 
+= \int_X \nu(E_x)\, d\mu(x)
+= \int_Y \mu(E^y)\, d\nu(y).
+$</p>
+
+<p>[
+\Rightarrow E = \bigcup_{n=1}^\infty E_n, \; \sum_{n=1}^\infty (\mu \times \nu) (E_n) = (\mu \times \nu)(E)
+]</p>
+
+<h4 id="pf-2">pf)</h4>
+
+<p>Since $\mathcal{D}$ was constructed to satisfy Properties 7-3–7-5 and contains all measurable rectangles, it follows (from the previous steps in the construction) that:</p>
+
+<ol>
+  <li>
+    <p>If $E_n\nearrow E$ with $E_n\in\mathcal{D}$, then<br />
+[
+\nu((E_n)_x)\nearrow\nu(E_x)
+\quad\text{for all }x,
+]
+and 
+[
+\mu((E_n)^y)\nearrow\mu(E^y)
+\quad\text{for all }y.
+]</p>
+  </li>
+  <li>
+    <p>Each $E_n$ satisfies the defining identity of $\mathcal{D}$:
+[
+(\mu\times\nu)(E_n)
+=\int_X \nu((E_n)_x)\,d\mu
+=\int_Y \mu((E_n)^y)\,d\nu.
+]</p>
+  </li>
+</ol>
+
+<p>If $E_n$ are pairwise disjoint,
+[
+\chi_E=\sum_{n=1}^{\infty}\chi_{E_n}.
+]
+Integrating both sides over $X\times Y$:
+[
+(\mu\times\nu)(E)
+=\int_{X\times Y}\chi_E\,d(\mu\times\nu)
+=\int_{X\times Y}\sum_{n=1}^{\infty}\chi_{E_n}\,d(\mu\times\nu).
+]</p>
+
+<p>Apply MCT again:
+[
+\int_{X\times Y}\sum_{n=1}^{\infty}\chi_{E_n}
+=
+\sum_{n=1}^{\infty}\int_{X\times Y}\chi_{E_n}
+=
+\sum_{n=1}^{\infty}(\mu\times\nu)(E_n).
+]</p>
+
+<p>Thus,
+[
+(\mu\times\nu)(E)
+=\sum_{n=1}^{\infty}(\mu\times\nu)(E_n).
+]</p>
+
+<hr />
+<hr />
+
+<h1 id="07c-two-dimensional-lebesgue-measure-">(07c) Two-Dimensional Lebesgue Measure <!-- % 이차원 르벡측도 --></h1>
+
+<p>Consider $(\mathbb{R}^2, \mathcal{L} \times \mathcal{L}, m \times m)$.</p>
+
+<ul>
+  <li>Every open set is in $\mathcal{L} \times \mathcal{L}$.</li>
+  <li>Let $\mathcal{B}_2$ be the smallest $\sigma$-algebra containing all open sets.<br />
+Then <strong>Borel sets</strong> $\in \mathcal{B}_2$.</li>
+</ul>
+
+<h2 id="definition-complete-measure">Definition: Complete measure</h2>
+
+<p>$(X, \mathcal{S}, \mu)$ is a <strong>complete measure space</strong>, if</p>
+
+<p>$E \subset F$, $F \in \mathcal{S}$, and $\mu(F)=0$,  $\Rightarrow E \in \mathcal{S}$.</p>
+
+<h2 id="definition-positive-measure">Definition: Positive measure</h2>
+
+<p>$(X, \mathcal{S}, \mu)$ is a <strong>positive measure space</strong>, if
+[
+\mathcal{S}^\ast = \lbrace E \subset X : \exists A, B \in \mathcal{S},\ A \subset E \subset B,\ \mu(B\setminus A)=0 \rbrace.
+]
+Then for $E \in \mathcal{S}^\ast$, define $\mu^\ast(E) = \mu(A)$.</p>
+
+<p>Thus $(X, \mathcal{S}^\ast, \mu^\ast)$ is complete measure.</p>
+
+<hr />
+
+<h2 id="borel-vs-product-completion">Borel vs Product Completion</h2>
+
+<p>Claim:
+[
+\mathcal{B}_2^\ast = (\mathcal{L} \times \mathcal{L})^\ast.
+]</p>
+
+<p><strong>pf)</strong><br />
+($\subseteq$) If $B \in \mathcal{B}_2$, then $B \subset L \times L$ and completion preserves inclusion.</p>
+
+<p>($\supseteq$)  For $S \in \mathcal{L}$, 
+Let $A$ be an $F_\sigma$- set and $B$ a $G_\delta$- set, $A \subset S \subset B$, $\mu(B\setminus A)=0$.</p>
+
+<p>Thus $A \times \mathbb{R}$ and $B \times \mathbb{R}$ are Borel sets in $\mathbb{R}^2$.</p>
+
+<p>Hence
+[
+m \times m \lbrack (B \times \mathbb{R}) \setminus (A \times \mathbb{R}) \rbrack
+= m \times m \lbrack (B \setminus A) \times \mathbb{R} \rbrack = 0.
+]
+Thus $S \times \mathbb{R} \in \mathcal{B}_2^\ast$.</p>
+
+<p>And $S \times T = (S \times \mathbb{R}) \cap (\mathbb{R} \times T) \in \mathcal{B}_2^\ast $</p>
+
+<p>Therefore
+[
+(\mathcal{L} \times \mathcal{L})^\ast \subseteq \mathcal{B}_2^\ast
+]</p>
+
+<ul>
+  <li>$(\mathbb{R}^2, (\mathcal{L} \times \mathcal{L})^\ast, (m \times m)^\ast)$: <strong>Lebesgue measure in the plane</strong></li>
+</ul>
+
+<hr />
+
+<p>📚 <em>Reference:</em> <a href="https://www.math.snu.ac.kr/~kye/lecture_V/V_real/index.html">Real Analysis Lecture by Prof. Seung-Hyeok Kye (SNU)</a></p>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/dayeonjung5294" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:dayeonjung5294@gmail.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2025</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+  <script src="/assets/js/simple-jekyll-search.min.js"></script>
+  <script src="/assets/js/search.js"></script>
+  
+</body>
+
+</html>
